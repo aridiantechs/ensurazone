@@ -3,8 +3,9 @@
         
         <div class="site-navbar">
             <!-- Logo -->
-            <a href="{{ route('/') }}" class="site-logo">
-                <img src="{{ url('/') }}/theme/img/logo.png" alt="">
+            <a href="{{ route('/') }}" class="site-logo" style="font-size: 20px;font-weight: 700;">
+                {{-- <img src="{{ url('/') }}/theme/img/logo.png" alt=""> --}}
+                <span style="font-size: 23px">E</span>NSURAZONE
             </a>
             <div class="header-right">
                 <div class="header-info-box">
@@ -13,7 +14,7 @@
                     </div>
                     <div class="hib-text">
                         <h6>+546 990221 123</h6>
-                        <p>contact@industryalinc.com</p>
+                        <p>contact@ensurazone.com</p>
                     </div>
                 </div>
                 <div class="header-info-box">

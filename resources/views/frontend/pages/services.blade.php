@@ -8,7 +8,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-8">
-                            <h2><span>Defensible Space</span></h2>
+                            <h2><span class="text-white">Services</span></h2>
                           
                         </div>
                     </div>
