@@ -11,7 +11,7 @@
 				<div class="col-lg-7">
 					<h2>Our Solutions</h2>
 					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p>
-					<a href="" class="site-btn">Contact us</a>
+					<a href="{{ route('contact') }}" class="site-btn">Contact us</a>
 				</div>
 			</div>
 		</div>
@@ -142,7 +142,7 @@
 					<h2>We produce or supply Goods, Services, or Sources</h2>
 				</div>
 				<div class="col-lg-3 text-lg-right" >
-					<a href="#" class="site-btn sb-dark">contact us</a>
+					<a href="{{ route('contact') }}" class="site-btn sb-dark">contact us</a>
 				</div>
 			</div>
 		</div>
