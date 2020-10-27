@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Favicon -->
-    <link href="{{ url('/') }}/theme/img/favicon.ico" rel="shortcut icon"/>
+    <link href="{{ asset('images/favicon.png') }}" rel="shortcut icon"/>
     
      @include('frontend.partials.header_scripts')
 

@@ -8,7 +8,7 @@
 .feature-box {
     box-shadow: 5px 5px 12px #17172d70
 }
-.feature-box .fb-more-btn {
+.read-more-services {
     position: absolute;
     bottom: 50px;
 }
@@ -36,6 +36,26 @@
     border-top: 4px solid #e25822;
     border-radius: 3px;
 }*/
+.services-warp {
+    -webkit-box-shadow: 0px -80px 50px #0000002b;
+    box-shadow: 0px -80px 50px #0000002b;
+}
+.feature-box {
+    box-shadow: 0px 0px 14px #17172d26;
+}
+a.read-more-services.site-btn.sb-dark {
+    padding: 20px 30px;
+    min-width: fit-content;
+}
+.style-box {
+    height: 400px;
+    width: 400px;
+    border: 10px solid #d7d7d7;
+    position: relative;
+    bottom: 450px;
+    left: 230px;
+    z-index: -1;
+}
 </style>
 @endsection
 
@@ -46,7 +66,7 @@
             <div class="hero-item set-bg" data-setbg="{{ url('/') }}/images/bg1.jpg">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-8">
+                        <div class="col-xl-8 offset-md-1">
                             <h2><span>Wildfire</span><span>Assessment</span><span> Services</span></h2>
                             <a href="#" class="site-btn sb-white mr-4 mb-3">Start planning for wildfire now</a>
                             <a href="{{ route('wildfire-assessment-services') }}" class="site-btn sb-dark">Learn more</a>
@@ -54,23 +74,23 @@
                     </div>
                 </div>
             </div>
-           {{--  <div class="hero-item set-bg" data-setbg="{{ url('/') }}/theme/img/hero-slider/2.jpg">
+            <div class="hero-item set-bg" data-setbg="{{ url('/') }}/theme/img/hero-slider/2.jpg">
                 <div class="container">
                     <div class="row">
-                        <div class="col-xl-8">
-                            <h2><span>Power</span><span>& Energy</span><span>Industry</span></h2>
-                            <a href="#" class="site-btn sb-white mr-4 mb-3">Read More</a>
-                            <a href="#" class="site-btn sb-dark">our Services</a>
+                        <div class="col-xl-8 offset-md-1">
+                            <h2><span>Wildfire </span><span>& Planning</span><span>Industry</span></h2>
+                            <a href="#" class="site-btn sb-white mr-4 mb-3">Download Sample Report</a>
+                            <a href="{{ route('services') }}" class="site-btn sb-dark">Our Services</a>
                         </div>
                     </div>
                 </div>
-            </div> --}}
+            </div>
         </div>
     </section>
     <!-- Hero section end  -->
 
     <!-- Services section  -->
-{{--     <section class="services-section">
+    <section class="services-section">
         <div class="services-warp">
             <div class="container">
                 <div class="row">
@@ -82,7 +102,7 @@
                                 </div>
                                 <h5>Wildfire Protection Contractors</h5>
                             </div>
-                            <p><a href="#" class="">See Contractors<i class="fa fa-long-arrow-right" aria-hidden="true"></i> </a></p>
+                            <p><a href="{{ route('wildfire-protection-contractors') }}" class="">See Contractors<i class="fa fa-long-arrow-right" aria-hidden="true"></i> </a></p>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6">
@@ -94,7 +114,7 @@
                                 <h5>Wildfire Planning Information</h5>
                             </div>
                              
-                            <p><a href="#" class="">See Wildfire Service Providers<i class="fa fa-long-arrow-right" aria-hidden="true"></i> </a></p>
+                            <p><a href="{{ route('wildfire-planning-information') }}" class="">See Wildfire Service Providers<i class="fa fa-long-arrow-right" aria-hidden="true"></i> </a></p>
                         </div>
                     </div>
                     
@@ -102,9 +122,9 @@
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
 
-    <section class="services-section">
+    {{-- <section class="services-section">
         <div class="services-warp">
             <div class="container">
                 <div class="row">
@@ -135,7 +155,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <!-- Services section end  -->
 
@@ -155,7 +175,7 @@
                         <div class="fb-text">
                             
                             <p>Ensurazone provides its “Users” access to advancing technology through “Remote Sensed” Wildfire Hazard Assessment and Mitigation Planning on its Ensurazone Website and Web Application.</p>
-                            <a href="{{ route('services') }}" class="fb-more-btn">Read More</a>
+                            <a href="{{ route('services') }}" class="read-more-services site-btn sb-dark">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -167,7 +187,7 @@
                             <p>Ensurazone uses sensor technology normally found on satellites combined
                                 with computer imaging and modeling, and a ‘user friendly' interface to
                                 empower you towards real wildfire vulnerability reduction measures.</p>
-                            <a href="{{ route('services') }}" class="fb-more-btn">Read More</a>
+                            <a href="{{ route('services') }}" class="read-more-services site-btn sb-dark">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -182,7 +202,7 @@
                                 assessment and mitigation process, house by house, and home by home,
                                 and putting control back in the hands of home and property owners.
                             </p>
-                            <a href="{{ route('services') }}" class="fb-more-btn">Read More</a>
+                            <a href="{{ route('services') }}" class="read-more-services site-btn sb-dark">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -197,7 +217,7 @@
                                 Resilience/Home Hardening assessments survey your home and other
                                 structures on your property to assure you all has been done to prepare you
                                 for wildfire.</p>
-                            <a href="{{ route('services') }}" class="fb-more-btn">Read More</a>
+                            <a href="{{ route('services') }}" class="read-more-services site-btn sb-dark">Read More</a>
                         </div>
                     </div>
                 </div>
@@ -286,8 +306,28 @@ actions by your fire services provider or insurance company.</p>
     <!-- Testimonial section end  -->
 
 
+    <section class="video-section spad" style="padding-bottom: 0">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="video-text">
+                        <h2>How does it work</h2>
+                        <p>Ensurazone 3D build process brings leading professionals in Fire Safety and Planning, Sales and Business Development, Computer Engineering, GIS and Remote Sense Mapping, Portal and Dashboard Development, together to produce solutions for a wide range of customers in multiple fields of All-Hazard risk management and reduction.</p>
+                        <a href="{{ route('contact') }}" class="site-btn">contact us</a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="video-box set-bg" style="margin-top: -120px;" data-setbg="img/video-box.jpg">
+                        <img src="{{ asset('theme/img/houseingreen.jpg') }}">
+                    </div>
+                    <div class="style-box"></div>
+                </div>
+            </div>
+        </div>
+    </section>
 
 
+{{-- Modal --}}
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -300,7 +340,8 @@ actions by your fire services provider or insurance company.</p>
                 <div class="container">
                     <div class="text-center">
 
-                        <img src="{{ asset('images/ensurazone.png') }}" class="img img-fluid mt-5" style="max-width: 250px;">
+                        <img src="{{ asset('images/ensurazone-logo.png') }}" class="img img-fluid mt-1" style="max-width: 100px;">
+                        <h2>Ensurazone</h2>
 
                         <div class="row mt-5">
                             <div class="col-4">
@@ -317,9 +358,10 @@ actions by your fire services provider or insurance company.</p>
                             </div>
                         </div>
 
-                        <h4 class="mb-5 mt-5">Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</h4>
+                        <h5 class="mb-5 mt-5" style="    line-height: 1.5;">Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</h5>
 
-                        <a href="{{ route('services') }}" class="fb-more-btns mb-5">Read More</a>
+                        <a href="{{ route('services') }}" class="site-btn sb-dark mb-5">Read More</a>
+                        <a href="{{ route('services') }}" class="site-btn sb-dark mb-5">Download Sample Report</a>
 
                     </div>
                 </div>

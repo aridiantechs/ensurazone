@@ -1,10 +1,10 @@
-<!-- Footer section -->
+
     <footer class="footer-section spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-4 col-md-6">
                     <div class="footer-widget about-widget">
-                        <img src="{{ url('/') }}/img/logo-light.png" alt="">
+                        <img src="{{ url('/') }}/images/ensurazone-logo-white.png" alt="">
                         <p>Lorem ipsum dolor sit amet, consec-tetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. Donec consequat arcu et commodo interdum. </p>
                         <div class="footer-social">
                             <a href=""><i class="fa fa-facebook"></i></a>
@@ -14,38 +14,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer-widget">
-                        <h2 class="fw-title">Useful Resources</h2>
-                        <ul>
-                            <li><a href="">Jobs Vacancies</a></li>
-                            <li><a href="">Client Testimonials</a></li>
-                            <li><a href="">Green  Energy</a></li>
-                            <li><a href="">Chemical Research</a></li>
-                            <li><a href="">Oil Extractions</a></li>
-                            <li><a href="">About our Work</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer-widget">
-                        <h2 class="fw-title">Our Solutions</h2>
-                        <ul>
-                            <li><a href="">Metal Industry</a></li>
-                            <li><a href="">Agricultural Engineering</a></li>
-                            <li><a href="">Green  Energy</a></li>
-                            <li><a href="">Chemical Research</a></li>
-                            <li><a href="">Oil Extractions</a></li>
-                            <li><a href="">Manufactoring</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-sm-7">
+                
+                <div class="col-lg-4 col-md-6 col-sm-7">
                     <div class="footer-widget">
                         <h2 class="fw-title">Contact Us</h2>
                         <div class="footer-info-box">
                             <div class="fib-icon">
-                                <img src="{{ url('/') }}/img/icons/map-marker.png" alt="" class="">
+                                <img src="{{ url('/') }}/theme/img/icons/phone.png" alt="" class="">
                             </div>
                             <div class="fib-text">
                                 <p>Main Str, no 23 NY,<br>New York PK 23589</p>
@@ -53,7 +28,7 @@
                         </div>
                         <div class="footer-info-box">
                             <div class="fib-icon">
-                                <img src="{{ url('/') }}/img/icons/phone.png" alt="" class="">
+                                <img src="{{ url('/') }}/theme/img/icons/map-marker.png" alt="" class="">
                             </div>
                             <div class="fib-text">
                                 <p>+546 990221 123<br>contact@ensurazone.com</p>
@@ -63,6 +38,21 @@
                             <input type="text" placeholder="Search">
                             <button><i class="fa fa-search"></i></button>
                         </form>
+                    </div>
+                </div>
+
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="footer-widget">
+                        <h2 class="fw-title">Our Solutions</h2>
+                        {{-- <ul>
+                            <li><a href="">Metal Industry</a></li>
+                            <li><a href="">Agricultural Engineering</a></li>
+                            <li><a href="">Green  Energy</a></li>
+                            <li><a href="">Chemical Research</a></li>
+                            <li><a href="">Oil Extractions</a></li>
+                            <li><a href="">Manufactoring</a></li>
+                        </ul> --}}
+                        <a href="" class="site-btn sb-white mr-4 mb-3">Download our Sample Report</a>
                     </div>
                 </div>
             </div>
@@ -77,11 +67,11 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
                 </div>
                 <div class="col-lg-7 order-1 order-lg-2 p-0">
                     <ul class="footer-menu">
-                        <li class="active"><a href="#">Home</a></li>
+                        <li class="active"><a href="{{ route('/') }}">Home</a></li>
                         <li><a href="#">About us</a></li>
-                        <li><a href="#">Solutions</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{ route('services') }}">Solutions</a></li>
+                        <li><a href="{{ route('blogs') }}">Blog</a></li>
+                        <li><a href="{{ route('contact') }}">Contact</a></li>
                     </ul>
                 </div>
             </div>
@@ -100,4 +90,4 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
             </form>
         </div>
     </div>
-    <!-- Search model end -->
+    <!-- Search model end
