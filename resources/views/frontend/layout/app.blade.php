@@ -13,6 +13,8 @@
     <link href="{{ url('/') }}/theme/img/favicon.ico" rel="shortcut icon"/>
     
      @include('frontend.partials.header_scripts')
+
+    @yield('styles')
 </head>
 
 <body>
@@ -27,6 +29,8 @@
 
     @include('frontend.partials.footer')
     @include('frontend.partials.footer_scripts')
+
+    @yield('scripts')
 </body>
 
 </html>

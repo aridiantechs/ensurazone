@@ -4,8 +4,8 @@
         <div class="site-navbar">
             <!-- Logo -->
             <a href="{{ route('/') }}" class="site-logo" style="font-size: 20px;font-weight: 700;">
-                {{-- <img src="{{ url('/') }}/theme/img/logo.png" alt=""> --}}
-                <span style="font-size: 23px">E</span>NSURAZONE
+                <img src="{{ asset('images/ensurazone.png') }}" alt="">
+                {{-- <span style="font-size: 23px">E</span>NSURAZONE --}}
             </a>
             <div class="header-right">
                 <div class="header-info-box">

@@ -2143,3 +2143,8 @@
  .service-col{
    margin-bottom: 20px;
  }
+
+
+a.site-logo img {
+   max-width: 250px;
+}
