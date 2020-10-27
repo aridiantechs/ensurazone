@@ -28,14 +28,14 @@
     min-width: 128px;
     text-align: center;
 }
-.modal-body {
+/*.modal-body {
     position: relative;
     -ms-flex: 1 1 auto;
     flex: 1 1 auto;
     padding: 1rem;
     border-top: 4px solid #e25822;
     border-radius: 3px;
-}
+}*/
 </style>
 @endsection
 
@@ -290,7 +290,12 @@ actions by your fire services provider or insurance company.</p>
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">
+          <div class="modal-content">.
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
             <div class="modal-body">
                 <div class="container">
                     <div class="text-center">
