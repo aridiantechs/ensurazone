@@ -300,7 +300,7 @@ actions by your fire services provider or insurance company.</p>
                 <div class="container">
                     <div class="text-center">
 
-                        <img src="{{ asset('images/question.png') }}" class="img img-fluid mt-5" style="max-width: 180px;">
+                        <img src="{{ asset('images/ensurazone.png') }}" class="img img-fluid mt-5" style="max-width: 250px;">
 
                         <div class="row mt-5">
                             <div class="col-4">
