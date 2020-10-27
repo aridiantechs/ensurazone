@@ -290,7 +290,7 @@ actions by your fire services provider or insurance company.</p>
 
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog modal-lg">
-          <div class="modal-content">.
+          <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
