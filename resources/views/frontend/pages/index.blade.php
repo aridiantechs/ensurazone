@@ -146,7 +146,7 @@
         >
         <div class="container">
             <div class="client-text">
-                <h2 ><span class="text-theme">ENSURAZONE</span> <span class="text-dark"> is a WILDFIRE SAFETY PLANNING TECHNOLOGYCOMPANY. </span></h2>
+                <h2 ><span class="text-theme">ENSURAZONE</span> <span class="text-dark"> is a WILDFIRE SAFETY PLANNING TECHNOLOGY COMPANY. </span></h2>
             </div>
             <div class="row">
                 <div class="col-lg-6 col-md-12">

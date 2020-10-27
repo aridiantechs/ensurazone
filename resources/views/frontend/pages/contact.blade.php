@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Page top section  -->
-	<section class="page-top-section set-bg" data-setbg="img/page-top-bg/4.jpg">
+	<section class="page-top-section set-bg" data-setbg="{{ url('/') }}/images/bg1.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7">
