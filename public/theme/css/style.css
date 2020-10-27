@@ -2148,3 +2148,7 @@
 a.site-logo img {
    max-width: 250px;
 }
+
+a.site-logo {
+    max-width: 200px;
+}
