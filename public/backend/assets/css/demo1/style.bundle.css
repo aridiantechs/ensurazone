@@ -10576,7 +10576,7 @@ code {
     .dropdown-menu > li > a [class*=" la-"],
     .dropdown-menu > .dropdown-item [class^="la-"],
     .dropdown-menu > .dropdown-item [class*=" la-"] {
-      font-size: 1.4rem; }
+      font-size: 1.4rem; margin-top: 8px; }
     .dropdown-menu > li > a [class^="fa-"],
     .dropdown-menu > li > a [class*=" fa-"],
     .dropdown-menu > .dropdown-item [class^="fa-"],

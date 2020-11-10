@@ -11,10 +11,10 @@
     background: #F2F5F9;
 }
 .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__link .kt-menu__link-text{
-    color: #8337FF !important;
+    color: #ffffff !important;
 }
 .kt-aside-menu .kt-menu__nav > .kt-menu__item:not(.kt-menu__item--parent):not(.kt-menu__item--open):not(.kt-menu__item--here):not(.kt-menu__item--active):hover > .kt-menu__link{
-	background: #F2F5F9;
+	background: #1b1b28;
 }
 
 .kt-aside{

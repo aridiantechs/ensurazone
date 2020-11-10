@@ -45,7 +45,7 @@ Route::get('/contact', function () {
 })->name('contact');
 
 Route::get('/dashboard', function () {
-    return view('frontend.pages.dashboard');
+    return view('backend.index');
 })->name('dashboard');
 
 Route::get('/initial-survey', function () {
@@ -56,15 +56,45 @@ Route::get('/my-account', function () {
     return view('frontend.dashboard.index');
 })->name('my-account');
 
-Route::get('/inquiry', function () {
-    return view('backend.inquiries.list');
-})->name('inquiry');
+
+
+Route::get('/remote-assessment-inquiries', function () {
+    return view('backend.remote-assessment-inquiries.list');
+})->name('remote-assessment-inquiries');
+
+Route::get('/mitigation-inquiries', function () {
+    return view('backend.mitigation-inquiries.list');
+})->name('mitigation-inquiries');
+
+Route::get('/mitigation-inquiries-ground-proof-survey', function () {
+    return view('backend.mitigation-inquiries.ground-proof-survey');
+})->name('mitigation-inquiries-ground-proof-survey');
+
+Route::get('/remote-assessment-contracts', function () {
+    return view('backend.remote-assessment-contracts.list');
+})->name('remote-assessment-contracts');
+
+Route::get('/mitigation-plan-contracts', function () {
+    return view('backend.mitigation-plan-contracts.list');
+})->name('mitigation-plan-contracts');
 
 Route::get('/inquiry-details', function () {
-    return view('backend.inquiries.show');
+    return view('backend.remote-assessment-contracts.show');
 })->name('inquiry-details');
 
+Route::get('/users', function () {
+    return view('backend.user.list');
+})->name('users');
+
+Route::get('/companies', function () {
+    return view('backend.companies.list');
+})->name('companies');
+
+Route::get('/contractors', function () {
+    return view('backend.contractors.list');
+})->name('contractors');
 
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
