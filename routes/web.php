@@ -33,3 +33,11 @@ Route::get('/services', function () {
     return view('frontend.pages.services');
 })->name('services');
 
+Route::get('/blogs', function () {
+    return view('frontend.pages.blogs');
+})->name('blogs');
+
+Route::get('/contact', function () {
+    return view('frontend.pages.contact');
+})->name('contact');
+

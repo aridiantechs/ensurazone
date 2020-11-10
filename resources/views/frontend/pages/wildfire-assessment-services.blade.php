@@ -55,84 +55,69 @@
     <!-- Services section end  -->
 
     <!-- Features section   -->
-   {{--  <section class="features-section spad set-bg" data-setbg="{{ url('/') }}/theme/img/features-bg.jpg">
+    <section class="features-section spad set-bg" >
         <div class="container">
             <div class="row">
                 <div class="col-lg-4 col-md-6">
                     <div class="feature-box">
-                        <img src="{{ url('/') }}/theme/img/features/1.jpg" alt="">
+                        {{-- <img src="{{ url('/') }}/theme/img/features/1.jpg" alt=""> --}}
                         <div class="fb-text">
-                            <h5>Chemichal Reserach</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi-scing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p>
-                            <a href="" class="fb-more-btn">Read More</a>
+                            <h5>What we do for the user/customer</h5>
+                            <p>Ensurazone provides professional grade Defensible Space and Structural
+                                Resilience / Home Hardening assessments, reports on our findings, and
+                                the mitigation planning to assist you in managing the assessment and
+                                mitigation requirements set by your fire services provider or fire safety
+                                organization.</p>
+                            {{-- <a href="" class="fb-more-btn">Read More</a> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <div class="feature-box">
-                        <img src="{{ url('/') }}/theme/img/features/2.jpg" alt="">
+                        {{-- <img src="{{ url('/') }}/theme/img/features/2.jpg" alt=""> --}}
                         <div class="fb-text">
-                            <h5>Engineering</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi-scing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p>
-                            <a href="" class="fb-more-btn">Read More</a>
+                            <h5>What is Defensible Space?</h5>
+                            <p>Cal-Fire defines Defensible space as essential to improve your home’s
+                                chance of surviving a wildfire. It’s the buffer you create between a
+                                building on your property and the grass, trees, shrubs, or any wildland
+                                areas that surround it. This space is needed to slow or stop the spread
+                                of wildfire and it helps protect your home from catching fire—either from direct flame contact or radiant heat. Defensible space is also important
+                                for the protection of the firefighters defending your home.
+                                <a href="https://www.fire.ca.gov/dspace/" class="site-link">fire.ca.gov</a>
+                            {{-- <a href="" class="fb-more-btn">Read More</a> --}}
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="feature-box">
-                        <img src="{{ url('/') }}/theme/img/features/3.jpg" alt="">
+                        {{-- <img src="{{ url('/') }}/theme/img/features/3.jpg" alt=""> --}}
                         <div class="fb-text">
                             <h5>Manufactoring</h5>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipi-scing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p>
-                            <a href="" class="fb-more-btn">Read More</a>
+                            <p>In January 2005 a new state law became effective that extended the defensible space
+                                clearance around homes and structures from 30 feet to 100 feet. Proper clearance to
+                                100 feet dramatically increases the chance of your house surviving a wildfire. This
+                                defensible space also provides for firefighter safety when protecting homes during a
+                                wildland fire.
+                                <a href="https://www.fire.ca.gov/programs/communications/defensible-space-prc-4291/" class="site-link">Defensible Space PRC 4291</a>
+                            {{-- <a href="" class="fb-more-btn">Read More</a> --}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </section> --}}
+    </section>
     <!-- Features section end  -->
 
+
+
+
+
+
     <!-- Clients section  -->
-    <section class="clients-section spad">
+    <section class="clients-section spad pt-0">
         <div class="container">
 
-            <div class="client-text text-left">
-                <h2>What we do for the user/customer</h2>
-
-                <p>
-                    Ensurazone provides professional grade Defensible Space and Structural
-                    Resilience / Home Hardening assessments, reports on our findings, and
-                    the mitigation planning to assist you in managing the assessment and
-                    mitigation requirements set by your fire services provider or fire safety
-                    organization.
-                </p>
-
-            </div>
-
-            <div class="client-text text-left">
-                <h2>What is Defensible Space?</h2>
-                <p>Cal-Fire defines Defensible space as essential to improve your home’s
-                chance of surviving a wildfire. It’s the buffer you create between a
-                building on your property and the grass, trees, shrubs, or any wildland
-                areas that surround it. This space is needed to slow or stop the spread
-                of wildfire and it helps protect your home from catching fire—either from direct flame contact or radiant heat. Defensible space is also important
-                for the protection of the firefighters defending your home.
-                <a href="https://www.fire.ca.gov/dspace/" class="site-link">fire.ca.gov</a>
-                </p> 
-            </div>
-
-            <div class="client-text text-left">
-                <h2>100 Feet of Defensible Space is the Law</h2>
-                <p>In January 2005 a new state law became effective that extended the defensible space
-clearance around homes and structures from 30 feet to 100 feet. Proper clearance to
-100 feet dramatically increases the chance of your house surviving a wildfire. This
-defensible space also provides for firefighter safety when protecting homes during a
-wildland fire.
-                <a href="https://www.fire.ca.gov/programs/communications/defensible-space-prc-4291/" class="site-link">Defensible Space PRC 4291</a>
-                </p>
-
-            </div>
+            
 
             <div class="client-text text-left">
                 <h2>100 Feet of Defensible Space is the Law</h2>
