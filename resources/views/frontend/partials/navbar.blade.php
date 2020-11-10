@@ -41,6 +41,7 @@
                      
                     <li><a href="{{ route('blogs') }}">Blogs</a></li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
+                    <li><a href="{{ route('login') }}">Login</a></li>
                 </ul>
             </nav>
 

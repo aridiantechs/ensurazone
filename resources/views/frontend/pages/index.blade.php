@@ -123,41 +123,8 @@ a.read-more-services.site-btn.sb-dark {
             </div>
         </div>
     </section>
-
-    {{-- <section class="services-section">
-        <div class="services-warp">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12">
-                        <div class="service-item">
-                            <div class="si-head">
-                                <div class="si-icon">
-                                    
-                                </div>
-                                <h4 class="text-center">Wildfire Protection Contractors</h4>
-                            </div>
-                            <p class="text-center"><a href="{{ route('wildfire-protection-contractors') }}" class="site-link">See Contractors</a></p>
-                        </div>
-                    </div>
-                   
-                    <div class="col-lg-6 col-md-12">
-                        <div class="service-item">
-                            <div class="si-head">
-                                <div class="si-icon">
-                                    
-                                </div>
-                                <h4 class="text-center">Wildfire Planning Information</h4>
-                            </div>
-                            <p class="text-center"><a href="{{ route('wildfire-planning-information') }}" class="site-link">See Wildfire Service Providers</a></p>
-                        </div>
-                    </div>
-                 
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
     <!-- Services section end  -->
+
 
     <!-- Features section   -->
     <section 
