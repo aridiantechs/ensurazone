@@ -8,8 +8,8 @@
 			<div class="row">
 				<div class="col-lg-7">
 					<h2>Contact</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p>
-					<a href="" class="site-btn">Say hello</a>
+					{{-- <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p> --}}
+					<a href="#" class="site-btn">Say hello</a>
 				</div>
 			</div>
 		</div>
@@ -25,7 +25,7 @@
 				<div class="col-lg-4">
 					<div class="contact-text">
 						<h2>Get in Touch</h2>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi</p>
+						<p>Ensurazone 3D build process brings leading professionals in Fire Safety and Planning, Sales and Business Development, Computer Engineering, GIS and Remote Sense Mapping, Portal and Dashboard Development, together to produce solutions for a wide range of customers in multiple fields of All-Hazard risk management and reduction.</p>
 						<div class="header-info-box">
 							<div class="hib-icon">
 								<img src="img/icons/phone.png" alt="" class="">
@@ -75,7 +75,7 @@
 		<div class="container">
 			<div class="map-info">
 				<img src="img/logo-contact.png" alt="">
-				<p>Lorem ipsum dolor sit amet, consec-tetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin est. Nam ornare ipsum ac accumsan auctor. </p>
+				<p>Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</p>
 			</div>
 		</div>
 		<div class="map">

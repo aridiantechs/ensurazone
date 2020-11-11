@@ -41,7 +41,7 @@
                      
                     <li><a href="{{ route('blogs') }}">Blogs</a></li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
-                    <li><a href="{{ route('login') }}">Login</a></li>
+                    <li><a href="{{ route('register') }}">Join Now</a></li>
                 </ul>
             </nav>
 

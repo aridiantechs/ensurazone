@@ -106,7 +106,7 @@
                 <div class="col-lg-6">
                     <div class="contact-text">
                         <h2>Register to your account now</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, blandit sollicitudin estst quis, blandit sollicitudi</p>
+                        <p>Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</p>
                         <div class="header-info-box">
                             <div class="hib-icon">
                                 <img src="img/icons/phone.png" alt="" class="">
@@ -128,6 +128,7 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    
                     <form class="contact-form"  method="POST" action="{{ route('register') }}">
                         @csrf
                         <div class="row">
@@ -168,6 +169,21 @@
                             </div>
                         </div>
                     </form>
+
+                    <hr>
+
+                    <div class="text-center m-5">
+                        <h5>Or Login with </h5>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-6">
+                            <button style="background: #1877f2;" class="site-btn sb-dark w-100"><i class="fa fa-facebook mr-2"></i> Facebook</button>
+                        </div>
+                        <div class="col-6">
+                            <button style="background: #d62f2f;" class="site-btn sb-dark w-100"><i class="fa fa-google mr-2"></i> Google</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

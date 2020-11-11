@@ -169,6 +169,8 @@
 	      var componentForm = {
 	        locality: 'short_name',
 	      };
+
+	      console.log(place);
 	      for (var i = 0; i < place.address_components.length; i++) {
 	        var addressType = place.address_components[i].types[0];
 	        if (componentForm[addressType]) {
@@ -188,10 +190,28 @@
 	}
 
 	function initMap(latlng) {
+
+
+
+		// var mapOptions = {
+		// 	zoom: 8,
+		// 	center: new google.maps.LatLng(44, -110),
+		// 	mapTypeId: 'roadmap'
+		// };
+		// var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+		// google.maps.event.addListener(map, 'bounds_changed', function() {
+
+		// });
+
+
+
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 8,
 			center: {lat: 40.731, lng: -73.997}
 		});
+
+		console.log(map.getBounds());
+
 		var geocoder = new google.maps.Geocoder;
 		var infowindow = new google.maps.InfoWindow;
 		geocodeLatLng(geocoder, map, infowindow, latlng);

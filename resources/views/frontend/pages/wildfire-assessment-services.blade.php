@@ -9,7 +9,7 @@
                     <div class="row">
                         <div class="col-xl-8">
                             <h2><span>Wildfire</span><span>Assessment</span><span> Services</span></h2>
-                            <a href="#" class="site-btn sb-white mr-4 mb-3">Start planning for wildfire now</a>
+                            <a href="{{ route('register') }}" class="site-btn sb-white mr-4 mb-3">Start planning for wildfire now</a>
                         </div>
                     </div>
                 </div>

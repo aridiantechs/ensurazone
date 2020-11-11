@@ -161,7 +161,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                 <p>Punjab, Pakistan</p>
                             </td>
                             <td>
-                                <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Pending</span>
+                                <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">In Progress</span>
 
                             </td>
                             <td>    
