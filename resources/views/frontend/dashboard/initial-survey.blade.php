@@ -4,11 +4,16 @@
 <link rel="stylesheet" href="{{ asset('theme/survey/fonts/material-icon/css/material-design-iconic-font.min.css') }}">
 <link rel="stylesheet" href="{{ asset('theme/survey/vendor/nouislider/nouislider.min.css') }}">
 <link rel="stylesheet" href="{{ asset('theme/survey/css/style.css') }}">
+<style type="text/css">
+header.header-section {
+    box-shadow: 0px 1px 25px #2e2e2e1a;
+}
+</style>
 @endsection
 
 @section('content')
 <!-- Hero section  -->
-    <section class="page-top-section set-bg" data-setbg="{{ url('/') }}/images/bg1.jpg">
+    {{-- <section class="page-top-section set-bg" data-setbg="{{ url('/') }}/images/bg1.jpg">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-7">
@@ -18,7 +23,7 @@
 				</div>
 			</div>
 		</div>
-	</section>
+	</section> --}}
     <!-- Hero section end  -->
 
     
@@ -126,6 +131,13 @@
 			                        </div>
 			                    </div>
 		                    </form>
+
+		                    <div class="row mt-5">
+		                    	<div class="col-12">
+		                    		<h5 class="mb-3">Download Our Sample Report</h5>
+                                	<button class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</button>
+		                    	</div>
+		                    </div>
                         </div>
                     </fieldset>
                 </div>
@@ -146,9 +158,132 @@
 <script src="{{ url('theme/survey/') }}/vendor/minimalist-picker/dobpicker.js"></script>
 <script src="{{ url('theme/survey/') }}/vendor/nouislider/nouislider.min.js"></script>
 <script src="{{ url('theme/survey/') }}/vendor/wnumb/wNumb.js"></script>
-<script src="{{ url('theme/survey/') }}/js/main.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqqhqN5q545cx57GD5ht6JVidUQuuGd34&sensor=false&v=3&libraries=geometry,places&callback=initAutocomplete" async defer></script>
+{{-- <script src="{{ url('theme/survey/') }}/js/main.js"></script> --}}
 
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqqhqN5q545cx57GD5ht6JVidUQuuGd34&sensor=false&v=3&libraries=geometry,places&callback=initAutocomplete" async defer></script>
+<script type="text/javascript">
+	(function($) {
+
+
+
+    var form = $("#signup-form");
+    form.validate({
+        errorPlacement: function errorPlacement(error, element) {
+            element.before(error);
+        },
+        rules: {
+            email: {
+                email: true
+            }
+        },
+        onfocusout: function(element) {
+            $(element).valid();
+        },
+    });
+    form.children("div").steps({
+        headerTag: "h3",
+        bodyTag: "fieldset",
+        transitionEffect: "fade",
+        stepsOrientation: "vertical",
+        titleTemplate: '<div class="title"><span class="step-number">#index#</span><span class="step-text">#title#</span></div>',
+        labels: {
+            previous: 'Previous',
+            next: 'Next',
+            finish: 'Finish',
+            current: ''
+        },
+        onStepChanging: function(event, currentIndex, newIndex) {
+            if (currentIndex === 0) {
+                form.parent().parent().parent().append('<div class="footer footer-' + currentIndex + '"></div>');
+            }
+            if (currentIndex === 1) {
+                form.parent().parent().parent().find('.footer').removeClass('footer-0').addClass('footer-' + currentIndex + '');
+            }
+            if (currentIndex === 2) {
+                form.parent().parent().parent().find('.footer').removeClass('footer-1').addClass('footer-' + currentIndex + '');
+            }
+            if (currentIndex === 3) {
+                form.parent().parent().parent().find('.footer').removeClass('footer-2').addClass('footer-' + currentIndex + '');
+            }
+            // if(currentIndex === 4) {
+            //     form.parent().parent().parent().append('<div class="footer" style="height:752px;"></div>');
+            // }
+            form.validate().settings.ignore = ":disabled,:hidden";
+            return form.valid();
+        },
+        onFinishing: function(event, currentIndex) {
+            form.validate().settings.ignore = ":disabled";
+            return form.valid();
+        },
+        onFinished: function(event, currentIndex) {
+        	window.location.href = "{{ route('thanks') }}";
+            // alert('Submited');
+        },
+        onStepChanged: function(event, currentIndex, priorIndex) {
+
+            return true;
+        }
+    });
+
+    jQuery.extend(jQuery.validator.messages, {
+        required: "",
+        remote: "",
+        email: "",
+        url: "",
+        date: "",
+        dateISO: "",
+        number: "",
+        digits: "",
+        creditcard: "",
+        equalTo: ""
+    });
+
+    $.dobPicker({
+        daySelector: '#birth_date',
+        monthSelector: '#birth_month',
+        yearSelector: '#birth_year',
+        dayDefault: '',
+        monthDefault: '',
+        yearDefault: '',
+        minimumAge: 0,
+        maximumAge: 120
+    });
+    var marginSlider = document.getElementById('slider-margin');
+    if (marginSlider != undefined) {
+        noUiSlider.create(marginSlider, {
+              start: [1100],
+              step: 100,
+              connect: [true, false],
+              tooltips: [true],
+              range: {
+                  'min': 100,
+                  'max': 2000
+              },
+              pips: {
+                    mode: 'values',
+                    values: [100, 2000],
+                    density: 4
+                    },
+                format: wNumb({
+                    decimals: 0,
+                    thousand: '',
+                    prefix: '$ ',
+                })
+        });
+        var marginMin = document.getElementById('value-lower'),
+	    marginMax = document.getElementById('value-upper');
+
+        marginSlider.noUiSlider.on('update', function ( values, handle ) {
+            if ( handle ) {
+                marginMax.innerHTML = values[handle];
+            } else {
+                marginMin.innerHTML = values[handle];
+            }
+        });
+    }
+})(jQuery);
+</script>
 <script type="text/javascript">
 	function initializeAutocompleteLocOne(){
 	    var input = document.getElementById('current');
@@ -169,8 +304,6 @@
 	      var componentForm = {
 	        locality: 'short_name',
 	      };
-
-	      console.log(place);
 	      for (var i = 0; i < place.address_components.length; i++) {
 	        var addressType = place.address_components[i].types[0];
 	        if (componentForm[addressType]) {
@@ -190,28 +323,10 @@
 	}
 
 	function initMap(latlng) {
-
-
-
-		// var mapOptions = {
-		// 	zoom: 8,
-		// 	center: new google.maps.LatLng(44, -110),
-		// 	mapTypeId: 'roadmap'
-		// };
-		// var map = new google.maps.Map(document.getElementById('map'), mapOptions);
-		// google.maps.event.addListener(map, 'bounds_changed', function() {
-
-		// });
-
-
-
 		var map = new google.maps.Map(document.getElementById('map'), {
 			zoom: 8,
 			center: {lat: 40.731, lng: -73.997}
 		});
-
-		console.log(map.getBounds());
-
 		var geocoder = new google.maps.Geocoder;
 		var infowindow = new google.maps.InfoWindow;
 		geocodeLatLng(geocoder, map, infowindow, latlng);

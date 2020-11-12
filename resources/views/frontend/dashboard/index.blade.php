@@ -5,6 +5,12 @@
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     background-color: #17172d;
 }
+tr td {
+    padding-bottom: 10px;
+}
+header.header-section {
+    box-shadow: 0px 1px 25px #2e2e2e1a;
+}
 </style>
 @endsection
 
@@ -12,7 +18,7 @@
 
 <section class="pb-5 header">
 
-    <section class="page-top-section set-bg" data-setbg="{{ url('/') }}/images/bg1.jpg">
+    {{-- <section class="page-top-section set-bg" data-setbg="{{ url('/') }}/images/bg1.jpg">
         <div class="container">
             <div class="row">
                 <div class="col-lg-7">
@@ -22,12 +28,12 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 
     <div class="container py-4">
         <header class="text-center mb-5 pb-5 text-dark">
             <h1 class="display-4">My Account</h1>
-            <p class="font-italic mb-1">Making advantage of Bootstrap 4 components, easily build an awesome tabbed interface.</p>
+            <p class="font-italic mb-1">You can update your personal details, download reports and download invoice details here.</p>
             
         </header>
 
@@ -63,7 +69,7 @@
                         <div class="row mb-5">
                             <div class="col-6">
                                 <label for="username" class="form-label mt-3">Name</label>
-                                <input class="form-control" type="username" name="username" id="username" value="Zach M" />
+                                <input class="form-control" type="text" name="username" id="username" value="Zach M" />
                             </div>
                             <div class="col-6">
                                 <label for="email" class="form-label mt-3">Email</label>
@@ -72,6 +78,10 @@
                             <div class="col-6">
                                 <label for="phone" class="form-label mt-3">Phone</label>
                                 <input class="form-control" type="text" name="phone" id="phone" value="+874 65441185" />
+                            </div>
+                            <div class="col-6">
+                                <label for="phone" class="form-label mt-3">Password</label>
+                                <input class="form-control" type="password" name="phone" id="phone" value="+874 65441185" />
                             </div>
                         </div>
                         <div class="row ">
@@ -106,16 +116,52 @@
                                 <th>Action</th>
                             </thead>
                             <tbody>
-                                <td>1</td>
-                                <td>12-10-2020</td>
-                                <td><a href="#"><i class="fa fa-download mr-2"></i></a></td>
+                                <tr>
+                                    <td>1</td>
+                                    <td>12-10-2020</td>
+                                    <td><a href="#"><i class="fa fa-download mr-2"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td>05-10-2019</td>
+                                    <td><a href="#"><i class="fa fa-download mr-2"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td>12-10-2018</td>
+                                    <td><a href="#"><i class="fa fa-download mr-2"></i></a></td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                     
                     <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
-                        <h4 class="font-italic mb-4">Logout from account</h4>
-                        <button class="site-btn sb-dark"><i class="fa fa-user mr-2"></i> Logout</button>
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="">
+                                    <label for="username" class="form-label mt-3">Old Password</label>
+                                    <input class="form-control" type="password" name="username" id="username" value="Zach M" />
+                                </div>
+
+                                <div class="">
+                                    <label for="username" class="form-label mt-3">New Password</label>
+                                    <input class="form-control" type="password" name="username" id="username" value="Zach M" />
+                                </div>
+
+                                <div class="">
+                                    <label for="username" class="form-label mt-3">Confirm Password</label>
+                                    <input class="form-control" type="password" name="username" id="username" value="Zach M" />
+                                </div>
+
+                                <button class="site-btn sb-dark mt-4">Update password</button>
+                            </div>
+
+                            <div class="col-6">
+                                <h5 class="font-italic mb-4">Logout from account</h5>
+                                <button class="site-btn sb-dark"><i class="fa fa-user mr-2"></i> Logout</button>
+                            </div>
+                        </div>
+                        
                     </div>
                 </div>
             </div>

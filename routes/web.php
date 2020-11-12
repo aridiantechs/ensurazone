@@ -52,6 +52,10 @@ Route::get('/initial-survey', function () {
     return view('frontend.dashboard.initial-survey');
 })->name('initial-survey');
 
+Route::get('/thanks', function () {
+    return view('frontend.dashboard.thanks');
+})->name('thanks');
+
 Route::get('/my-account', function () {
     return view('frontend.dashboard.index');
 })->name('my-account');

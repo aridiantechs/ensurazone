@@ -23,7 +23,7 @@
                                 <img src="{{ url('/') }}/theme/img/icons/phone.png" alt="" class="">
                             </div>
                             <div class="fib-text">
-                                <p>Main Str, no 23 NY,<br>New York PK 23589</p>
+                                <p>401 Ryland St, Suite 100<br>Reno, NV 89502, US</p>
                             </div>
                         </div>
                         <div class="footer-info-box">
@@ -31,7 +31,7 @@
                                 <img src="{{ url('/') }}/theme/img/icons/map-marker.png" alt="" class="">
                             </div>
                             <div class="fib-text">
-                                <p>+546 990221 123<br>contact@ensurazone.com</p>
+                                <p>775-737-1355<br>contact@ensurazone.com</p>
                             </div>
                         </div>
                         <form class="footer-search">

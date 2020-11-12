@@ -59,8 +59,8 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                             <td>Zach M</td>
                             <td>zach.mu43@gmail.com</td>
                             <td>
-                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town, Rawalpindi</h5>
-                                <p>Punjab, Pakistan</p>
+                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town</h5>
+                                <p>California, United States</p>
                             </td>
                             <td>
                                 <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Pending</span>
@@ -91,8 +91,8 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                             <td>Zach M</td>
                             <td>zach.mu43@gmail.com</td>
                             <td>
-                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town, Rawalpindi</h5>
-                                <p>Punjab, Pakistan</p>
+                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town</h5>
+                                <p>California, United States</p>
                             </td>
                             <td>
                                 <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Assigned</span>
@@ -125,8 +125,8 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                             <td>Zach M</td>
                             <td>zach.mu43@gmail.com</td>
                             <td>
-                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town, Rawalpindi</h5>
-                                <p>Punjab, Pakistan</p>
+                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town</h5>
+                                <p>California, United States</p>
                             </td>
                             <td>
                                 <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Pending</span>
@@ -157,8 +157,8 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                             <td>Zach M</td>
                             <td>zach.mu43@gmail.com</td>
                             <td>
-                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town, Rawalpindi</h5>
-                                <p>Punjab, Pakistan</p>
+                                <h5 class="mt-4 text-dark">797 Saidpur Rd, Block B Satellite Town</h5>
+                                <p>California, United States</p>
                             </td>
                             <td>
                                 <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">In Progress</span>
