@@ -53,7 +53,7 @@
             <div class="dropdown-menu dropdown-menu-fit dropdown-menu-right dropdown-menu-anim dropdown-menu-top-unround dropdown-menu-xl">
                 <form>
                     <!--begin: Head -->
-                    <div class="kt-head kt-head--skin-dark" style="background-image: url(./assets/media/misc/bg-1.jpg)">
+                    <div class="kt-head kt-head--skin-dark" style="background-image: url({{ asset('backend/assets/media/misc/bg-1.jpg') }})">
                         <h3 class="kt-head__title">
                             User Quick Actions 
                             <span class="kt-space-15"></span>

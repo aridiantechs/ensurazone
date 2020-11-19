@@ -2,7 +2,7 @@
 
 
 @section('meta')
-<title>Adbotics | Create Strategy</title>
+<title>Ensurazone | Survey report</title>
 @endsection
 
 

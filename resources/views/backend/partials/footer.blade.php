@@ -87,6 +87,7 @@ var KTAppOptions = {"colors":{"state":{"brand":"#5d78ff","dark":"#282a3c","light
 <!--end::Page Vendors -->
 
 <!--begin::Page Scripts(used by this page) -->
+<script src="{{ asset('backend/assets/vendors/general/toastr/build/toastr.min.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/js/demo1/pages/dashboard.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/js/demo1/scripts.bundle.js') }}" type="text/javascript"></script>
 <!--end::Global Theme Bundle -->

@@ -2,27 +2,20 @@
 <html lang="en" >
     
     <head>
-        <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.js"></script>
-        <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.css">
         @include('backend.partials.header')
-  {{--       <style>
-            .btn-primary, .btn-danger, .btn-success{
-                background-color: #ffffff;
-            }
-        </style> --}}
+  
         @yield('styles') 
         
     </head>
-    <!-- end::Head -->
-    <!-- begin::Body -->
+    
     <body  class="kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--fixed kt-subheader--solid kt-aside--enabled kt-aside--fixed kt-page--loading"  >
         <!-- begin:: BODY -->
 
         <!-- begin:: Header Mobile -->
         <div id="kt_header_mobile" class="kt-header-mobile  kt-header-mobile--fixed " >
             <div class="kt-header-mobile__logo">
-                <a href="demo1/index.html">
-                <img alt="Logo" src="backend-assets/assets/media/logos/logo-light.png"/>
+                <a href="{{ route('/') }}">
+                <img alt="Logo" src="{{ asset('backend/assets/media/logos/logo-light.png') }}"/>
                 </a>
             </div>
             <div class="kt-header-mobile__toolbar">
