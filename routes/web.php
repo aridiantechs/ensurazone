@@ -15,6 +15,16 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+//Social Login
+Route::get('login/{provider}', 'SocialController@redirect');
+Route::get('login/{provider}/callback','SocialController@Callback');
+Route::post('/authenticate/{user}', 'SocialController@authenticate')->name('authenticate');
+
+
+Route::get('/user_type', function () {
+    return view('frontend.pages.user_type');
+})->name('user_type');
+
 Route::resource('remote-assessment', App\Http\Controllers\RemoteAssessmentController::class);
 
 

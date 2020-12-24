@@ -15,6 +15,12 @@
      @include('frontend.partials.header_scripts')
 
     @yield('styles')
+
+    <style>
+        .site-nav-menu ul li:hover .sub-menu {
+            z-index: 9999;
+        }
+    </style>
 </head>
 
 <body>

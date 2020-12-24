@@ -34,14 +34,31 @@
                     <li class="@if(\Request::route()->getName() == '/') active @endif"><a href="{{ route('/') }}">Home</a></li>
                     {{-- <li><a href="about.html">About us</a></li> --}}
                     <li class="@if(\Request::route()->getName() == 'services') active @endif"><a href="{{ route('services') }}">Services</a>
-                        {{-- <ul class="sub-menu">
+                        <ul class="sub-menu">
                             <li><a href="elements.html">Elements</a></li>
-                        </ul> --}}
+                        </ul>
                     </li>
                      
                     <li><a href="{{ route('blogs') }}">Blogs</a></li>
                     <li><a href="{{ route('contact') }}">Contact</a></li>
-                    <li><a href="{{ route('register') }}">Join Now</a></li>
+                    @if(Auth::guest())
+                        <li><a href="{{ route('register') }}">Join Now</a></li>
+                    @else
+                        <li>
+                            <a href="{{ route('/') }}">Dashboard</a>
+                            <ul class="sub-menu">
+                                <li class="m-menu__sub-item">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                        @csrf
+                                    </form>
+                                </li>
+                            </ul>
+                        </li>
+                        
+                    @endif
                 </ul>
             </nav>
 

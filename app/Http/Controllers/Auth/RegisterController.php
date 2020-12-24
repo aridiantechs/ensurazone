@@ -64,10 +64,24 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user= User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
+
+        $user->assignRole('endUser');
+        return $user;
+    }
+
+    protected function registered()
+    {
+        if(\Auth::check() && auth()->user()->hasRole('endUser')) {
+            return redirect()->route('remote-assessment.index');
+            
+        } else {
+            return redirect()->route('login');
+            
+        }
     }
 }
