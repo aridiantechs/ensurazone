@@ -25,8 +25,9 @@ Route::get('/user_type', function () {
     return view('frontend.pages.user_type');
 })->name('user_type');
 
-Route::resource('remote-assessment', App\Http\Controllers\RemoteAssessmentController::class);
-
+Route::middleware(['auth'])->group(function () {
+    Route::resource('remote-assessment', RemoteAssessmentController::class);
+});
 
 
 // Old routes

@@ -44,18 +44,18 @@ label.error:after{
 
                             <div class="form-group">
                                 <label for="username" class="form-label">Name</label>
-                                <input class="form-control" type="username" name="username" required="" id="username" />
+                                <input class="form-control" type="username" name="username" value="{{$user->name}}" required="" id="username" />
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control" type="email" name="email" required="" id="email" />
+                                <input class="form-control" type="email" name="email" value="{{$user->email}}" required="" id="email" />
                                 <span class="text-input">Example :<span>  Jeff@gmail.com</span></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input class="form-control" type="text" name="phone" required="" id="phone" />
+                                <input class="form-control" type="text" name="phone" value="" required="" id="phone" />
                             </div>
                             
                             <div class="form-group">
@@ -314,10 +314,21 @@ label.error:after{
 	          console.log('city', city);
 	        }
 	      }
+
+          address = place['adr_address'];
 	      console.log(lat,lng);
 	     
 	    });
 	 }
+
+     $('#initial-survey').submit(function(e) {
+		$(this).append('<input type="hidden" name="address" value="'+ address +'" id="address">');
+		$(this).append('<input type="hidden" name="latitude" value="'+ lat +'" id="lat">');
+		$(this).append('<input type="hidden" name="longitude" value="'+ lng +'" id="long">');
+		$(this).append('<input type="hidden" name="city" value="'+ city +'" id="city">');
+		$(this).append('<input type="hidden" name="country" value="'+ country +'" id="country">');
+		return true;
+	});
 
     function showPosition(position) {
 	  latlng = position.coords.latitude + ',' +  position.coords.longitude;

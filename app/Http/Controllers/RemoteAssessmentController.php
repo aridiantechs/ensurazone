@@ -14,7 +14,8 @@ class RemoteAssessmentController extends Controller
      */
     public function index()
     {
-        return view('frontend.dashboard.initial-survey');
+        $user=auth()->user();
+        return view('frontend.dashboard.initial-survey',compact('user'));
     }
 
     /**
