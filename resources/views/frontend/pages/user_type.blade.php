@@ -339,6 +339,7 @@
 					</svg>
 
 					<form class="user_type_group mb-5" method="POST" id="authenticate-form" action="{{ route('authenticate',$user) }}">
+						@csrf
 						<input type="hidden" name="user_type">
 						<button class="user_btn svg" data-usertype="sme-1">SME-1</button>
 						<button class="user_btn svg" data-usertype="sme-2">SME-2</button>
