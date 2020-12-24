@@ -8,6 +8,9 @@
 header.header-section {
     box-shadow: 0px 1px 25px #2e2e2e1a;
 }
+label.error:after{
+    display: none;
+}
 </style>
 @endsection
 
@@ -30,10 +33,10 @@ header.header-section {
     <div class="main">
 
         <div class="container">
-            <form method="POST" id="signup-form" class="signup-form" action="#">
+            <form method="POST" id="initial-survey" action="{{ route('remote-assessment.store') }}" class="signup-form">
+                
                 <div>
                     <h3>Personal info</h3>
-
                     <fieldset>
                         <h2>Personal information</h2>
                         <p class="desc">Please enter your infomation and proceed to next step so we can complete your account</p>
@@ -41,24 +44,24 @@ header.header-section {
 
                             <div class="form-group">
                                 <label for="username" class="form-label">Name</label>
-                                <input class="form-control" type="username" name="username" id="username" />
+                                <input class="form-control" type="username" name="username" required="" id="username" />
                             </div>
 
                             <div class="form-group">
                                 <label for="email" class="form-label">Email</label>
-                                <input class="form-control" type="email" name="email" id="email" />
+                                <input class="form-control" type="email" name="email" required="" id="email" />
                                 <span class="text-input">Example :<span>  Jeff@gmail.com</span></span>
                             </div>
 
                             <div class="form-group">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input class="form-control" type="text" name="phone" id="phone" />
+                                <input class="form-control" type="text" name="phone" required="" id="phone" />
                             </div>
                             
                             <div class="form-group">
                                 <label for="location" class="form-label">Location</label>
 		                        <div class="input-group">
-		                            <input type="text" name="addressone" id="current" onFocus="initializeAutocompleteLocOne()" class="form-control" placeholder="PICKUP Current Location" aria-required="true" >
+		                            <input type="text" name="addressone" id="current" required="" onFocus="initializeAutocompleteLocOne()" class="form-control" placeholder="PICKUP Current Location" aria-required="true" >
 		                            <span class="input-group-btn">
 		                                <button style="border-radius: unset;" type="button" class="btn btn-primary" id="current_loc_btn" >Use My Location</button>
 		                            </span>
@@ -70,7 +73,6 @@ header.header-section {
                         </div>
                     </fieldset>
 
-						
 					<h3>Previous History</h3>
                     <fieldset>
                         <h2>Previous History (Optional)</h2>
@@ -167,7 +169,7 @@ header.header-section {
 
 
 
-    var form = $("#signup-form");
+    var form = $("#initial-survey");
     form.validate({
         errorPlacement: function errorPlacement(error, element) {
             element.before(error);
@@ -217,8 +219,9 @@ header.header-section {
             return form.valid();
         },
         onFinished: function(event, currentIndex) {
-        	window.location.href = "{{ route('thanks') }}";
-            // alert('Submited');
+            // $('#initial-survey').submit();
+        	// window.location.href = "{{ route('thanks') }}";
+            alert('Submited');
         },
         onStepChanged: function(event, currentIndex, priorIndex) {
 

@@ -15,6 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
+Route::resource('remote-assessment', App\Http\Controllers\RemoteAssessmentController::class);
+
+
+
+// Old routes
+
 
 Route::get('/', function () {
     return view('frontend.pages.index');
