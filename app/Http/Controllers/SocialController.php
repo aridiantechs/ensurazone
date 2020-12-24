@@ -21,12 +21,12 @@ class SocialController extends Controller
     {
 
         // return view('frontend.pages.user_type')->with('user',$user ?? 'null');
-        /* try { */
-            return $userSocial = Socialite::driver($provider)->stateless()->user();
+        try {
+            $userSocial = Socialite::driver($provider)->stateless()->user();
              
-        /* } catch (\Exception $e) {
+        } catch (\Exception $e) {
             return redirect('/login');
-        } */
+        }
 
         $user = User::where(['email' => $userSocial->getEmail()])->first();
         if($user){
