@@ -55,7 +55,7 @@ class SocialController extends Controller
 
     public function authenticate(Request $request,User $user)
     {
-        $user->assignRole('end_user');
+        $user->assignRole('endUser');
         // dd($user->getRoleNames());
         Auth::login($user);
         return redirect()->route('/');
