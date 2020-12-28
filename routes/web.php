@@ -27,8 +27,16 @@ Route::get('/user_type', function () {
 
 Route::middleware(['auth'])->group(function () {
     Route::resource('remote-assessment', RemoteAssessmentController::class);
+    Route::post('/storeMedia', [App\Http\Controllers\RemoteAssessmentController::class, 'storeMedia'])->name('storeMedia');
+    Route::delete('/fileDestroy', [App\Http\Controllers\RemoteAssessmentController::class, 'fileDestroy'])->name('fileDestroy');
 });
 
+Route::middleware(['hasPaid'])->group(function () {
+    Route::resource('my_account', Account\DashboardController::class);
+    Route::post('/my_password', [App\Http\Controllers\Account\DashboardController::class, 'myPassword'])->name('my_account.password');
+    Route::get('/remote_assessment_report', [App\Http\Controllers\Account\DashboardController::class, 'remote_assessment_report'])->name('remote_assessment_report');
+    Route::post('/ground_proof', [App\Http\Controllers\Account\DashboardController::class, 'storeGroundProof'])->name('ground_proof.store');
+});
 
 // Old routes
 
@@ -73,9 +81,9 @@ Route::get('/thanks', function () {
     return view('frontend.dashboard.thanks');
 })->name('thanks');
 
-Route::get('/my-account', function () {
+/* Route::get('/my-account', function () {
     return view('frontend.dashboard.index');
-})->name('my-account');
+})->name('my-account'); */
 
 
 

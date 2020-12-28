@@ -123,6 +123,9 @@ return [
 
     'cipher' => 'AES-256-CBC',
 
+    'STRIPE_KEY' => env('STRIPE_KEY', 'pk_test_51I3HbVERX5U0TZT16HG1ae1rJM5CuRZNTSfAPaofYT7hZdQhyqLChtDHu9BwG4Nz7xjv1zkiFvfv2JH5ZMjGWvSm00PwBNDWXY'),
+    'STRIPE_SECRET' => env('STRIPE_SECRET', 'sk_test_51I3HbVERX5U0TZT1u9jSUbahCgR2mJbhIEX60b2cZwDI5Mrm9IribDFnjVSxQwh0WKYw5YmItEV49r0fVA8VhIkk00g7k2wkQ5'),
+    
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

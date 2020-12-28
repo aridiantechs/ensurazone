@@ -47,6 +47,7 @@
                         <li>
                             <a href="{{ route('/') }}">Dashboard</a>
                             <ul class="sub-menu">
+                                <li class="m-menu__sub-item"><a href="{{ route('my_account.index') }}">Account</a></li>
                                 <li class="m-menu__sub-item">
                                     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
                                     {{ __('Logout') }}

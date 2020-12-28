@@ -2,14 +2,17 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RemoteAssessment extends Model
+class Profile extends Model
 {
-    use HasFactory;
+    use SoftDeletes;
+
+    protected $table='profile';
+
     protected $fillable = [
-    	'username',
+        'username',
         'email',
         'address1',
         'latitude',
@@ -19,11 +22,11 @@ class RemoteAssessment extends Model
         'state',
         'city',
         'phone',
-        'dob',
-	];
-	
-	public function user()
+    ];
+
+    public function user()
     {
         return $this->belongsTo('App\Models\User','user_id');
     }
+
 }
