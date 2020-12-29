@@ -45,7 +45,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                 <table class="table table-striped- table-hover table-checkable" id="kt_table_2">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
                             <th>Location</th>
@@ -54,138 +54,43 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Zach M</td>
-                            <td>zach.mu43@gmail.com</td>
-                            <td>
-                                <h5 class="mt-4 text-dark">797 Woston Rd, Block B Satellite Town</h5>
-                                <p>California, United States</p>
-                            </td>
-                            <td>
-                                <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Pending</span>
-                            </td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                      <i class="la la-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
-                                    </div>
-                                </span>
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
-                                  <i class="la la-eye"></i>
-                                </a>
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
-                                  <i class="la la-mail-forward"> </i>
-                                </a>
-                            </td>
+                        @foreach($user as $key => $user)
+                            @if ($user->remote_assessment()->exists())
+                                <tr>
+                                    <td>{{++$key}}</td>
+                                    <td>{{ $user->name ?? '' }}</td>
+                                    <td>{{ $user->email ?? '' }}</td>
+                                    <td style="max-width:300px">{{$user->remote_assessment()->exists() ? $user->remote_assessment->address1 : ''}}</td>
+                                    <td>
+                                        @php
+                                            $status=$user->remote_assessment->status=='pending'?'primary':($user->remote_assessment->status=='In process'?'success':($user->remote_assessment->status=='completed'?'warning':''));
+                                        @endphp
+                                        <span class="kt-badge kt-badge--{{$status}} kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">{{$user->remote_assessment->status}}</span>
+                                    </td>
+                                    <td>
+                                        <span class="dropdown">
+                                            <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                                            <i class="la la-ellipsis-h"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right">
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
+                                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
+                                                <a class="dropdown-item" href="#" name="remote_assess_status" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
+                                                <a class="dropdown-item" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
+                                            </div>
+                                        </span>
+                                        <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                        <i class="la la-eye"></i>
+                                        </a>
+                                        <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
+                                        <i class="la la-mail-forward"> </i>
+                                        </a>
+                                    </td>
+                                
+                                </tr>
+                            @endif
                             
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Zach M</td>
-                            <td>zach.mu43@gmail.com</td>
-                            <td>
-                                <h5 class="mt-4 text-dark">797 Woston Rd, Block B Satellite Town</h5>
-                                <p>California, United States</p>
-                            </td>
-                            <td>
-                                <span class="kt-badge kt-badge--warning kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Assigned</span>
-                            </td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                      <i class="la la-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
-                                    </div>
-                                </span>
-                                 <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
-                                  <i class="la la-eye"></i>
-                                </a>
-
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
-                                  <i class="la la-mail-forward"> </i>
-                                </a>
-                               
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Zach M</td>
-                            <td>zach.mu43@gmail.com</td>
-                            <td>
-                                <h5 class="mt-4 text-dark">797 Woston Rd, Block B Satellite Town</h5>
-                                <p>California, United States</p>
-                            </td>
-                            <td>
-                                <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Pending</span>
-                            </td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                      <i class="la la-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
-                                    </div>
-                                </span>
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
-                                  <i class="la la-eye"></i>
-                                </a>
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
-                                  <i class="la la-mail-forward"> </i>
-                                </a>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Zach M</td>
-                            <td>zach.mu43@gmail.com</td>
-                            <td>
-                                <h5 class="mt-4 text-dark">797 Woston Rd, Block B Satellite Town</h5>
-                                <p>California, United States</p>
-                            </td>
-                            <td>
-                                <span class="kt-badge kt-badge--success kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">In Progress</span>
-
-                            </td>
-                            <td>    
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                      <i class="la la-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
-                                        <a class="dropdown-item" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
-                                    </div>
-                                </span>
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
-                                  <i class="la la-eye"></i>
-                                </a>
-                                <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
-                                  <i class="la la-mail-forward"> </i> 
-                                </a>
-                            </td>
-                            
-                        </tr>
-                        
+                        @endforeach
                         
                     </tbody>
                     
@@ -201,36 +106,36 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <div class="modal fade" id="kt_modal_status" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="kt-scroll" data-scroll="true" data-height="200">
-                    <form>
-                      
+            <form action="{{route('backend.remote_assessment_status')}}" method="GET">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="kt-scroll" data-scroll="true" data-height="200">
+                        <input type="hidden" name="ra_id">
                         <div class="form-group">
                             <label class="form-control-label">Status</label>
-                             <select name="" id="" class="form-control">
-                                 <option value="pending">Pending</option>
-                                 <option value="in_process">In Process</option>
-                                 <option value="completed">Completed</option>
-                             </select>
+                            <select name="status" id="" class="form-control">
+                                <option value="pending">Pending</option>
+                                <option value="In process">In Process</option>
+                                <option value="completed">Completed</option>
+                            </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Note</label>
-                             <textarea class="form-control" id="" cols="30" rows="3"></textarea>
+                            <textarea class="form-control" id="" name="note" cols="30" rows="3"></textarea>
                         </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -424,6 +329,12 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
     <script src="{{ url('/') }}/backend/assets/vendors/general/summernote/dist/summernote.js" type="text/javascript"></script>
 
      <script>
+        $(document).ready(function(){
+            $('[name="remote_assess_status"]').click(function(e){
+                $('[name="ra_id"]').val($(this).data('raid'));
+                
+            });
+        })
 
         $('.summernote').summernote({
             height: 150

@@ -43,66 +43,46 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                 <table class="table table-striped- table-hover table-checkable" id="kt_table_2">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>#</th>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Phone</th>
                             <th>Role</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Zach M</td>
-                            <td>03023232323</td>
-                            <td>zach.mu43@gmail.com</td>
-                            <td>Admin</td>
-                            <td>
-                                <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Active</span>
-                            </td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                      <i class="la la-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_addOrUpdateUser"><i class="la la-edit"></i> Edit Details</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf" data-toggle="modal" data-target="#kt_modal_status"></i> Update Status</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"
-                                             data-toggle="modal" data-target="#kt_modal_status"><i class="la la-trash"> </i> Delete</a>
-
-                                    </div>
-                                </span>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Zach M</td>
-                            <td>03023232323</td>
-                            <td>zach.mu43@gmail.com</td>
-                             <td>Inquiry Manager</td>
-                            <td>
-                                <span class="kt-badge kt-badge--primary kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">Active</span>
-                            </td>
-                            <td>
-                                <span class="dropdown">
-                                    <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
-                                      <i class="la la-ellipsis-h"></i>
-                                    </a>
-                                    <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_addOrUpdateUser"><i class="la la-edit"></i> Edit Details</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf" data-toggle="modal" data-target="#kt_modal_status"></i> Update Status</a>
-                                        <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"
-                                             data-toggle="modal" data-target="#kt_modal_status"><i class="la la-trash"> </i> Delete</a>
-                                    </div>
-                                </span>
-                                
-                            </td>
-                            
-                        </tr>
+                        @foreach($user as $key => $user)
+                            <tr>
+                                <td>{{++$key}}</td>
+                                <td>{{ $user->name ?? '' }}</td>
+                                <td>{{ $user->email ?? '' }}</td>
+                                <td>
+                                    @foreach ($user->roles as $role)
+                                        {{ $role->name ?? '' }}
+                                        <br>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    <span class="kt-badge kt-badge--{{$user->status==1?'primary':'danger'}} kt-badge--inline kt-badge--pill" data-toggle="modal" data-target="#kt_modal_status">{{$user->status==1?'Active':'Inactive'}}</span>
+                                </td>
+                                <td>
+                                    <span class="dropdown">
+                                        <a href="#" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="dropdown" aria-expanded="true">
+                                          <i class="la la-ellipsis-h"></i>
+                                        </a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="{{route('backend.user.edit',$user->id)}}"><i class="la la-edit"></i> Edit Details</a>
+                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf" data-toggle="modal" data-target="#kt_modal_status"></i> Update Status</a>
+                                            <a class="dropdown-item" href="#" name="delete_user" data-userid="{{$user->id}}" data-toggle="modal" data-target="#kt_modal_status"
+                                                 data-toggle="modal" data-target="#kt_modal_status"><i class="la la-trash"> </i> Delete</a>
+    
+                                        </div>
+                                    </span>
+                                    
+                                </td>
+                            </tr>
+                        @endforeach
 
                     </tbody>
                     
@@ -118,31 +98,32 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <div class="modal fade" id="kt_modal_status" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="kt-scroll" data-scroll="true" data-height="200">
-                    <form>
-                      
-                        <div class="form-group">
-                            <label class="form-control-label">Status</label>
-                             <select name="" id="" class="form-control">
-                                 <option value="pending">Deactivate</option>
-                                 <option value="in_process">Active</option>
-                             </select>
-                        </div>
- 
-
-                    </form>
+            <form action="{{route('backend.user.updateStatus')}}" method="GET">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
-            </div>
+                <div class="modal-body">
+                    <div class="kt-scroll" data-scroll="true" data-height="200">
+                            <input type="hidden" name="user_id">
+                            <div class="form-group">
+                                <label class="form-control-label">Status</label>
+                                <select name="status" id="" class="form-control">
+                                    <option value="0">Deactivate</option>
+                                    <option value="1">Active</option>
+                                </select>
+                            </div>
+    
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+
+            </form>
         </div>
     </div>
 </div>
@@ -245,4 +226,13 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <!--begin::Page Scripts(used by this page) -->
     <script src="{{ asset('backend/assets/js/demo1/pages/crud/datatables/extensions/select.js') }}" type="text/javascript"></script>
 <!--end::Page Scripts -->
+
+<script>
+    $(document).ready(function(){
+        $('[name="delete_user"]').click(function(e){
+            $('[name="user_id"]').val($(this).data('userid'));
+            
+        });
+    })
+</script>
 @endsection

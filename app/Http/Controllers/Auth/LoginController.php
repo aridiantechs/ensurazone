@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
@@ -36,5 +38,30 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function authenticated()
+    {
+        /* dd(auth()->user()); */
+        if (Auth::check() && \Auth::user()->hasRole('superadmin')) {
+            return redirect()->route('backend.dashboard');
+        } elseif(Auth::check() && \Auth::user()->hasRole('sme-1')) {
+            /* dd(session('url.intended')); */
+            return redirect()->to(session('url.intended'));
+        } elseif(Auth::check() && auth()->user()->hasRole('sme-2')) {
+            /* return redirect()->route('account.talent.profile'); */
+            return redirect()->to(session('url.intended'));
+        }
+        
+    }
+
+    public function logout(Request $request) 
+    {
+        if(Auth::check() && auth()->user()->hasRole('endUser'))
+        {
+            session()->forget('url.intended');
+        }
+        Auth::logout();
+        return redirect('/login');
     }
 }

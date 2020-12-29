@@ -33,7 +33,7 @@
 					<div class="thanks-d">
 						<h5>We have recieved your inquiry details. Thank you for submitting application. We will contact you in 24 hours via email !. Or what ever message you want, will appear here.</h5>
 					</div>
-					<p>Go to : <a href="{{ route('my-account') }}">your account</a></p>
+					<p>Go to : <a href="{{ route('my_account.index') }}">your account</a></p>
 				</div>
 			</div>
 		</div>

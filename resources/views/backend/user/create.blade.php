@@ -1,165 +1,218 @@
 @extends('backend.layouts.app')
-
-
-@section('meta')
-<title>Adbotics | Create Strategy</title>
-@endsection
-
-
+{{-- {{ dd($contents) }} --}}
 @section('styles')
-<style type="text/css">
-.switch-field {
-  display: flex;
-  margin-bottom: 36px;
-  overflow: hidden;
-}
+<!--Third party Styles(used by this page)--> 
+<link href="{{asset('backend/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
+<link href="{{asset('backend/assets/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('backend/assets/css/tagsinput.css') }}">
+<style>
+   .form-group label {
+   font-size: 1.2rem;
+   }
 
-.switch-field input {
-  position: absolute !important;
-  clip: rect(0, 0, 0, 0);
-  height: 1px;
-  width: 1px;
-  border: 0;
-  overflow: hidden;
-}
+   .bootstrap-tagsinput{
+        color: #495057 !important;
+        background-color: #fff !important;
+        background-clip: padding-box !important;
+        border: 1px solid #e2e5ec !important;
+        border-radius: 4px !important;
+	}
 
-.switch-field label {
-    background-color: #f2f5f9;
-    color: rgba(0, 0, 0, 0.6);
-    font-size: 14px;
-    line-height: 1;
-    text-align: center;
-    padding: 10px 18px;
-    margin-right: -1px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    /* box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1); */
-    /* transition: all 0.1s ease-in-out; */
-}
-
-.switch-field label:hover {
-  cursor: pointer;
-}
-
-.switch-field input:checked + label {
-  background-color: #ffffff;
-  box-shadow: none;
-  border-color: #9a9a9a;
-  z-index: 99;
-}
-
-.switch-field label:first-of-type {
-  border-radius: 4px 0 0 4px;
-}
-
-.switch-field label:last-of-type {
-  border-radius: 0 4px 4px 0;
-}
-textarea{
-  width: 100%;
-  background: #f2f5f9;
-  border-color: #c2c4c7;
-  border-radius: 5px;
-}
-.mt-4.text-md-left.str-constraints-box {
-  border-left: 2px solid #959595;
-  padding: 15px 0 2px 15px;
-}
+    .bootstrap-tagsinput input{
+        width: 100% !important;
+    }
+	
+   .bootstrap-tagsinput .badge{
+		margin: 2px 2px;
+		background-color: #5969ff;
+		border-radius: 4px;
+	}
 </style>
 @endsection
-@section('page_title')
- My Strategy Ads Automated Rules
-@endsection
-
 @section('content')
-
-
-  <div class="kt-content  kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" id="kt_content">
-
-      <div class="kt-container ">
-
-          <div class="row align-items-center">
-            <div class="col-12 col-md-3 col-lg-2 order-md-2">
-              <div class="kt-sc__bg">
-                
-           </div>
+<div class="kt-container  kt-container--fluid  kt-grid__item kt-grid__item--fluid">
+   <div class="row">
+      <div class="col-md-12">
+         <!--begin::Portlet-->
+         <div class="kt-portlet">
+            <div class="kt-portlet__head">
+               <div class="kt-portlet__head-label">
+                  <h3 class="kt-portlet__head-title">
+                     Create User
+                  </h3>
+               </div>
             </div>
-            <div class="col-12 col-md-7 col-lg-7 order-md-1 aos-init aos-animate" data-aos="fade-up">
+            <!--begin::Form-->
+            @php 
+            $route = route('backend.user.store');
+            if(isset($user)){
+            $route = route('backend.user.update',$user->id);
+            }
+            @endphp
+            <form action="{{$route}}" method="POST" id="user-content-form" enctype="multipart/form-data" class="kt-form">
+               @csrf
+               @if(isset($user))
+               {{ method_field('PATCH') }}
+               @endif
+               <div class="kt-portlet__body">
+                  <div class="row">
+                     <div class="col-md-8 col-sm-12 col-xs-12 mx-auto">
+                        <br />
 
-              <!-- Heading -->
-              <h1 class="font-bold text-center text-md-left" style="font-weight: 500">
-              Create your perfect strategy
-              </h1>
+                        <div class="form-group">
+                           <label class="col-md-12">Add Role</label>
+                           <div class="col-md-12">
+                           <select class="form-control" name="role_id">
+                              <option value="">Select Role</option>
+                              @foreach ($roles as $role)
+                                    <option value="{{$role->id}}" {{isset($user)&& $user->roles()->exists() && $user->roles->first()->id==$role->id?'selected' : ''}}>{{$role->name}}</option>
+                              @endforeach
+                           </select>
+                           </div>
+                        </div>
+                        
+                        <div class="form-group">
+                           <label class="col-md-3 col-sm-3 col-xs-12">Add Name</label>
+                           <div class="col-md-12 col-sm-12 col-xs-12">
+                              <input type="text" class="form-control" name="name" value="{{isset($user)?$user->name : ''}}"/> 
+                              @error('name')
+                                  <div class="error">{{$message}}</div>
+                              @enderror
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="col-md-3 col-sm-3 col-xs-12">Add Email</label>
+                           <div class="col-md-12 col-sm-12 col-xs-12">
+                              <input type="email" class="form-control" name="email" value="{{isset($user)?$user->email : ''}}"/>
+                              @error('email')
+                                  <div class="error">{{$message}}</div>
+                              @enderror
+                           </div>
+                        </div>
+                        <div class="form-group">
+                           <label class="col-md-3 col-sm-3 col-xs-12">Add Password</label>
+                           <div class="col-md-12 col-sm-12 col-xs-12">
+                              <input type="password" class="form-control" name="password"/> 
+                           </div>
+                        </div>
+                        
+                        {{-- <div class="form-group mt-3">
+                           <div class="col-md-12 col-sm-12 col-xs-12">
+							         <textarea name="description" id="summernote" class="summernote">{!!isset($user)?html_entity_decode($user->description) : ''!!}</textarea>
+                           </div>
+                        </div> --}}
 
-              <div class="mt-4 text-md-left">
-                <h5>platform</h5>
-                <div class="switch-field">
-                  <input type="radio" id="radio-three" name="switch-two" value="yes" checked/>
-                  <label for="radio-three">Facebook Ads</label>
-                  <input type="radio" id="radio-four" name="switch-two" value="maybe" />
-                  <label for="radio-four">Google Ads</label>
-                  <input type="radio" id="radio-five" name="switch-two" value="no" />
-                  <label for="radio-five">Snapchat Ads</label>
-                </div>
-              </div>
-              
+                        <div class="form-group">
+                           <div class="col-md-12 col-sm-9 col-xs-12">
+                              <button type="submit" {{-- onclick="formSubmitWithTextEditor('editor-post_content','long_desc','post-content-form')" --}} class="btn btn-info btn-xs" role="button" style="font-size:13px" ><b>Save</b></button>
+                              
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </form>
+            <!--end::Form-->			
+         </div>
+         <!--end::Portlet-->
+      </div>
+   </div>
+</div>
+@endsection
+@section('scripts')
+<!-- Third Party Scripts(used by this page)-->
+<script src="{{asset('backend/assets/plugins/summernote/summernote.min.js')}}"></script>
+<script src="{{asset('backend/assets/plugins/summernote/summernote-bs4.min.js')}}"></script>
+<!--Page Active Scripts(used by this page)-->
+<script src="{{asset('backend/assets/plugins/summernote/summernote.active.js')}}"></script>
+<script src="{{ asset('backend/assets/js/tagsinput.js') }}"></script>
 
-              <div class="mt-4 text-md-left">
-                <h5>Description</h5>
-                <div class="str-description">
-                  <textarea name="description" placeholder="What does your strategy do" class="form-control" autocomplete="off" step="any" cols="5" rows="10"></textarea>
-                </div>
-              </div>
-              
-              <div class="mt-4 text-md-left">
-                <h5>Youtube video</h5>
-                <div class="str-video-link">
-                  <input name="youtube_video" placeholder="https://www.youtube.com/watch?v=ZHnGrVZ8Jp4" class="form-control" autocomplete="off" step="any" type="text">
-                </div>
-              </div>
+<script type="text/javascript">
+   
+   $(document).ready(function(){
+      @if (session('status'))
+         toastr.success('{{session('status')}}', "Success");
+      @endif
+   })
 
-              <hr class="mt-4">
+   $(document).ready(function(){
+		window.sidebar_search=function() {
+			var input, filter, div, childdiv, label, i, txtValue;
+			input = document.getElementById("admin_sidebar_search");
+			filter = input.value.toUpperCase();
+			div = document.getElementById("admin_sidebar");
+			childdiv = div.getElementsByTagName("div");
+			//console.log(childdiv);
+			for (i = 0; i < childdiv.length; i++) {
+				label = childdiv[i].getElementsByTagName("label");
+				//console.log(a);
+				if(label.length !=0)
+				{
+					label = childdiv[i].getElementsByTagName("label")[0]
+					//console.log(label);
+					txtValue = label.textContent || label.innerText;
+					if (txtValue.toUpperCase().indexOf(filter) > -1) {
+						childdiv[i].style.display = "";
+					} else {
+						childdiv[i].style.display = "none";
+					}
+				}
+			}
+		}
 
-
-              <div class="mt-4 text-md-left">
-                <h5>Youtube video</h5>
-                <div class="str-video-link">
-                  <input name="youtube_video" placeholder="https://www.youtube.com/watch?v=ZHnGrVZ8Jp4" class="form-control" autocomplete="off" step="any" type="text">
-                </div>
-              </div>
-              
-              <div class="mt-4 text-md-left">
-                <h5>Rules</h5>
-                <div class="str-btns">
-                  <button class="btn btn-primary">+ From Rule List</button>
-                  <a href="{{ route('rules.create') }}" class="btn btn-primary">+ From Scratch</a>
-                </div>
-              </div>
-              
-              <hr class="mt-4">
-
-              <div class="mt-4 text-md-left str-constraints-box">
-                <div style="display: -webkit-inline-box;">
-                  <img src="https://revealbot.com/packs/media/controls/Icon/assets/alert--black-530f9b6b7685d94507eb00442d6c437b.svg">
-                  <h5>&nbsp Not available in strategies</h5>
-                </div>
-                <div class="str-constraints">
-                  <ul>
-                    <li class="str-constraints-list" value="0">– Specific item selections.</li>
-                    <li class="str-constraints-list" value="0">– Facebook custom conversions.</li>
-                    <li class="str-constraints-list" value="0">– Custom metrics with Facebook custom conversions.</li>
-                    <li class="str-constraints-list" value="0">– Custom metrics using the Google Sheets integrations.</li></ul>
-                </div>
-              </div>
-              
-
-            </div>
-          </div>
-
-         
-  </div>
-
-
-               
-  </div>
-
+		$(".taginput").tagsinput({
+			maxTags: 5,
+		})
+		
+	})
+   
+   function formSubmitWithTextEditor(editorId,fieldToCopyIn,formId)
+   {
+   	console.log($('#'+editorId).html() );
+   	if ($('#'+editorId).html() !=='') {
+   		$('[name='+fieldToCopyIn+']').val($('#'+editorId).html());
+   		$('#'+formId).submit();
+   	} else {
+   		$('#'+formId).submit();
+   	}
+   }
+   
+function changeImageView(input, id,max_size) {
+   
+   var FileUploadPath = input.value;
+   
+   if (FileUploadPath == '') {
+   	alert("Please upload an image");
+   
+   } 
+   else 
+   {
+   	var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+   	if (Extension == "jpg" || Extension == "png")
+   	{
+   		if (input.files && input.files[0]) {
+   			var size = input.files[0].size;
+   			
+   			if(size > max_size){
+   				alert("Maximum file size exceeds");
+   				return;
+   			}else{
+   				var reader = new FileReader();
+   				/* alert(input.files[0].size); */
+   				reader.onload = function (e) {
+   					$('#'+id).attr('src', e.target.result).fadeIn('slow');
+   				}
+   				reader.readAsDataURL(input.files[0]);
+   			}
+   		}
+   	}
+   	else{
+   		alert("Photo only allows file types of GIF, PNG");
+   	}
+   	
+   }   
+   // alert('');
+}
+   
+</script>
 @endsection

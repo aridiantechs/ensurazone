@@ -38,6 +38,24 @@ Route::middleware(['hasPaid'])->group(function () {
     Route::post('/ground_proof', [App\Http\Controllers\Account\DashboardController::class, 'storeGroundProof'])->name('ground_proof.store');
 });
 
+
+Route::group([
+	'prefix' => 'backend',
+    'as' => 'backend.',
+	'middleware' => ['isSuperAdmin'],
+],function(){
+    Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class,'dashboard'])->name('dashboard');
+
+    Route::resource('topic', App\Http\Controllers\Admin\TopicController::class);
+    Route::get('/topic_status', [App\Http\Controllers\Admin\TopicController::class, 'updateStatus'])->name('topic.updateStatus');
+
+    Route::resource('user', Backend\UserController::class);
+    Route::get('/user_status', [App\Http\Controllers\Backend\UserController::class, 'updateStatus'])->name('user.updateStatus');
+
+    Route::resource('remote-assessment-inquiries', Backend\RemoteAssessmentController::class);
+    Route::get('/remote_assessment_status', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentStatus'])->name('remote_assessment_status');
+});
+
 // Old routes
 
 
