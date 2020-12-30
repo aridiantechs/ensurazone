@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class GroundProof extends Model
 {
     use HasFactory;
+
+    public function findings()
+    {
+        return $this->hasMany('App\Models\Finding','gp_id','id');
+    }
 }

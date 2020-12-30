@@ -32,9 +32,9 @@ var KTAppOptions = {"colors":{"state":{"brand":"#5d78ff","dark":"#282a3c","light
 <script src="{{ asset('backend/assets/vendors/general/bootstrap-switch/dist/js/bootstrap-switch.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/vendors/custom/js/vendors/bootstrap-switch.init.js') }}" type="text/javascript"></script>
 
-<script src="{{ asset('backend/assets/vendors/general/select2/dist/js/select2.full.js') }}" type="text/javascript"></script>
+<script src="{{ asset('backend/assets/vendors/general/select2/dist/js/select2.full.js') }}" type="text/javascript"></script>--}}
 <script src="{{ asset('backend/assets/vendors/general/owl.carousel/dist/owl.carousel.js') }}" type="text/javascript"></script>
-<script src="{{ asset('backend/assets/vendors/general/ion-rangeslider/js/ion.rangeSlider.js') }}" type="text/javascript"></script>
+{{-- <script src="{{ asset('backend/assets/vendors/general/ion-rangeslider/js/ion.rangeSlider.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/vendors/general/typeahead.js/dist/typeahead.bundle.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/vendors/general/handlebars/dist/handlebars.js') }}" type="text/javascript"></script>
 <script src="{{ asset('backend/assets/vendors/general/inputmask/dist/jquery.inputmask.bundle.js') }}" type="text/javascript"></script>

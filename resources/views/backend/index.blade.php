@@ -1111,11 +1111,11 @@
 <script type="text/javascript">
 
 	 const tilesUrl = 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png';
-	 const map = L.map('map').setView([41.89, 12.51], 5);
+	 const map = L.map('map').setView([33.597, 73.0759], 5);
 
 	 L.tileLayer(tilesUrl, {
 	 	maxZoom: 20,
-	 	attribution: '',	 	
+	 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',	 	
 	 }).addTo(map);
 
 	 const cities = [

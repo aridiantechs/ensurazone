@@ -36,9 +36,10 @@
     <div class="kt-aside-menu-wrapper kt-grid__item kt-grid__item--fluid" id="kt_aside_menu_wrapper">
         <div 
             id="kt_aside_menu"
-            class="kt-aside-menu "
+            class="kt-aside-menu kt-scroll ps ps--active-y"
             data-ktmenu-vertical="1"
-            data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500"  
+            data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500"
+            style="height: 500px"
             >
             <ul class="kt-menu__nav ">
              
@@ -64,7 +65,7 @@
                     <h4 class="kt-menu__section-text">Remote Assessment</h4>
                     <i class="kt-menu__section-icon flaticon-more-v2"></i>
                 </li>
-                <li class="kt-menu__item  kt-menu__item--submenu {{Request::routeIs('backend.remote-assessment-inquiries*')?'kt-menu__item--open' : ''}}" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
+                <li class="kt-menu__item  kt-menu__item--submenu {{Request::routeIs('backend.remote-assessment-inquiries*','backend.inquiry-details*')?'kt-menu__item--open' : ''}}" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
                     <a  href="javascript:;" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                             <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1" class="kt-svg-icon">
@@ -82,7 +83,7 @@
                         <ul class="kt-menu__subnav">
                             <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true" ><span class="kt-menu__link"><span class="kt-menu__link-text">Remote Assessment</span></span></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.remote-assessment-inquiries.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">New Inquiries</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.remote-assessment-inquiries.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">In Process</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.remote-assessment-inquiries.index') }}?q=in_process" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">In Process</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.remote-assessment-inquiries.index') }}?q=completed" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Completed</span></a></li>
 
                             
@@ -143,9 +144,9 @@
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
                             <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true" ><span class="kt-menu__link"><span class="kt-menu__link-text">Mitigation Plan</span></span></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('mitigation-inquiries') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">New Inquiries</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('mitigation-inquiries') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">In Process</span></a></li>
-                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('mitigation-inquiries') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Completed</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.groundproof-inquiries.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">New Inquiries</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.groundproof-inquiries.index') }}?q=in_process" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">In Process</span></a></li>
+                            <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.groundproof-inquiries.index') }}?q=completed" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Completed</span></a></li>
                             
                         </ul>
                     </div>

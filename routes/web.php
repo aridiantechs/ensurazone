@@ -53,7 +53,15 @@ Route::group([
     Route::get('/user_status', [App\Http\Controllers\Backend\UserController::class, 'updateStatus'])->name('user.updateStatus');
 
     Route::resource('remote-assessment-inquiries', Backend\RemoteAssessmentController::class);
+    Route::post('/remote-assessment-update', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'updateRA'])->name('updateRA');
+    Route::post('/remote-assessment-findings', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentFindings'])->name('remote-assessment-findings');
+    
+    Route::get('/remote_assessment_report/{file}', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remote_assessment_report'])->name('remote_assessment_report');
     Route::get('/remote_assessment_status', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentStatus'])->name('remote_assessment_status');
+    Route::get('/inquiry-details/{id}', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'show'])->name('inquiry-details');
+
+    Route::resource('groundproof-inquiries', Backend\GroundProofController::class);
+    Route::get('/ground-proof-survey/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofSurvey'])->name('ground-proof-survey');
 });
 
 // Old routes

@@ -26,4 +26,14 @@ class RemoteAssessment extends Model
     {
         return $this->belongsTo('App\Models\User','user_id');
     }
+
+    public function attachments()
+    {
+        return $this->hasMany('App\Models\Attachment','user_id','user_id');
+    }
+
+    public function findings()
+    {
+        return $this->hasMany('App\Models\Finding','ra_id','id');
+    }
 }

@@ -4,19 +4,21 @@ namespace App\Http\Controllers\Backend;
 use App\Models\User;
 use App\Models\Finding;
 
+use App\Models\GroundProof;
 use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 
+use Illuminate\Http\Request;
 use App\Mail\InquiryComplete;
 use Illuminate\Http\Response;
 use App\Models\RemoteAssessment;
+use App\Models\GroundProofSurvery;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
-class RemoteAssessmentController extends Controller
+class GroundProofController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -36,20 +38,18 @@ class RemoteAssessmentController extends Controller
                 }
                 )->get();  
         } else {
-            $user = User::whereHas(
-            'roles', function($q){
-                $q->where('name','endUser');
-            }
-            )->whereHas(
-                'remote_assessment', function($q){
-                    $q->where('status','pending');
-                }
-            )->get();
+            $user = User::whereHas('roles', function($q){
+                        $q->where('name','endUser');
+                    })->whereHas('remote_assessment', function($q){
+                            $q->where('status','completed');
+                        }
+                    )->whereHas('ground_proof', function($q){
+                        $q->where('paid',1);
+                    }
+                    )->get();
         }
         
-        /* dd($user); */
-        
-        return view('backend.remote-assessment-inquiries.list',compact('user'));
+        return view('backend.groundproof.list',compact('user'));
         
     }
 
@@ -58,10 +58,10 @@ class RemoteAssessmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function groundProofSurvey(Request $request,$id)
     {
-        $roles=Role::where('name','<>','superadmin')->get();
-        return view('backend.user.create',compact('roles'));
+        $gp=GroundProof::findOrFail($id);
+        return view('backend.groundproof.survey',compact('gp'));
     }
 
     /**
@@ -72,33 +72,49 @@ class RemoteAssessmentController extends Controller
      */
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        dd($request->all());
         $validator = Validator::make($request->all(),[
-            'role_id'  => 'required|integer',
-            'name'  => 'required|string',
-            'email' => 'required|string',
-            'password'  => 'required|string',
+            'distance_from_structure'  => 'required|string',
+            'density'  => 'required|string',
+            'combustible_presence'  => 'required|string',
+            'trees' => 'required|integer',
+            'location'  => 'required|string',
+            'grass'  => 'required|integer',
+            'density_of_trees'  => 'required|string',
+            'arrangement'  => 'required|string',
+            'space_arrangement'  => 'required|string',
+            'clump_size'  => 'required|string',
+            'ladder_fuel'  => 'required|string',
+            'aspects'  => 'required|string',
+
+            'combustibles' => 'required|array',
+            'combustibles.*' => 'string',
+            'leave_deposits' => 'required|array',
+            'leave_deposits.*' => 'string',
+            'screening' => 'required|array',
+            'screening.*' => 'string',
+            'barrier' => 'required|array',
+            'barrier.*' => 'string',
         ]);
         
         if ($validator->fails()) {
+            return $validator->errors();
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
             /* return 'error'; */
         }
 
-        $user = new User;
-        $user->name=$request->name;
-        $user->email=$request->email;
-        if ($request->has('password')) {
-			$user->password =  Hash::make($request->password);
-		}
-        $user->save();
-
-        $role=Role::where('id',$request->role_id)->first();
-        $user->assignRole($role->name);
+        $survey = new GroundProofSurvery;
+        $survey->gp_id=$request->gp_id;
+        $survey->fill($request->all());
+        $survey->combustibles=implode(';',$request->combustibles);
+        $survey->leave_deposits=implode(';',$request->leave_deposits);
+        $survey->screening=implode(';',$request->screening);
+        $survey->barrier=implode(';',$request->Barrier);
+        $survey->save();
         
-        return redirect()->back()->with("status", "User has been Created.");
+        return redirect()->back()->with("status", "Survey Generated.");
     }
 
     /**

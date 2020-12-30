@@ -497,23 +497,23 @@
 		});
 	}
 
-$(function() {
-	$(document).ready(function () {
+    $(function() {
+        $(document).ready(function () {
 
-	    var x = document.getElementById("demo");
+            var x = document.getElementById("demo");
 
-		$('#current_loc_btn').click(function(e){
+            $('#current_loc_btn').click(function(e){
 
-			e.preventDefault();
-			if (navigator.geolocation) {
-				navigator.geolocation.getCurrentPosition(showPosition);
-			} else { 
-				x.innerHTML = "Geolocation is not supported by this browser.";
+                e.preventDefault();
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(showPosition);
+                } else { 
+                    x.innerHTML = "Geolocation is not supported by this browser.";
 
-			}
-		});
-	});
-});
+                }
+            });
+        });
+    });
 
 </script>
 

@@ -58,4 +58,15 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\GroundProof','user_id');
     }
+
+    public function hasGroundProofPlan()
+    {
+        if ($this->ground_proof()->exists() && $this->ground_proof->first()->paid==1) {
+            $status=true;
+        }
+        else{
+            $status=false;
+        }
+        return $status;
+    }
 }
