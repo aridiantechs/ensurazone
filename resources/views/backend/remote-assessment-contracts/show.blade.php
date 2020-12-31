@@ -466,7 +466,7 @@
                             <div class="locaion-d">
                                 <h4>Location: </h4>
                                 <p class="ml-4 location-details">{{$ra->address1 ?? ''}}</p>
-                                <h4>Lotitude: </h4>
+                                <h4>Latitude: </h4>
                                 <p class="ml-4 location-details">{{$ra->latitude ?? ''}}</p>
                                 <h4>Longitude: </h4>
                                 <p class="ml-4 location-details">{{$ra->longitude ?? ''}}</p>
