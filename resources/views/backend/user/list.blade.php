@@ -31,7 +31,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
         <div class="kt-portlet__head">
             <div class="kt-portlet__head-label">
                 <h3 class="kt-portlet__head-title jumper-primary-title">
-                    Users List <a  class="badge badge-primary" href="#" data-toggle="modal" data-target="#enz_addOrUpdateUser">Add User</a>
+                    Users List <a  class="badge badge-primary" href="{{route('backend.user.create')}}" {{-- data-toggle="modal" data-target="#enz_addOrUpdateUser" --}}>Add User</a>
                 </h3>
             </div>
             
@@ -73,7 +73,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
                                             <a class="dropdown-item" href="{{route('backend.user.edit',$user->id)}}"><i class="la la-edit"></i> Edit Details</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf" data-toggle="modal" data-target="#kt_modal_status"></i> Update Status</a>
+                                            <a class="dropdown-item" href="#" name="update_status" data-userid="{{$user->id}}"  data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf" data-toggle="modal" data-target="#kt_modal_status"></i> Update Status</a>
                                             <a class="dropdown-item" href="#" name="delete_user" data-userid="{{$user->id}}" data-toggle="modal" data-target="#kt_modal_status"
                                                  data-toggle="modal" data-target="#kt_modal_status"><i class="la la-trash"> </i> Delete</a>
     
@@ -229,7 +229,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 
 <script>
     $(document).ready(function(){
-        $('[name="delete_user"]').click(function(e){
+        $('[name="delete_user"],[name="update_status"]').click(function(e){
             $('[name="user_id"]').val($(this).data('userid'));
             
         });

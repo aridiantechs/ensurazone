@@ -25,26 +25,37 @@ class RemoteAssessmentController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->query('q') /* && $request->query('q')=='completed' */) {
-            $user = User::whereHas(
-                'roles', function($q){
-                    $q->where('name','endUser');
-                }
-            )->whereHas(
-                'remote_assessment', function($q) use($request){
-                    $q->where('status',$request->query('q'));
-                }
-                )->get();  
-        } else {
-            $user = User::whereHas(
-            'roles', function($q){
-                $q->where('name','endUser');
+        $user = User::whereHas('roles', function($q){
+            $q->where('name','endUser');
+        });
+
+        if ($request->query('q')) {
+            if (!auth()->user()->hasAnyRole("superadmin|endUser") ) {
+                $user = $user->whereHas('remote_assessment', function($q) use($request){
+                    $q->where('status',$request->query('q'))->where('assign_to',auth()->user()->id);
+                })
+                ->get();
             }
-            )->whereHas(
-                'remote_assessment', function($q){
-                    $q->where('status','pending');
-                }
-            )->get();
+            else{
+                $user = $user->whereHas('remote_assessment', function($q) use($request){
+                    $q->where('status',$request->query('q'));
+                })
+                ->get();
+            }
+        } else {
+
+            if (!auth()->user()->hasAnyRole("superadmin|endUser") ) {
+                $user = $user->whereHas('remote_assessment', function($q){
+                            $q->where('status','pending')->where('assign_to',auth()->user()->id);
+                        })
+                        ->get();
+            }
+            else{
+                $user = $user->whereHas('remote_assessment', function($q){
+                            $q->where('status','pending');
+                        })
+                        ->get();
+            }
         }
         
         $contractors = User::whereHas(
@@ -52,7 +63,8 @@ class RemoteAssessmentController extends Controller
                     $q->whereNotIn('name',['superadmin','endUser']);
                 }
             )->get();
-        /* dd($contractors[0]->roles); */
+            
+        /* dd($user); */
         
         return view('backend.remote-assessment-inquiries.list',compact('user','contractors'));
         

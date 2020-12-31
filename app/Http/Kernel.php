@@ -69,5 +69,6 @@ class Kernel extends HttpKernel
         'isSME1' => \App\Http\Middleware\isSME1::class,
         'isSME2' => \App\Http\Middleware\isSME2::class,
         'isEndUser' => \App\Http\Middleware\isEndUser::class,
+        'hasBackendAccess' => \App\Http\Middleware\hasBackendAccess::class,
     ];
 }

@@ -42,7 +42,7 @@ Route::middleware(['hasPaid'])->group(function () {
 Route::group([
 	'prefix' => 'backend',
     'as' => 'backend.',
-	'middleware' => ['isSuperAdmin'],
+	'middleware' => ['hasBackendAccess'],
 ],function(){
     Route::get('/dashboard', [App\Http\Controllers\Backend\DashboardController::class,'dashboard'])->name('dashboard');
 

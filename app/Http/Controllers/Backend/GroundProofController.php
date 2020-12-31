@@ -28,26 +28,42 @@ class GroundProofController extends Controller
      */
     public function index(Request $request)
     {
+        $user = User::whereHas('roles', function($q){
+                    $q->where('name','endUser');
+                })
+                ->whereHas('remote_assessment', function($q){
+                    $q->where('status','completed');
+                });
         if ($request->query('q') /* && $request->query('q')=='completed' */) {
-            $user = User::whereHas('roles', function($q){
-                $q->where('name','endUser');
-                })->whereHas('remote_assessment', function($q){
-                        $q->where('status','completed');
-                    }
-                )->whereHas('ground_proof', function($q) use ($request){
-                    $q->where('paid',1)->where('status',$request->query('q'));
-                }
-                )->get(); 
-        } else {
-            $user = User::whereHas('roles', function($q){
-                        $q->where('name','endUser');
-                    })->whereHas('remote_assessment', function($q){
-                            $q->where('status','completed');
-                        }
-                    )->whereHas('ground_proof', function($q){
+            
+            if (!auth()->user()->hasAnyRole("superadmin|endUser") ) {
+                $user=$user->whereHas('ground_proof', function($q) use ($request){
+                        $q->where('paid',1)->where('status',$request->query('q'))->where('assign_to',auth()->user()->id);
+                    })
+                    ->get();
+            }
+            else{
+                $user=$user->whereHas('ground_proof', function($q){
                         $q->where('paid',1)->where('status','pending');
-                    }
-                    )->get();
+                    })
+                    ->get();
+            }
+
+        } else {
+
+            if (!auth()->user()->hasAnyRole("superadmin|endUser") ) {
+                $user=$user->whereHas('ground_proof', function($q){
+                        $q->where('paid',1)->where('status','pending')->where('assign_to',auth()->user()->id);
+                    })
+                    ->get();
+            }
+            else{
+                $user=$user->whereHas('ground_proof', function($q){
+                        $q->where('paid',1)->where('status','pending');
+                    })
+                    ->get();
+            }
+            
         }
 
         $contractors = User::whereHas(
@@ -55,6 +71,8 @@ class GroundProofController extends Controller
                 $q->whereNotIn('name',['superadmin','endUser']);
             }
         )->get();
+
+        /* dd($user[0]->ground_proof); */
         
         return view('backend.groundproof.list',compact('user','contractors'));
         
