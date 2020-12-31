@@ -72,13 +72,16 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                         <i class="la la-ellipsis-h"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
+                                            @if (auth()->user()->hasRole('superadmin'))
+                                                <a class="dropdown-item" name="ground_proof_assign" data-gpid="{{$user->ground_proof->id}}" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
+                                            @endif
+                                            
+                                            {{-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a> --}}
                                             <a class="dropdown-item" href="{{ route('backend.ground-proof-survey',$user->ground_proof->id) }}"><i class="la la-leaf"></i> Update Status</a>
-                                            <a class="dropdown-item" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
+                                            <a class="dropdown-item" name="gen_report_btn" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
                                         </div>
                                     </span>
-                                    <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                    <a href="{{ route('backend.inquiry-details',$user->remote_assessment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
                                     <i class="la la-eye"></i>
                                     </a>
                                     <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
@@ -194,37 +197,44 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <div class="modal fade" id="enz_AssignContract" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog  modal-lg" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Assign Contract</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="kt-scroll" data-scroll="true" data-height="400">
-                    <form>
-                        
+            <form method="POST" action="{{route('backend.ground-proof.assign')}}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="gp_id" value="{{old('gp_id') ?? ''}}">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Assign Contract</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="kt-scroll" data-scroll="true" data-height="400">
                         <div class="form-group">
                             <label class="form-control-label">Contractors</label>
-                            <select class="form-control" name="" id="">
+                            <select class="form-control" name="contractor" id="">
                                 <option value="">Select Contractor</option>
-                                <option value="">Contractor A</option>
-                                <option value="">Contractor B</option>
-                                <option value="">Contractor C</option>
+                                @foreach ($contractors as $contractor)
+                                    <option value="{{$contractor->id}}">{{$contractor->name}}</option>
+                                @endforeach
+                                
                             </select>
+                            @error('contractor')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Detail</label>
-                            <div class="summernote"></div>
+                            <textarea class="summernote" name="note_to_contractor"></textarea>
+                            @error('note_to_contractor')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
-                        
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Assign</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Assign</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -262,48 +272,40 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <div class="modal fade" id="kt_scrollable_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Scrollable Modal Content</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <i aria-hidden="true" class="ki ki-close"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="scroll scroll-pull" data-scroll="true" data-height="300">
-                    <form>
+            <form method="POST" action="{{route('backend.ground-proof-findings')}}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="gp_id">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Generate Report</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <i aria-hidden="true" class="ki ki-close"></i>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="kt-scroll" data-scroll="true">
                         <div class="form-group">
-                            <label class="form-control-label">Name:</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Email:</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                        <div class="form-group">
-                            <label class="form-control-label">Groups:</label>
-                            <div class="checkbox-list">
-                                <label class="checkbox">
-                                <input type="checkbox" checked="checked" />Management 
-                                <span></span></label>
-                                <label class="checkbox">
-                                <input type="checkbox" />Finance 
-                                <span></span></label>
-                                <label class="checkbox">
-                                <input type="checkbox" />IT Department 
-                                <span></span></label>
-                            </div>
+                            <label for="file" class="form-label">Report File</label>
+                            <input style="height: 45px;" class="form-control" type="file" name="finding" id="finding" required/>
+                            <span class="text-input">Please attach pdf if any</span>
+                            @error('extension')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
                         <div class="form-group">
                             <label class="form-control-label">Message:</label>
-                            <textarea class="form-control" rows="6"></textarea>
+                            <textarea class="form-control" rows="6" name="message" required></textarea>
+                            @error('message')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                         </div>
-                    </form>
+                        {{-- <div class="summernote"></div> --}}
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" id="kt_blockui_4_1">Submit</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Send Request</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -324,6 +326,23 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
     <script src="{{ url('/') }}/backend/assets/vendors/general/summernote/dist/summernote.js" type="text/javascript"></script>
 
      <script>
+        $(document).keypress(
+            function(event){
+                if (event.which == '13') {
+                event.preventDefault();
+                }
+        });
+
+        $(document).ready(function(){
+            $('[name="remote_assess_status"],[name="gen_report_btn"],[name="ground_proof_assign"]').click(function(e){
+                $('[name="gp_id"]').val($(this).data('gpid'));
+                
+            });
+
+            @if($errors->has('extension') || $errors->has('message') || $errors->has('gp_id') )
+                $('#kt_scrollable_modal_1').modal('toggle');
+            @endif
+        })
 
         $('.summernote').summernote({
             height: 150

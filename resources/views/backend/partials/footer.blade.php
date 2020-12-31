@@ -98,3 +98,20 @@ var KTAppOptions = {"colors":{"state":{"brand":"#5d78ff","dark":"#282a3c","light
 
 <!--begin::Page Scripts(used by this page) -->
 {{-- <script src="{{ asset('backend/assets/js/demo1/pages/crud/datatables/basic/basic.js') }}" type="text/javascript"></script> --}}
+
+<script>
+    $(document).ready(function(){
+      @if(session()->has('error'))
+         toastr.error('{{ session('error') }}')
+      @endif
+
+      @if(session()->has('warning'))
+         toastr.warning('{{ session('warning') }}')
+      @endif
+
+         
+      @if(session()->has('status'))
+         toastr.success('{{ session('status') }}')
+      @endif
+   })
+</script>

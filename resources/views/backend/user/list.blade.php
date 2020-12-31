@@ -59,7 +59,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                 <td>{{ $user->email ?? '' }}</td>
                                 <td>
                                     @foreach ($user->roles as $role)
-                                        {{ $role->name ?? '' }}
+                                        {{ \Str::title($role->name ?? '') }}
                                         <br>
                                     @endforeach
                                 </td>

@@ -23,7 +23,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->route('remote-assessment.index');
-        return view('backend.index');
+        if (auth()->user()->paid==1) {
+            return redirect()->route('/');
+        } else {
+            return redirect()->route('remote-assessment.index');
+        }
     }
 }

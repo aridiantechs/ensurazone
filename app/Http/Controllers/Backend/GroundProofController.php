@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Mail\InquiryComplete;
 use Illuminate\Http\Response;
 use App\Models\RemoteAssessment;
+use App\Mail\GroundProofComplete;
 use App\Models\GroundProofSurvery;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
@@ -28,15 +29,15 @@ class GroundProofController extends Controller
     public function index(Request $request)
     {
         if ($request->query('q') /* && $request->query('q')=='completed' */) {
-            $user = User::whereHas(
-                'roles', function($q){
-                    $q->where('name','endUser');
+            $user = User::whereHas('roles', function($q){
+                $q->where('name','endUser');
+                })->whereHas('remote_assessment', function($q){
+                        $q->where('status','completed');
+                    }
+                )->whereHas('ground_proof', function($q) use ($request){
+                    $q->where('paid',1)->where('status',$request->query('q'));
                 }
-            )->whereHas(
-                'remote_assessment', function($q) use($request){
-                    $q->where('status',$request->query('q'));
-                }
-                )->get();  
+                )->get(); 
         } else {
             $user = User::whereHas('roles', function($q){
                         $q->where('name','endUser');
@@ -44,12 +45,18 @@ class GroundProofController extends Controller
                             $q->where('status','completed');
                         }
                     )->whereHas('ground_proof', function($q){
-                        $q->where('paid',1);
+                        $q->where('paid',1)->where('status','pending');
                     }
                     )->get();
         }
+
+        $contractors = User::whereHas(
+            'roles', function($q){
+                $q->whereNotIn('name',['superadmin','endUser']);
+            }
+        )->get();
         
-        return view('backend.groundproof.list',compact('user'));
+        return view('backend.groundproof.list',compact('user','contractors'));
         
     }
 
@@ -72,7 +79,7 @@ class GroundProofController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request->all());
+        /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
             'distance_from_structure'  => 'required|string',
             'density'  => 'required|string',
@@ -105,14 +112,19 @@ class GroundProofController extends Controller
             /* return 'error'; */
         }
 
+        $gp =GroundProof::findOrFail($request->gp_id);
+
         $survey = new GroundProofSurvery;
-        $survey->gp_id=$request->gp_id;
+        $survey->gp_id=$gp->id;
         $survey->fill($request->all());
         $survey->combustibles=implode(';',$request->combustibles);
         $survey->leave_deposits=implode(';',$request->leave_deposits);
         $survey->screening=implode(';',$request->screening);
-        $survey->barrier=implode(';',$request->Barrier);
+        $survey->barrier=implode(';',$request->barrier);
         $survey->save();
+        
+        $gp->status='in_process';
+        $gp->save();
         
         return redirect()->back()->with("status", "Survey Generated.");
     }
@@ -255,7 +267,7 @@ class GroundProofController extends Controller
         
     }
 
-    public function remoteAssessmentFindings(Request $request)
+    public function groundProofFindings(Request $request)
     {
         /* dd($request->all()); */
         $validator = Validator::make(
@@ -263,41 +275,44 @@ class GroundProofController extends Controller
                 'file'      => $request->finding,
                 'extension' => strtolower($request->finding->getClientOriginalExtension()),
                 'message'      => $request->message,
-                'ra_id'      => $request->ra_id,
+                'gp_id'      => $request->gp_id,
             ]
             ,[
                 'file'      => 'required',
                 'extension'      =>'required|in:pdf,docx',
 
                 'message'      => 'required|string',
-                'ra_id'      =>'required|integer',
+                'gp_id'      =>'required|integer',
             ]
         );
         
         if ($validator->fails()) {
             /* return $validator->errors(); */
+            $request->session()->flash('error', 'Fields Required');
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
             /* return 'error'; */
         }
 
-        $ra=RemoteAssessment::findOrFail($request->ra_id);
+        $gp=GroundProof::findOrFail($request->gp_id);
         $report = custom_file_upload($request->file('finding'),'public','uploads/uploadData',null,null,null,null);
         $finding=new Finding;
-        $finding->type= 'remote_assessment';
-        $finding->ra_id=$ra->id;
+        $finding->type= 'ground_proof';
+        $finding->gp_id=$gp->id;
         $finding->file= $report;
         $finding->message= $request->message;
         $finding->save();
 
+        $gp->status='completed';
+        $gp->save();
         /* try { */
             $data=[
                 "message"=>$request->message,
                 "report"=>$report
             ];
             
-            Mail::to($ra->user->email)->send(new InquiryComplete($data));
+            Mail::to($gp->user->email)->send(new GroundProofComplete($data));
             if ($finding) {
                 return redirect()->back()->with("status", "Report Submitted.");
             }
@@ -307,6 +322,36 @@ class GroundProofController extends Controller
             return redirect()->back()->with("error", "Something went wrong.");
         } */
 
+    }
+
+
+    public function groundProofAssign(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'contractor'  => 'required|integer',
+            'note_to_contractor' => 'required|string',
+        ]);
+        
+        if ($validator->fails()) {
+            $request->session()->flash('error', 'Fields Required');
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+            /* return 'error'; */
+        }
+
+        /* dd($request->all()); */
+        $ground=GroundProof::findOrFail($request->gp_id);
+        $ground->assign_to=$request->contractor;
+        $ground->note_to_contractor=$request->note_to_contractor;
+        $ground->save();
+        if ($ground) {
+            return redirect()->back()->with("status", "Assigned.");
+        } else {
+            return redirect()->back()->with("error", "Something went wrong.");
+        }
+        
+        
     }
 
     /**

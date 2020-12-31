@@ -128,12 +128,6 @@
 <script src="{{ asset('backend/assets/js/tagsinput.js') }}"></script>
 
 <script type="text/javascript">
-   
-   $(document).ready(function(){
-      @if (session('status'))
-         toastr.success('{{session('status')}}', "Success");
-      @endif
-   })
 
    $(document).ready(function(){
 		window.sidebar_search=function() {

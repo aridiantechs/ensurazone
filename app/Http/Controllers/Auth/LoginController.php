@@ -51,6 +51,9 @@ class LoginController extends Controller
         } elseif(Auth::check() && auth()->user()->hasRole('sme-2')) {
             /* return redirect()->route('account.talent.profile'); */
             return redirect()->to(session('url.intended'));
+        } elseif(Auth::check() && auth()->user()->hasRole('endUser')) {
+            /* return redirect()->route('account.talent.profile'); */
+            return redirect()->route('home');
         }
         
     }

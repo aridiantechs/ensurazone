@@ -47,9 +47,14 @@ class RemoteAssessmentController extends Controller
             )->get();
         }
         
-        /* dd($user); */
+        $contractors = User::whereHas(
+                'roles', function($q){
+                    $q->whereNotIn('name',['superadmin','endUser']);
+                }
+            )->get();
+        /* dd($contractors[0]->roles); */
         
-        return view('backend.remote-assessment-inquiries.list',compact('user'));
+        return view('backend.remote-assessment-inquiries.list',compact('user','contractors'));
         
     }
 
@@ -275,6 +280,9 @@ class RemoteAssessmentController extends Controller
         $finding->message= $request->message;
         $finding->save();
 
+        $ra->status='completed';
+        $ra->save();
+
         /* try { */
             $data=[
                 "message"=>$request->message,
@@ -293,6 +301,35 @@ class RemoteAssessmentController extends Controller
 
     }
 
+
+    public function remoteAssessmentAssign(Request $request)
+    {
+        $validator = Validator::make($request->all(),[
+            'contractor'  => 'required|integer',
+            'note_to_contractor' => 'required|string',
+        ]);
+        
+        if ($validator->fails()) {
+            $request->session()->flash('error', 'Fields Required');
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+            /* return 'error'; */
+        }
+
+        /* dd($request->all()); */
+        $remote=RemoteAssessment::findOrFail($request->ra_id);
+        $remote->assign_to=$request->contractor;
+        $remote->note_to_contractor=$request->note_to_contractor;
+        $remote->save();
+        if ($remote) {
+            return redirect()->back()->with("status", "Assigned.");
+        } else {
+            return redirect()->back()->with("error", "Something went wrong.");
+        }
+        
+        
+    }
     /**
      * Remove the specified resource from storage.
      *

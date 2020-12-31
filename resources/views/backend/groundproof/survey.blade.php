@@ -103,6 +103,9 @@ textarea{
                       <div class="form-group">
                         <h5>Distance from structure</h5>
                         <div class="kt-radio-list">
+                          @error('distance_from_structure')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                           <label class="kt-radio">
                             <input type="radio" name="distance_from_structure" value="5 feet apart from the structure"> 5 feet apart from the structure
                             <span></span>
@@ -122,12 +125,18 @@ textarea{
                              <option value="medium">Medium</option>
                              <option value="high">High</option>
                            </select>
+                            @error('density')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                         <h5>Arrangement</h5>
                         <div class="kt-radio-list">
+                          @error('density')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                           <label class="kt-radio">
                             <input type="radio" name="arrangement" value="continues"> Continues
                             <span></span>
@@ -154,12 +163,18 @@ textarea{
                       <div class="form-group">
                         <h5>Number of trees surface</h5>
                          <input type="number" min="0" class="form-control" name="trees"/>
+                          @error('trees')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
                            <h5 class="form-control-label">Location</h5>
                             <div class="kt-radio-list">
+                              @error('location')
+                                  <div class="error">{{ $message }}</div>
+                              @enderror
                               <label class="kt-radio">
                                 <input type="radio" name="location" value="east"> East
                                 <span></span>
@@ -199,6 +214,9 @@ textarea{
                       <div class="form-group">
                         <h5>Height of grass from the</h5>
                          <input type="number" class="form-control" name="grass"/>
+                          @error('grass')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                       </div>
                     </div>
                   </div>
@@ -210,6 +228,9 @@ textarea{
                        <div class="form-group">
                             <h5 class="form-control-label">Presence of Combustible Substance</h5>
                             <div class="kt-checkbox-list">
+                              @error('combustibles')
+                                  <div class="error">{{ $message }}</div>
+                              @enderror
                               <label class="kt-checkbox">
                                 <input type="checkbox" name="combustibles[]" value="Logs/Fire"> Logs/Fire woodpile
                                 <span></span>
@@ -237,6 +258,9 @@ textarea{
                       <div class="form-group">
                             <h5 class="form-control-label">Deposit of leaves</h5>
                             <div class="kt-checkbox-list">
+                              @error('leave_deposits')
+                                  <div class="error">{{ $message }}</div>
+                              @enderror
                               <label class="kt-checkbox">
                                 <input type="checkbox" name="leave_deposits[]" value="Gutters"> Gutters
                                 <span></span>
@@ -261,6 +285,9 @@ textarea{
                       <div class="form-group">
                         <h5>Presence of Combustible</h5>
                          <input type="text" class="form-control" name="combustible_presence"/>
+                          @error('combustible_presence')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                       </div>
                     </div>
                   </div>
@@ -271,6 +298,9 @@ textarea{
                        <div class="form-group">
                             <h5 class="form-control-label">Screening</h5>
                             <div class="kt-checkbox-list">
+                              @error('screening[]')
+                                  <div class="error">{{ $message }}</div>
+                              @enderror
                               <label class="kt-checkbox">
                                 <input type="checkbox" name="screening[]" value="Attic"> Attic
                                 <span></span>
@@ -303,6 +333,9 @@ textarea{
                       <div class="form-group">
                         <h5>Density of trees</h5>
                         <div class="kt-radio-list">
+                            @error('density_of_trees')
+                                <div class="error">{{ $message }}</div>
+                            @enderror
                           <label class="kt-radio">
                             <input type="radio" name="density_of_trees" value="Trees scattered by 20 feet distance"> Trees scattered by 20 feet distance.
                             <span></span>
@@ -319,6 +352,9 @@ textarea{
                       <div class="form-group">
                         <h5>Arrangement</h5>
                         <div class="kt-radio-list">
+                          @error('space_arrangement')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                           <label class="kt-radio">
                             <input type="radio" name="space_arrangement" value="Continues"> Continues
                             <span></span>
@@ -348,6 +384,9 @@ textarea{
                       <div class="form-group">
                         <h5>Size of clump</h5>
                         <div class="kt-radio-list">
+                          @error('clump_size[]')
+                              <div class="error">{{ $message }}</div>
+                          @enderror
                           <label class="kt-radio">
                             <input type="radio" name="clump_size" value="More than 3 trees"> More than 3 trees
                             <span></span>
@@ -364,6 +403,9 @@ textarea{
                        <div class="form-group">
                           <h5>Ladder fuel</h5>
                           <div class="kt-radio-list">
+                              @error('ladder_fuel')
+                                <div class="error">{{ $message }}</div>
+                              @enderror
                              <label class="kt-radio">
                                 <input type="radio" name="ladder_fuel" value="Branch of trees at or under the 6ft height of a tree"> Branch of trees at or under the 6ft height of a tree
                                 <span></span>
@@ -393,24 +435,27 @@ textarea{
                       <div class="form-group">
                             <h5 class="form-control-label">Types of Barier</h5>
                             <div class="kt-checkbox-list">
+                              @error('barrier[]')
+                                <div class="error">{{ $message }}</div>
+                              @enderror
                               <label class="kt-checkbox">
-                                <input type="checkbox" name="Barrier[]" value="Rocks"> Rocks
+                                <input type="checkbox" name="barrier[]" value="Rocks"> Rocks
                                 <span></span>
                               </label>
                               <label class="kt-checkbox">
-                                <input type="checkbox" name="Barrier[]" value="Ponds"> Ponds
+                                <input type="checkbox" name="barrier[]" value="Ponds"> Ponds
                                 <span></span>
                               </label>
                               <label class="kt-checkbox">
-                                <input type="checkbox" name="Barrier[]" value="Stream"> Stream
+                                <input type="checkbox" name="barrier[]" value="Stream"> Stream
                                 <span></span>
                               </label>
                               <label class="kt-checkbox">
-                                <input type="checkbox" name="Barrier[]" value="Road"> Road
+                                <input type="checkbox" name="barrier[]" value="Road"> Road
                                 <span></span>
                               </label>
                               <label class="kt-checkbox">
-                                <input type="checkbox" name="Barrier[]" value="Open Meadow"> Open Meadow
+                                <input type="checkbox" name="barrier[]" value="Open Meadow"> Open Meadow
                                 <span></span>
                               </label>
                               
@@ -430,6 +475,9 @@ textarea{
                                <option value="south_west">South West</option>
                                <option value="north_west">North East</option>
                              </select>
+                              @error('aspects')
+                                <div class="error">{{ $message }}</div>
+                              @enderror
                         </div>
                     </div>
                   </div>

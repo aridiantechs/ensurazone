@@ -25,7 +25,7 @@ Route::get('/user_type', function () {
     return view('frontend.pages.user_type');
 })->name('user_type');
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth','hasNotPaid'])->group(function () {
     Route::resource('remote-assessment', RemoteAssessmentController::class);
     Route::post('/storeMedia', [App\Http\Controllers\RemoteAssessmentController::class, 'storeMedia'])->name('storeMedia');
     Route::delete('/fileDestroy', [App\Http\Controllers\RemoteAssessmentController::class, 'fileDestroy'])->name('fileDestroy');
@@ -55,6 +55,7 @@ Route::group([
     Route::resource('remote-assessment-inquiries', Backend\RemoteAssessmentController::class);
     Route::post('/remote-assessment-update', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'updateRA'])->name('updateRA');
     Route::post('/remote-assessment-findings', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentFindings'])->name('remote-assessment-findings');
+    Route::post('/remote-assessment-assign', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentAssign'])->name('remote-assessment.assign');
     
     Route::get('/remote_assessment_report/{file}', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remote_assessment_report'])->name('remote_assessment_report');
     Route::get('/remote_assessment_status', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentStatus'])->name('remote_assessment_status');
@@ -62,6 +63,8 @@ Route::group([
 
     Route::resource('groundproof-inquiries', Backend\GroundProofController::class);
     Route::get('/ground-proof-survey/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofSurvey'])->name('ground-proof-survey');
+    Route::post('/ground-proof-findings', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofFindings'])->name('ground-proof-findings');
+    Route::post('/ground-proof-assign', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofAssign'])->name('ground-proof.assign');
 });
 
 // Old routes

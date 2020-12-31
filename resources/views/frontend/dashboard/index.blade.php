@@ -176,7 +176,12 @@ header.header-section {
 
                                 <div class="col-6">
                                     <h5 class="font-italic mb-4">Logout from account</h5>
-                                    <button class="site-btn sb-dark"><i class="fa fa-user mr-2"></i> Logout</button>
+                                    <a class="site-btn sb-dark" href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                        <i class="fa fa-user mr-2"></i> Logout
+                                    </a>
                                 </div>
                             </div>
                         </form>
