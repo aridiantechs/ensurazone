@@ -70,7 +70,7 @@
                             <a href="{{ url('/login/facebook') }}" style="background: #1877f2;" class="site-btn sb-dark w-100"><i class="fa fa-facebook mr-2"></i> Facebook</a>
                         </div>
                         <div class="col-6">
-                            <a href="{{ url('/login/google') }}" style="background: #d62f2f;" class="site-btn sb-dark w-100"><i class="fa fa-google mr-2"></i> Google</button>
+                            <a href="{{ url('/login/google') }}" style="background: #d62f2f;" class="site-btn sb-dark w-100"><i class="fa fa-google mr-2"></i> Google</a>
                         </div>
                     </div>
 

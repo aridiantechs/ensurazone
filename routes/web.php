@@ -28,7 +28,7 @@ Route::get('/user_type', function () {
 Route::middleware(['auth','hasNotPaid'])->group(function () {
     Route::resource('remote-assessment', RemoteAssessmentController::class);
     Route::post('/storeMedia', [App\Http\Controllers\RemoteAssessmentController::class, 'storeMedia'])->name('storeMedia');
-    Route::delete('/fileDestroy', [App\Http\Controllers\RemoteAssessmentController::class, 'fileDestroy'])->name('fileDestroy');
+    Route::get('/fileDestroy', [App\Http\Controllers\RemoteAssessmentController::class, 'fileDestroy'])->name('fileDestroy');
 });
 
 Route::middleware(['hasPaid'])->group(function () {

@@ -440,7 +440,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 	
 
           address = place['adr_address'];
-	      console.log(lat,lng,place,city,state,zipcode,country);
+	      console.log(lati,lngi,place,city,state,zipcode,country);
 	     
 	    });
         

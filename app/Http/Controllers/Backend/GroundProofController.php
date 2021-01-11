@@ -43,8 +43,8 @@ class GroundProofController extends Controller
                     ->get();
             }
             else{
-                $user=$user->whereHas('ground_proof', function($q){
-                        $q->where('paid',1)->where('status','pending');
+                $user=$user->whereHas('ground_proof', function($q) use ($request){
+                        $q->where('paid',1)->where('status',$request->query('q'));
                     })
                     ->get();
             }

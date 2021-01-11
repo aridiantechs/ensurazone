@@ -165,7 +165,7 @@
                     </fieldset>
 
 					<h3>Previous History</h3>
-                    <fieldset>
+                    <fieldset style="overflow-y: auto;height: 540px;">
                         <h2>Previous History (Optional)</h2>
                         <p class="desc">Please enter your infomation and proceed to next step so we can complete your account</p>
                         <div class="fieldset-content">
@@ -519,7 +519,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.js" integrity="sha512-9WciDs0XP20sojTJ9E7mChDXy6pcO0qHpwbEJID1YVavz2H6QBz5eLoDD8lseZOb2yGT8xDNIV7HIe1ZbuiDWg==" crossorigin="anonymous"></script>
 <script>
-    var csrf="{{ csrf_token() }}",submit_url='{{ route('storeMedia') }}';
+    var csrf="{{ csrf_token() }}",submit_url='{{ route('storeMedia') }}',remove_url="{{ route('fileDestroy') }}";
 </script>
 <script src="{{asset('js/mydropzone.js')}}"></script>
 

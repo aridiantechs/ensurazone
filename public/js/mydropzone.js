@@ -43,11 +43,11 @@ var myDropzoneTheFirst = new Dropzone(
     removedfile: function (file) {
         file.previewElement.remove()
         $.ajax({
-            type: 'delete',
-            url: "{{ route('account.fileDestroy') }}",
+            type: 'get',
+            url: remove_url,
             data: {
                 filename: uploadedDocumentMap[file.upload.filename],
-                _method: 'DELETE',
+                /* _method: 'DELETE', */
             },
             success: function (data) {
                 var name = ''
