@@ -124,7 +124,7 @@
                                                 
 
                 <li class="kt-menu__section ">
-                    <h4 class="kt-menu__section-text">Mitigation Plan</h4>
+                    <h4 class="kt-menu__section-text">GroundProof</h4>
                     <i class="kt-menu__section-icon flaticon-more-v2"></i>
                 </li>
                 <li class="kt-menu__item  kt-menu__item--submenu {{Request::routeIs('backend.groundproof-inquiries*')?'kt-menu__item--open' : ''}}" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
@@ -143,7 +143,7 @@
                     <div class="kt-menu__submenu ">
                         <span class="kt-menu__arrow"></span>
                         <ul class="kt-menu__subnav">
-                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true" ><span class="kt-menu__link"><span class="kt-menu__link-text">Mitigation Plan</span></span></li>
+                            <li class="kt-menu__item  kt-menu__item--parent" aria-haspopup="true" ><span class="kt-menu__link"><span class="kt-menu__link-text">GroundProof</span></span></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.groundproof-inquiries.index') }}" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">New Inquiries</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.groundproof-inquiries.index') }}?q=in_process" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">In Process</span></a></li>
                             <li class="kt-menu__item " aria-haspopup="true" ><a  href="{{ route('backend.groundproof-inquiries.index') }}?q=completed" class="kt-menu__link "><i class="kt-menu__link-bullet kt-menu__link-bullet--dot"><span></span></i><span class="kt-menu__link-text">Completed</span></a></li>
