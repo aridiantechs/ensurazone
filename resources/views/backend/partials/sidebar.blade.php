@@ -93,7 +93,7 @@
                 </li>
 
 
-                <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
+                {{-- <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
                     <a  href="{{ route('remote-assessment-contracts') }}" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                         
@@ -118,7 +118,7 @@
                         <span class="kt-menu__link-text">Contracts</span>
                     </a>
                     
-                </li>
+                </li> --}}
 
                                  
                                                 
