@@ -4,6 +4,7 @@
 
 @section('styles')
 <link href="{{ asset('backend/assets/vendors/custom/datatables/datatables.bundle.css') }}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.css">
 <style type="text/css">
 .kt-checkbox.kt-checkbox--brand.kt-checkbox--solid > span {
     background: transparent;
@@ -33,6 +34,18 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 
 .error{
     color: red;
+}
+
+.report_img {
+  max-width: 100%; /* This rule is very important, please do not ignore this! */
+}
+
+#canvas {
+  height: 300px;
+  width: 100%;
+  background-color: #ffffff;
+  cursor: default;
+  border: 1px dotted black;
 }
 </style>
 
@@ -295,7 +308,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 
 <!--begin::Modal-->
 <div class="modal fade" id="kt_scrollable_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <form method="POST" action="{{route('backend.remote-assessment-findings')}}" enctype="multipart/form-data">
                 @csrf
@@ -307,40 +320,35 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="scroll scroll-pull" data-scroll="true" data-height="300">
+                    <div class="scroll scroll-pull" data-scroll="true" {{-- data-height="300" --}}>
                             {{-- <div class="form-group">
-                                <label class="form-control-label">Name:</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">Email:</label>
-                                <input type="text" class="form-control" />
-                            </div>
-                            <div class="form-group">
-                                <label class="form-control-label">Groups:</label>
-                                <div class="checkbox-list">
-                                    <label class="checkbox">
-                                    <input type="checkbox" checked="checked" />Management 
-                                    <span></span></label>
-                                    <label class="checkbox">
-                                    <input type="checkbox" />Finance 
-                                    <span></span></label>
-                                    <label class="checkbox">
-                                    <input type="checkbox" />IT Department 
-                                    <span></span></label>
-                                </div>
-                            </div> --}}
-                            <div class="form-group">
                                 <label for="file" class="form-label">Report File</label>
                                 <input style="height: 45px;" class="form-control" type="file" name="finding" id="finding" required/>
                                 <span class="text-input">Please attach pdf if any</span>
                                 @error('extension')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
+                            </div> --}}
+                            <div class="form-group">
+                                <label for="file" class="form-label">Image</label>
+                                <input style="height: 45px;" class="form-control" type="file" onchange="changeImageView(this, 'cat_image',250000)" name="image" id="image" required/>
+                                <input class="btn btn-primary mt-3" type="button" id="btnCrop" value="Crop" />
+                                @error('file')
+                                    <div class="error">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <div>
+                                    <canvas id="canvas">
+                                      Your browser does not support the HTML5 canvas element.
+                                    </canvas>
+                                </div>		
+                                  <input type="hidden" name="cropped_img" id="cropped_img">
+                                <div id="result" style="border: 2px dotted grey; text-align: center;"></div>
                             </div>
                             <div class="form-group">
                                 <label class="form-control-label">Message:</label>
-                                <textarea class="form-control" rows="6" name="message" required></textarea>
+                                <textarea class="form-control summernote" name="message" required></textarea>
                                 @error('message')
                                     <div class="error">{{ $message }}</div>
                                 @enderror
@@ -370,6 +378,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <!--end::Page Scripts -->
 
     <script src="{{ url('/') }}/backend/assets/vendors/general/summernote/dist/summernote.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropper/2.3.3/cropper.js"></script>
 
      <script>
          $(document).keypress(
@@ -384,7 +393,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                 
             });
 
-            @if($errors->has('extension') || $errors->has('message') || $errors->has('ra_id') )
+            @if($errors->has('file') || $errors->has('message') || $errors->has('ra_id') )
                 $('#kt_scrollable_modal_1').modal('toggle');
             @endif
 
@@ -393,9 +402,44 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
             @endif
         })
 
-        $('.summernote').summernote({
-            height: 150
-        });
+        $('.summernote').summernote();
+
+        function changeImageView(input, id,max_size) {
+   
+            var FileUploadPath = input.value;
+            
+            if (FileUploadPath == '') {
+                alert("Please upload an image");
+            
+            } 
+            else 
+            {
+                var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
+                if (Extension == "jpg" || Extension == "png")
+                {
+                    if (input.files && input.files[0]) {
+                        var size = input.files[0].size;
+                        
+                        if(size > max_size){
+                            alert("Maximum file size exceeds");
+                            return;
+                        }else{
+                            var reader = new FileReader();
+                            /* alert(input.files[0].size); */
+                            reader.onload = function (e) {
+                                $('#'+id).attr('src', e.target.result).fadeIn('slow');
+                            }
+                            reader.readAsDataURL(input.files[0]);
+                        }
+                    }
+                }
+                else{
+                    alert("Photo only allows file types of GIF, PNG");
+                }
+                
+            }   
+            // alert('');
+        }
         
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqqhqN5q545cx57GD5ht6JVidUQuuGd34&sensor=false&v=3&libraries=geometry,places&callback=initAutocomplete" async defer></script>
@@ -535,4 +579,48 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
     });
 
 </script>
+
+
+{{-- cropper.js --}}
+<script>
+    var canvas  = $("#canvas"),
+    context = canvas.get(0).getContext("2d"),
+    $result = $('#result');
+
+    $('#image').on( 'change', function(){
+        if (this.files && this.files[0]) {
+        if ( this.files[0].type.match(/^image\//) ) {
+            var reader = new FileReader();
+            reader.onload = function(evt) {
+            var img = new Image();
+            img.onload = function() {
+                context.canvas.height = img.height;
+                context.canvas.width  = img.width;
+                context.drawImage(img, 0, 0);
+                var cropper = canvas.cropper({
+                aspectRatio: 14 / 8
+                });
+                $('#btnCrop').click(function() {
+                    // Get a string base 64 data url
+                    var croppedImageDataURL = canvas.cropper('getCroppedCanvas').toDataURL("image/png"); 
+                    $result.html( $('<img>').attr('src', croppedImageDataURL) );
+                    $('#cropped_img').val(croppedImageDataURL);
+                    
+                });
+                
+            };
+            img.src = evt.target.result;
+                    };
+            reader.readAsDataURL(this.files[0]);
+        }
+        else {
+            alert("Invalid file type! Please select an image file.");
+        }
+        }
+        else {
+        alert('No file(s) selected.');
+        }
+    });
+</script>
+{{-- end cropper.js --}}
 @endsection

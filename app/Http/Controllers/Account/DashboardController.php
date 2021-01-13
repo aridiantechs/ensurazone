@@ -100,6 +100,7 @@ class DashboardController extends Controller
                 {
                     $ground=new GroundProof;
                     $ground->user_id=auth()->user()->id;
+                    $ground->remote_assess_id=auth()->user()->remote_assessment->id;
                     $ground->amount=5000;
                     $ground->paid=1;
                     $ground->save();

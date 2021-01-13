@@ -259,22 +259,29 @@ class RemoteAssessmentController extends Controller
     public function remoteAssessmentFindings(Request $request)
     {
         /* dd($request->all()); */
+        /* Validator::extend('is_png',function($attribute, $value, $params, $validator) {
+            $image = base64_decode($value);
+            $f = finfo_open();
+            $result = finfo_buffer($f, $image, FILEINFO_MIME_TYPE);
+            return $result == 'image/png';
+        }); */
+        
         $validator = Validator::make(
             [
-                'file'      => $request->finding,
-                'extension' => strtolower($request->finding->getClientOriginalExtension()),
+                'file'      => $request->cropped_img,
+                /* 'extension' => strtolower($request->image->getClientOriginalExtension()), */
                 'message'      => $request->message,
                 'ra_id'      => $request->ra_id,
             ]
             ,[
-                'file'      => 'required',
-                'extension'      =>'required|in:pdf,docx',
+                /* 'file'      => 'required|is_png', */
+                /* 'extension'      =>'required|in:pdf,docx', */
 
                 'message'      => 'required|string',
                 'ra_id'      =>'required|integer',
             ]
         );
-        
+        /* dd($validator->errors()); */
         if ($validator->fails()) {
             /* return $validator->errors(); */
             return redirect()->back()
@@ -284,11 +291,25 @@ class RemoteAssessmentController extends Controller
         }
 
         $ra=RemoteAssessment::findOrFail($request->ra_id);
-        $report = custom_file_upload($request->file('finding'),'public','uploads/uploadData',null,null,null,null);
+        /* $image = custom_file_upload($request->file('image'),'public','uploads/uploadData',null,null,null,null); */
+        $folderPath = public_path('storage/uploads/uploadData/');
+ 
+        $image_parts = explode(";base64,", $request->cropped_img);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+ 
+        $imageName = uniqid() . '.png';
+ 
+        $imageFullPath = $folderPath.$imageName;
+ 
+        file_put_contents($imageFullPath, $image_base64);
+
         $finding=new Finding;
         $finding->type= 'remote_assessment';
+        $finding->serial=unique_string('findings','serial',8);
         $finding->ra_id=$ra->id;
-        $finding->file= $report;
+        $finding->file= $imageName;
         $finding->message= $request->message;
         $finding->save();
 
@@ -298,7 +319,8 @@ class RemoteAssessmentController extends Controller
         /* try { */
             $data=[
                 "message"=>$request->message,
-                "report"=>$report
+                /* "report"=>$image */
+                "report"=>$finding->serial
             ];
             
             Mail::to($ra->user->email)->send(new InquiryComplete($data));

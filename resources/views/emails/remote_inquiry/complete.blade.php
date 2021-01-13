@@ -401,31 +401,13 @@
       <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%"
         style="margin: auto;">
         <tr>
-          <td valign="top" class="bg_white" style="padding: 1em 2.5em;">
-            <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">
-              {{-- <tr>
-                <td>
-                  <h4 style="margin-left: 1.7rem"><b>Hello!</b> {{$user}}</h4>
-              </td>
-              </tr> --}}
-              <tr>
-                <td>
-                  <p style="margin-left: 1.7rem">{{$data['message'] ?? ''}}</p>
-                </td>
-              </tr>
-            </table>
-          </td>
-        </tr><!-- end tr -->
-        <tr>
-        </tr><!-- end tr -->
-        <tr>
           <td class="bg_white">
             <table role="presentation" cellspacing="0" cellpadding="0" border="0" width="100%">
               <tr>
                 <td class="bg_white email-section">
                   <div class="heading-section" style="text-align: justify; padding: 0 30px;">
-                    
-                    <p style="font-weight: 600;">Please upgrade your membership plan,click this link:<span><a href="{{route('my_account.index')}}">My Account</a></span></p>
+                    <p style="font-weight: 600;">Remote Assessment report is complete and can be viewed here:<span><a href="{{route('survey_report',$data['report'])}}" target="_blank">View Report</a></span></p>
+                    <p style="font-weight: 600;">Please upgrade your membership plan for GroundProof report,click this link:<span><a href="{{route('my_account.index')}}" target="_blank">My Account</a></span></p>
                   </div>
                   <hr>
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%">

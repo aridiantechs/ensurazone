@@ -11,6 +11,11 @@ tr td {
 header.header-section {
     box-shadow: 0px 1px 25px #2e2e2e1a;
 }
+
+.disabled{
+    background: #929292 !important;
+    cursor: default !important;
+}
 </style>
 @endsection
 
@@ -116,9 +121,8 @@ header.header-section {
                             </div>
 
                             <div class="col-6 border-left">
-                                <h5 class="mb-3">Mitigation Plan Report</h5>
-                                {{-- <button class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</button> --}}
-                                <button class="site-btn sb-dark" data-toggle="modal" data-target="#upgradeModal"><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
+                                <h5 class="mb-3">GroundProof Plan Report</h5>
+                                <button class="site-btn sb-dark {{auth()->user()->ground_proof()->exists() ? 'disabled':''}}" data-toggle="modal" data-target="#upgradeModal" {{auth()->user()->ground_proof()->exists() ? 'disabled':''}}><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
                             </div>
                         </div>
                     </div>

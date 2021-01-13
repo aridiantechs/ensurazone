@@ -13,6 +13,11 @@ class GroundProof extends Model
     {
         return $this->belongsTo('App\Models\User','user_id');
     }
+
+    public function remote_assessment()
+    {
+        return $this->belongsTo('App\Models\RemoteAssessment','remote_assess_id');
+    }
     
     public function findings()
     {

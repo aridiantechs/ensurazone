@@ -67,8 +67,13 @@ Route::group([
     Route::post('/ground-proof-assign', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofAssign'])->name('ground-proof.assign');
 });
 
+Route::get('/survey_report/{id}', [App\Http\Controllers\ReportController::class, 'show'])->name('survey_report');
+
 // Old routes
 
+Route::get('/ensura', function () {
+    return view('print.ensura');
+})->name('ensura');
 
 Route::get('/', function () {
     return view('frontend.pages.index');

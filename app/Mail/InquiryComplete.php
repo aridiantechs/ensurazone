@@ -30,9 +30,9 @@ class InquiryComplete extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Inquiry Completed')->markdown('emails.remote_inquiry.complete')->attach(public_path().'/storage/uploads/uploadData/'.$this->data['report'], [
+        return $this->subject('Inquiry Completed')->markdown('emails.remote_inquiry.complete')/* ->attach(public_path().'/storage/uploads/uploadData/'.$this->data['report'], [
             'as' => 'findings.pdf',
             'mime' => 'application/pdf',
-        ]);
+        ]) */;
     }
 }
