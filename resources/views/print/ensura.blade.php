@@ -7734,22 +7734,22 @@ button.close {
                                           </tr>
 
                                           <tr>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3">Aspects</h4></th>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3">North-east</h4></th>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3">North-east</h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">Aspects</h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">North-east</h4></th>
+                                            <th style="border: 1px solid;" rowspan="3"><h4 class="ml-3">The defensible space form the structure till zone-2 needs to be increased in case of steep slope Incorporate artificial barriers to improve resistance frim fire </h4></th>
                                           </tr>
                                           <tr>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3"><b>Slope</b></h4></th>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3">Medium</h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Slope</b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">Medium</h4></th>
                                           </tr>
                                           <tr>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3"><b>Types of barriers</b></h4></th>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3">Big rocks </h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>Types of barriers</b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3">Big rocks </h4></th>
                                           </tr>
                                           <tr>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3"><b>SME recommendation for zone 2</b></h4></th>
-                                            <th style="border-left: 1px solid;"><h4 class="ml-3"></h4></th>
-                                            <th style="border-right: 1px solid;"><h4></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"><b>SME recommendation for zone 2</b></h4></th>
+                                            <th style="border: 1px solid;"><h4 class="ml-3"></h4></th>
+                                            <th style="border: 1px solid;"><h4></h4></th>
                                           </tr>
                                         </table>
                                       </div>
