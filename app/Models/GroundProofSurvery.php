@@ -28,6 +28,6 @@ class GroundProofSurvery extends Model
 
     public function ground_proof()
     {
-        return $this->hasMany('App\Models\GroundProof','gp_id');
+        return $this->belongsTo('App\Models\GroundProof','gp_id');
     }
 }

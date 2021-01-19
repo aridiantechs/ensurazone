@@ -30,9 +30,9 @@ class GroundProofComplete extends Mailable implements ShouldQueue
      */
     public function build()
     {
-        return $this->subject('Ground Proof Completed')->markdown('emails.ground_proof.complete')->attach(public_path().'/storage/uploads/uploadData/'.$this->data['report'], [
+        return $this->subject('Ground Proof Completed')->markdown('emails.ground_proof.complete')/* ->attach(public_path().'/storage/uploads/uploadData/'.$this->data['report'], [
             'as' => 'findings.pdf',
             'mime' => 'application/pdf',
-        ]);
+        ]) */;
     }
 }

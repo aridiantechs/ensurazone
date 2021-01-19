@@ -410,7 +410,8 @@
               </tr> --}}
               <tr>
                 <td>
-                  <p style="margin-left: 1.7rem">{{$data['message'] ?? ''}}</p>
+                  <p style="margin-left: 1.7rem">Your GroundProof Survey Report has been completed you can view it on the given link: <br>
+                    <a class="btn btn-primary" href="{{route('survey_report',$data['serial'])}}">View Report</a></p>
                 </td>
               </tr>
             </table>

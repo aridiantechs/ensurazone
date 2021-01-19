@@ -77,8 +77,9 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             @endif
                                             
                                             {{-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a> --}}
-                                            <a class="dropdown-item" href="{{ route('backend.ground-proof-survey',$user->ground_proof->id) }}"><i class="la la-leaf"></i> Update Status</a>
-                                            <a class="dropdown-item" name="gen_report_btn" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
+                                            <a href="#" class="dropdown-item"  name="ground_proof_status" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
+                                            <a class="dropdown-item" href="{{ route('backend.ground-proof-survey',$user->ground_proof->id) }}"><i class="la la-print"></i> Generate Report</a>
+                                            {{-- <a class="dropdown-item" name="gen_report_btn" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a> --}}
                                         </div>
                                     </span>
                                     <a href="{{ route('backend.inquiry-details',$user->remote_assessment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
@@ -105,36 +106,36 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <div class="modal fade" id="kt_modal_status" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="kt-scroll" data-scroll="true" data-height="200">
-                    <form>
-                      
+            <form action="{{route('backend.ground_proof_status')}}" method="GET">
+                @csrf
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Update Status</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="kt-scroll" data-scroll="true" data-height="200">
+                        <input type="hidden" name="gp_id">
                         <div class="form-group">
                             <label class="form-control-label">Status</label>
-                             <select name="" id="" class="form-control">
-                                 <option value="pending">Pending</option>
-                                 <option value="in_process">In Process</option>
-                                 <option value="completed">Completed</option>
-                             </select>
+                                <select name="status" id="" class="form-control" required>
+                                    <option value="pending">Pending</option>
+                                    <option value="in_process">In Process</option>
+                                    <option value="completed">Completed</option>
+                                </select>
                         </div>
 
                         <div class="form-group">
                             <label class="form-control-label">Note</label>
-                             <textarea class="form-control" id="" cols="30" rows="3"></textarea>
+                                <textarea class="form-control" id="" name="note" cols="30" rows="3"></textarea>
                         </div>
-
-                    </form>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Update</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -334,7 +335,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
         });
 
         $(document).ready(function(){
-            $('[name="remote_assess_status"],[name="gen_report_btn"],[name="ground_proof_assign"]').click(function(e){
+            $('[name="ground_proof_status"],[name="gen_report_btn"],[name="ground_proof_assign"]').click(function(e){
                 $('[name="gp_id"]').val($(this).data('gpid'));
                 
             });

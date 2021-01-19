@@ -72,7 +72,7 @@ class GroundProofController extends Controller
             }
         )->get();
 
-        /* dd($user[0]->ground_proof); */
+        /* dd($user); */
         
         return view('backend.groundproof.list',compact('user','contractors'));
         
@@ -86,7 +86,7 @@ class GroundProofController extends Controller
     public function groundProofSurvey(Request $request,$id)
     {
         $gp=GroundProof::findOrFail($id);
-        return view('backend.groundproof.survey',compact('gp'));
+        return view('backend.groundproof.newSurvey',compact('gp'));
     }
 
     /**
@@ -99,27 +99,64 @@ class GroundProofController extends Controller
     {
         /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
-            'distance_from_structure'  => 'required|string',
-            'density'  => 'required|string',
+            'vegetation_free_area'  => 'required|string',
+            'veg_remarks'  => 'required|string',
+            'grass'  => 'required|string',
             'combustible_presence'  => 'required|string',
-            'trees' => 'required|integer',
-            'location'  => 'required|string',
-            'grass'  => 'required|integer',
-            'density_of_trees'  => 'required|string',
-            'arrangement'  => 'required|string',
-            'space_arrangement'  => 'required|string',
-            'clump_size'  => 'required|string',
-            'ladder_fuel'  => 'required|string',
-            'aspects'  => 'required|string',
+            'logs_woodpile_value'  => 'required|string',
+            'scrape_value'  => 'required|string',
+            'flammable_value'  => 'required|string',
+            'wild_grass_value'  => 'required|string',
+            'conifer_value'  => 'required|string',
+            'Gutters_value'  => 'required|string',
+            'roof_line_value'  => 'required|string',
+            'porch_value'  => 'required|string',
+            'deck_value'  => 'required|string',
 
-            'combustibles' => 'required|array',
+            'screen_attic'  => 'required|string',
+            'screen_attic_value'  => 'required|string',
+            'screen_soffit'  => 'required|string',
+            'screen_soffit_value'  => 'required|string',
+            'screen_foundation'  => 'required|string',
+            'screen_foundation_value'  => 'required|string',
+            'screen_chimney'  => 'required|string',
+            'screen_chimney_value'  => 'required|string',
+
+            'space_assess1_trees'  => 'required|integer',
+            'space_assess1_trees_distance'  => 'required|integer',
+            'space_assess1_density'  => 'required|string',
+            'space_assess1_space_arrangement'  => 'required|string',
+            'location'  => 'required|string',
+            'space_assess1_img'  => 'required|image',
+            'space_assess1_img_description'  => 'required|string',
+            'space_assess1_sme_comments'  => 'required|string',
+
+            'space_assess2_trees'  => 'required|integer',
+            'space_assess2_trees_density'  => 'required|string',
+            'space_assess2_density'  => 'required|string',
+            'space_assess2_space'  => 'required|string',
+            'space_assess2_clumpsize'  => 'required|string',
+            'space_assess2_ladder_fuel'  => 'required|string',
+            'space_assess2_neighbour_vege'  => 'required|string',
+            'space_assess2_site_findings'  => 'required|string',
+            'space_assess2_slope'  => 'required|string',
+            'space_assess2_aspects'  => 'required|string',
+            'space_assess2_rock'  => 'nullable|string',
+            'space_assess2_Pond'  => 'nullable|string',
+            'space_assess2_stream'  => 'nullable|string',
+            'space_assess2_road'  => 'nullable|string',
+            'space_assess2_meadow'  => 'nullable|string',
+            'space_assess2_sme_comments'  => 'required|string',
+            'space_assess2_img'  => 'required|image',
+
+           /*  'combustibles' => 'required|array',
             'combustibles.*' => 'string',
             'leave_deposits' => 'required|array',
             'leave_deposits.*' => 'string',
             'screening' => 'required|array',
             'screening.*' => 'string',
             'barrier' => 'required|array',
-            'barrier.*' => 'string',
+            'barrier.*' => 'string', */
         ]);
         
         if ($validator->fails()) {
@@ -127,24 +164,54 @@ class GroundProofController extends Controller
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
-            /* return 'error'; */
         }
 
         $gp =GroundProof::findOrFail($request->gp_id);
-
-        $survey = new GroundProofSurvery;
-        $survey->gp_id=$gp->id;
-        $survey->fill($request->all());
+        $req=$request->except(['_token','gp_id']);
+        foreach ($req as $key => $value) {
+            if (!is_null($value)) {
+                $survey = new GroundProofSurvery;
+                $survey->gp_id=$gp->id;
+                $survey->key =$key;
+                if ($request->hasFile($key)) {
+                    $img = custom_file_upload($request->file($key),'public','uploads/uploadData',null,null,null,null);
+                    $survey->value =$img;
+                }
+                else{
+                    $survey->value =$value;
+                }
+                
+                $survey->save();
+            }
+            
+        }
+        /* dd($survey); */
+        /* $survey->fill($request->all());
         $survey->combustibles=implode(';',$request->combustibles);
         $survey->leave_deposits=implode(';',$request->leave_deposits);
         $survey->screening=implode(';',$request->screening);
         $survey->barrier=implode(';',$request->barrier);
-        $survey->save();
-        
-        $gp->status='in_process';
+        $survey->save(); */
+
+        $finding=new Finding;
+        $finding->type= 'ground_proof';
+        $finding->serial=unique_string('findings','serial',8);
+        $finding->gp_id=$gp->id;
+        $finding->save();
+
+        $gp->status='completed';
         $gp->save();
+
+        $data=[
+            "serial"=>$finding->serial
+        ];
         
-        return redirect()->back()->with("status", "Survey Generated.");
+        Mail::to($gp->user->email)->send(new GroundProofComplete($data));
+        dd('submitted');
+        if ($finding && $gp) {
+            return redirect()->back()->with("status", "GroundProof Report Submitted.");
+        }
+        
     }
 
     /**
@@ -160,27 +227,13 @@ class GroundProofController extends Controller
         return view('backend.remote-assessment-contracts.show',compact('ra'));
     }
 
-    public function assignRole(Request $request)
-    {
-        $user=User::findOrFail($request->user_id);
-        if ($user) {
-            $role=Role::where('id',$request->role_id)->first();
-            if ($role) {
-                $user->removeRole($user->roles[0]->name);
-                $user->assignRole($role->name);
-                return redirect()->back()->with("status", "Role has been Updated.");
-            }
-        }
-
-    }
-
-    public function remoteAssessmentStatus(Request $request)
+    public function groundProofStatus(Request $request)
     {
         /* dd($request->all()); */
-        $remote=RemoteAssessment::findOrFail($request->ra_id);
-        $remote->status=$request->status;
-        $remote->note=$request->note;
-        $remote->save();
+        $ground=GroundProof::findOrFail($request->gp_id);
+        $ground->status=$request->status;
+        $ground->note=$request->note;
+        $ground->save();
         return redirect()->back()->with("status", "Status Updated.");
     }
 
@@ -305,12 +358,9 @@ class GroundProofController extends Controller
         );
         
         if ($validator->fails()) {
-            /* return $validator->errors(); */
-            $request->session()->flash('error', 'Fields Required');
             return redirect()->back()
-                        ->withErrors($validator)
-                        ->withInput();
-            /* return 'error'; */
+                    ->withErrors($validator)
+                    ->withInput();
         }
 
         $gp=GroundProof::findOrFail($request->gp_id);

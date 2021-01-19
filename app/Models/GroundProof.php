@@ -23,4 +23,9 @@ class GroundProof extends Model
     {
         return $this->hasMany('App\Models\Finding','gp_id','id');
     }
+
+    public function ground_proof_survey()
+    {
+        return $this->hasMany('App\Models\GroundProofSurvery','gp_id');
+    }
 }
