@@ -34,8 +34,9 @@ Route::middleware(['auth','hasNotPaid'])->group(function () {
 Route::middleware(['hasPaid'])->group(function () {
     Route::resource('my_account', Account\DashboardController::class);
     Route::post('/my_password', [App\Http\Controllers\Account\DashboardController::class, 'myPassword'])->name('my_account.password');
-    Route::get('/remote_assessment_report', [App\Http\Controllers\Account\DashboardController::class, 'remote_assessment_report'])->name('remote_assessment_report');
-    Route::post('/ground_proof', [App\Http\Controllers\Account\DashboardController::class, 'storeGroundProof'])->name('ground_proof.store');
+    Route::get('/view_report', [App\Http\Controllers\Account\DashboardController::class, 'view_report'])->name('view_report');
+    /* Route::post('/ground_proof', [App\Http\Controllers\Account\DashboardController::class, 'storeGroundProof'])->name('ground_proof.store'); */
+    Route::post('/upgrade_plan', [App\Http\Controllers\Account\DashboardController::class, 'upgrade_plan'])->name('upgrade_plan');
 });
 
 
@@ -66,6 +67,12 @@ Route::group([
     Route::post('/ground-proof-findings', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofFindings'])->name('ground-proof-findings');
     Route::post('/ground-proof-assign', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofAssign'])->name('ground-proof.assign');
     Route::get('/ground_proof_status', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofStatus'])->name('ground_proof_status');
+
+    Route::resource('mitigation-inquiries', Backend\MitigationController::class);
+    Route::get('/mitigation-survey/{id}', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationSurvey'])->name('mitigation-survey');
+    Route::post('/mitigation-findings', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationFindings'])->name('mitigation-findings');
+    Route::post('/mitigation-assign', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationAssign'])->name('mitigation.assign');
+    Route::get('/mitigation_status', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationStatus'])->name('mitigation_status');
 });
 
 Route::get('/survey_report/{id}', [App\Http\Controllers\ReportController::class, 'show'])->name('survey_report');

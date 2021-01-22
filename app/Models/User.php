@@ -59,6 +59,11 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\GroundProof','user_id');
     }
 
+    public function mitigation()
+    {
+        return $this->hasOne('App\Models\Mitigation','user_id');
+    }
+
     public function assigned_RA()
     {
         return $this->hasOne('App\Models\RemoteAssessment','assign_to');

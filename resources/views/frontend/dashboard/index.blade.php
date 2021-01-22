@@ -115,15 +115,31 @@ header.header-section {
                     <div class="tab-pane fade shadow rounded bg-white p-5" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
                         <h4 class="font-italic mb-4">My report</h4>
                         <div class="row mt-5 text-center">
-                            <div class="col-6">
+                            <div class="col-4">
                                 <h5 class="mb-3">Remote Assesment Report</h5>
-                                <a href="{{route('remote_assessment_report')}}" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
+                                <a href="{{route('view_report',['q'=>'remote_assessment'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
                             </div>
 
-                            <div class="col-6 border-left">
+                            <div class="col-4 border-left">
                                 <h5 class="mb-3">GroundProof Plan Report</h5>
-                                <button class="site-btn sb-dark {{auth()->user()->ground_proof()->exists() ? 'disabled':''}}" data-toggle="modal" data-target="#upgradeModal" {{auth()->user()->ground_proof()->exists() ? 'disabled':''}}><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
+                                @if (auth()->user()->ground_proof()->exists())
+                                    <a href="{{route('view_report',['q'=>'ground_proof'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
+                                @else
+                                    <button class="site-btn sb-dark" name="upgradeBtn" data-upgradetype="ground_proof" data-toggle="modal" data-target="#upgradeModal"><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
+                                @endif
+                                
                             </div>
+
+                            <div class="col-4 border-left">
+                                <h5 class="mb-3">Mitigation Plan Report</h5>
+                                @if (auth()->user()->mitigation()->exists())
+                                    <a href="{{route('view_report',['q'=>'mitigation'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
+                                @else
+                                    <button class="site-btn sb-dark" name="upgradeBtn" data-upgradetype="mitigation" data data-toggle="modal" data-target="#upgradeModal"><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
+                                @endif
+                                
+                            </div>
+
                         </div>
                     </div>
                     
@@ -209,8 +225,9 @@ header.header-section {
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-12 mt-5 mb-3">
-                        <form action="{{route('ground_proof.store')}}" id="groundProofForm" method="POST">
+                        <form action="{{route('upgrade_plan')}}" id="groundProofForm" method="POST">
                             @csrf
+                            <input type="hidden" name="upgrade_type" id="upgrade_type">
                             <div id="payment-section">
                                                     
                                 <div class="form-group">
@@ -316,6 +333,15 @@ header.header-section {
         // Submit the form
         form.submit();
     }
+</script>
+
+<script>
+    $(document).ready(function(){
+        $('[name="upgradeBtn"]').click(function(){
+            var upgrade_type=$(this).data('upgradetype');
+            $('#upgrade_type').val(upgrade_type);
+        })
+    })
 </script>
 
 @endsection
