@@ -103,7 +103,7 @@ class MitigationController extends Controller
      */
     public function store(Request $request)
     {
-        /* dd($request->all()); */
+        dd($request->all());
         $validator = Validator::make($request->all(),[
             'vegetation_free_area'  => 'required|string',
             'veg_remarks'  => 'required|string',

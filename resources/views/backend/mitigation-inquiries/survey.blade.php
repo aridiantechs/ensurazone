@@ -379,7 +379,7 @@ textarea{
                   <hr>
 
                   <div class="row">
-                    <div class="col-md-3">
+                    {{-- <div class="col-md-3">
                       <div class="form-group">
                         <h6>Number of trees</h6>
                          <input type="number" min="0" class="form-control" name="space_assess1_trees"/>
@@ -409,7 +409,7 @@ textarea{
                                 <div class="error">{{ $message }}</div>
                             @enderror
                       </div>
-                    </div>
+                    </div> --}}
                     <div class="col-md-3">
                       <div class="form-group">
                         <h6>Arrangement</h6>
@@ -426,7 +426,7 @@ textarea{
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-12">
+                    {{-- <div class="col-md-12">
                       <div class="form-group">
                           <h5 class="form-control-label">Location</h5>
                           <div class="kt-radio-list d-flex">
@@ -468,7 +468,7 @@ textarea{
                           </div>
                       </div>
                     </div>
-                    {{-- <div class="col-md-4">
+                    <div class="col-md-4">
                        <div class="form-group">
                             <h5 class="form-control-label">Screening</h5>
                             <div class="kt-checkbox-list">
@@ -490,7 +490,7 @@ textarea{
                                
                             </div>
                       </div>
-                    </div> --}}
+                    </div>
                     <div class="col-md-6">
                       <div class="form-group">
                             <h5 for="file" class="form-control-label">Photographic evidence from site</h5>
@@ -518,7 +518,7 @@ textarea{
                             <div class="error">{{ $message }}</div>
                         @enderror
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
                   
                   <hr>
@@ -528,7 +528,7 @@ textarea{
                   <hr>
 
                   <div class="row">
-                    <div class="col-md-3">
+                    {{-- <div class="col-md-3">
                       <div class="form-group">
                         <h6>Number of trees</h6>
                          <input type="number" min="0" class="form-control" name="space_assess2_trees"/>
@@ -549,8 +549,8 @@ textarea{
                             <div class="error">{{ $message }}</div>
                         @enderror
                       </div>
-                    </div>
-                    <div class="col-md-3">
+                    </div> --}}
+                    <div class="col-md-6">
                       <div class="form-group">
                         <h6 class="form-control-label">Arrangement</h6>
                         <select name="space_assess2_density" class="form-control" id="">
@@ -564,7 +564,7 @@ textarea{
                         @enderror
                       </div>
                     </div>
-                    <div class="col-md-3">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <h6>Space</h6>
                         <select name="space_assess2_space" class="form-control" id="">
@@ -579,7 +579,7 @@ textarea{
                   </div>
 
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                       <div class="form-group">
                         <h6>Size of clump</h6>
                         <select name="space_assess2_clumpsize" class="form-control" id="">
@@ -591,7 +591,7 @@ textarea{
                         @enderror
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                        <div class="form-group">
                           <h5>Ladder fuel</h5>
                           <select name="space_assess2_ladder_fuel" class="form-control" id="" required>
@@ -630,7 +630,7 @@ textarea{
                             <div class="error">{{ $message }}</div>
                         @enderror
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
 
                   <hr>
@@ -651,7 +651,7 @@ textarea{
                           @enderror
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    {{-- <div class="col-md-4">
                       <div class="form-group">
                              <h5 class="form-control-label">Aspects</h5>
                              <select name="space_assess2_aspects" class="form-control" id="">
@@ -716,7 +716,7 @@ textarea{
                             <div class="error">{{ $message }}</div>
                         @enderror
                       </div>
-                    </div>
+                    </div> --}}
                   </div>
 
  
