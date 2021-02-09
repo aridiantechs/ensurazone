@@ -103,24 +103,24 @@ class GroundProofController extends Controller
             'veg_remarks'  => 'required|string',
             'grass'  => 'required|string',
             'combustible_presence'  => 'required|string',
-            'logs_woodpile_value'  => 'required|string',
-            'scrape_value'  => 'required|string',
-            'flammable_value'  => 'required|string',
-            'wild_grass_value'  => 'required|string',
-            'conifer_value'  => 'required|string',
-            'Gutters_value'  => 'required|string',
-            'roof_line_value'  => 'required|string',
-            'porch_value'  => 'required|string',
-            'deck_value'  => 'required|string',
+            'logs_woodpile_value'  => 'string',
+            'scrape_value'  => 'string|nullable',
+            'flammable_value'  => 'string|nullable',
+            'wild_grass_value'  => 'string|nullable',
+            'conifer_value'  => 'string|nullable',
+            'Gutters_value'  => 'string|nullable',
+            'roof_line_value'  => 'string|nullable',
+            'porch_value'  => 'string|nullable',
+            'deck_value'  => 'string|nullable',
 
             'screen_attic'  => 'required|string',
-            'screen_attic_value'  => 'required|string',
+            'screen_attic_value'  => 'string|nullable',
             'screen_soffit'  => 'required|string',
-            'screen_soffit_value'  => 'required|string',
+            'screen_soffit_value'  => 'string|nullable',
             'screen_foundation'  => 'required|string',
-            'screen_foundation_value'  => 'required|string',
+            'screen_foundation_value'  => 'string|nullable',
             'screen_chimney'  => 'required|string',
-            'screen_chimney_value'  => 'required|string',
+            'screen_chimney_value'  => 'string|nullable',
 
             'space_assess1_trees'  => 'required|integer',
             'space_assess1_trees_distance'  => 'required|integer',
@@ -131,7 +131,7 @@ class GroundProofController extends Controller
             'space_assess1_img_description'  => 'required|string',
             'space_assess1_sme_comments'  => 'required|string',
 
-            'space_assess2_trees'  => 'required|integer',
+            'space_assess2_trees'  => 'nullable|integer',
             'space_assess2_trees_density'  => 'required|string',
             'space_assess2_density'  => 'required|string',
             'space_assess2_space'  => 'required|string',
@@ -165,7 +165,7 @@ class GroundProofController extends Controller
                         ->withErrors($validator)
                         ->withInput();
         }
-
+        /* dd($request->all()); */
         $gp =GroundProof::findOrFail($request->gp_id);
         $req=$request->except(['_token','gp_id']);
         foreach ($req as $key => $value) {

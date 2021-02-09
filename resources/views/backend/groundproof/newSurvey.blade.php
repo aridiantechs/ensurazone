@@ -151,11 +151,11 @@ textarea{
                               <div class="error">{{ $message }}</div>
                           @enderror
                           <label class="kt-radio">
-                            <input type="radio" name="vegetation_free_area" value="5 feet apart from the structure"> 5 feet apart from the structure
+                            <input type="radio" name="vegetation_free_area" value="5 feet apart from the structure" {{old('vegetation_free_area')=='5 feet apart from the structure' ? 'checked' : ''}}> 5 feet apart from the structure
                             <span></span>
                           </label>
                           <label class="kt-radio">
-                            <input type="radio" name="vegetation_free_area" value="less than 5 feet"> less than 5 feet
+                            <input type="radio" name="vegetation_free_area" value="less than 5 feet" {{old('vegetation_free_area')=='less than 5 feet' ? 'checked' : ''}}> less than 5 feet
                             <span></span>
                           </label>
                         </div>
@@ -164,7 +164,7 @@ textarea{
                     <div class="col-md-6">
                       <div class="form-group">
                            <h5 class="form-control-label">SME remarks about vegetation 5ft area around the structure </h5>
-                           <textarea name="veg_remarks" id="veg_remarks" cols="30" rows="3"></textarea>
+                           <textarea name="veg_remarks" id="veg_remarks" cols="30" rows="3">{{old('veg_remarks') ?? ''}}</textarea>
                             @error('veg_remarks')
                                 <div class="error">{{ $message }}</div>
                             @enderror
@@ -218,8 +218,8 @@ textarea{
                       <div class="form-group">
                         <h5>Height of grass from the Surface</h5>
                           <select name="grass" class="form-control" id="grass">
-                            <option value="Grass is 6”or higher from the surface">Grass is 6”or higher from the surface</option>
-                            <option value="Grass is lower the 6”from the ground ">Grass is lower the 6”from the ground </option>
+                            <option value="Grass is 6”or higher from the surface" {{old('grass')=='Grass is 6”or higher from the surface' ? 'checked' : ''}}>Grass is 6”or higher from the surface</option>
+                            <option value="Grass is lower the 6”from the ground" {{old('grass')=='Grass is lower the 6”from the ground' ? 'checked' : ''}}>Grass is lower the 6”from the ground </option>
                           </select>
                           @error('grass')
                               <div class="error">{{ $message }}</div>
@@ -229,7 +229,7 @@ textarea{
                     <div class="col-md-6">
                       <div class="form-group">
                           <h5 class="form-control-label">Presence of Combustible Material on the structure</h5>
-                          <textarea name="combustible_presence" id="combustible_presence" cols="30" rows="3"></textarea>
+                          <textarea name="combustible_presence" id="combustible_presence" cols="30" rows="3">{{old('combustible_presence') ?? ''}}</textarea>
                           @error('combustible_presence')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -243,29 +243,30 @@ textarea{
                               <div class="error">{{ $message }}</div>
                           @enderror
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Logs/Fire"> Logs/Fire woodpile
+                            
+                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Logs/Fire" {{ !is_null(old('logs_woodpile_value')) ? 'checked' : ''}}> Logs/Fire woodpile
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="logs_woodpile_value" disabled>
+                            <input type="text" class="combustible_value" name="logs_woodpile_value" value="{{!is_null(old('logs_woodpile_value')) ? old('logs_woodpile_value') : ''}}" {{!is_null(old('logs_woodpile_value')) ? '' : 'disabled'}} >
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Scrape"> Scrape
+                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Scrape" {{!is_null(old('scrape_value')) ? 'checked' : ''}}> Scrape
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="scrape_value" disabled>
+                            <input type="text" class="combustible_value" name="scrape_value" value="{{!is_null(old('scrape_value')) ? old('scrape_value') : ''}}" {{!is_null(old('scrape_value')) ? '' : 'disabled'}} >
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Flammable Debris"> Flammable debris
+                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Flammable Debris" {{ !is_null(old('flammable_value')) ? 'checked' : ''}}> Flammable debris
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="flammable_value" disabled>
+                            <input type="text" class="combustible_value" name="flammable_value" value="{{ !is_null(old('flammable_value')) ? old('flammable_value') : ''}}" {{ !is_null(old('flammable_value')) ? '' : 'disabled'}}>
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Wild grass longer than of 6 inches"> Wild grass longer than of 6 inches
+                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Wild grass longer than of 6 inches" {{ !is_null(old('wild_grass_value')) ? 'checked' : ''}}> Wild grass longer than of 6 inches
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="wild_grass_value" disabled>
+                            <input type="text" class="combustible_value" name="wild_grass_value" value="{{ !is_null(old('wild_grass_value')) ? old('wild_grass_value') : ''}}" {{ !is_null(old('wild_grass_value')) ? '' : 'disabled'}}>
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Presence of conifer(low limbed)"> Presence of conifer(low limbed)
+                            <input type="checkbox" {{-- name="combustibles[]" --}} value="Presence of conifer(low limbed)" {{ !is_null(old('conifer_value')) ? 'checked' : ''}}> Presence of conifer(low limbed)
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="conifer_value" disabled>
+                            <input type="text" class="combustible_value" name="conifer_value" value="{{ !is_null(old('conifer_value')) ? old('conifer_value') : ''}}" {{ !is_null(old('conifer_value')) ? '' : 'disabled'}}>
                           </label>
                         </div>
                       </div>
@@ -278,24 +279,24 @@ textarea{
                               <div class="error">{{ $message }}</div>
                           @enderror
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="Gutters"> Gutters
+                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="Gutters" {{ !is_null(old('Gutters_value')) ? 'checked' : ''}}> Gutters
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="Gutters_value" disabled>
+                            <input type="text" class="combustible_value" name="Gutters_value" value="{{ !is_null(old('Gutters_value')) ? old('Gutters_value') : ''}}" {{ !is_null(old('Gutters_value')) ? '' : 'disabled'}}>
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="roof_line"> Roof-line
+                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="roof_line" {{ !is_null(old('roof_line_value')) ? 'checked' : ''}}> Roof-line
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="roof_line_value" disabled>
+                            <input type="text" class="combustible_value" name="roof_line_value" value="{{ !is_null(old('roof_line_value')) ? old('roof_line_value') : ''}}" {{ !is_null(old('roof_line_value')) ? '' : 'disabled'}}>
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="Porch"> Porch
+                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="Porch" {{ !is_null(old('porch_value')) ? 'checked' : ''}}> Porch
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="porch_value" disabled>
+                            <input type="text" class="combustible_value" name="porch_value" value="{{ !is_null(old('porch_value')) ? old('porch_value') : ''}}" {{ !is_null(old('porch_value')) ? '' : 'disabled'}}>
                           </label>
                           <label class="kt-checkbox check-cust">
-                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="Deck"> Deck
+                            <input type="checkbox" {{-- name="leave_deposits[]" --}} value="Deck" {{ !is_null(old('deck_value')) ? 'checked' : ''}}> Deck
                             <span class="check-cust-span"></span>
-                            <input type="text" class="combustible_value" name="deck_value" disabled>
+                            <input type="text" class="combustible_value" name="deck_value" value="{{ !is_null(old('deck_value')) ? old('deck_value') : ''}}" {{ !is_null(old('deck_value')) ? '' : 'disabled'}}>
                           </label>
                           
                         </div>
@@ -311,9 +312,9 @@ textarea{
                       <div class="form-group">
                         <h5 class="form-control-label">Attic</h5>
                         <select name="screen_attic" class="form-control" id="grass">
-                          <option value="missing">Missing </option>
-                          <option value="broken">Broken</option>
-                          <option value="placed">Placed</option>
+                          <option value="missing" {{ !is_null(old('screen_attic')) && old('screen_attic') == 'missing' ? 'selected' : ''}}>Missing </option>
+                          <option value="broken" {{ !is_null(old('screen_attic')) && old('screen_attic') == 'broken' ? 'selected' : ''}}>Broken</option>
+                          <option value="placed" {{ !is_null(old('screen_attic')) && old('screen_attic') == 'placed' ? 'selected' : ''}}>Placed</option>
                         </select>
                           @error('screen_attic')
                               <div class="error">{{ $message }}</div>
@@ -322,7 +323,7 @@ textarea{
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                          <textarea name="screen_attic_value" id="screen_attic_value" cols="30" rows="3"></textarea>
+                          <textarea name="screen_attic_value" id="screen_attic_value" cols="30" rows="3">{{ old('screen_attic_value') ?? ''}}</textarea>
                           @error('screen_attic_value')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -332,9 +333,9 @@ textarea{
                       <div class="form-group">
                         <h5 class="form-control-label">Soffit</h5>
                         <select name="screen_soffit" class="form-control" id="grass">
-                          <option value="missing">Missing </option>
-                          <option value="broken">Broken</option>
-                          <option value="placed">Placed</option>
+                          <option value="missing" {{ !is_null(old('screen_soffit')) && old('screen_soffit') == 'missing' ? 'selected' : ''}}>Missing </option>
+                          <option value="broken" {{ !is_null(old('screen_soffit')) && old('screen_soffit') == 'broken' ? 'selected' : ''}}>Broken</option>
+                          <option value="placed" {{ !is_null(old('screen_soffit')) && old('screen_soffit') == 'placed' ? 'selected' : ''}}>Placed</option>
                         </select>
                           @error('screen_soffit')
                               <div class="error">{{ $message }}</div>
@@ -343,7 +344,7 @@ textarea{
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                          <textarea name="screen_soffit_value" id="screen_soffit_value" cols="30" rows="3"></textarea>
+                          <textarea name="screen_soffit_value" id="screen_soffit_value" cols="30" rows="3">{{ old('screen_soffit_value') ?? ''}}</textarea>
                           @error('screen_soffit_value')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -353,9 +354,9 @@ textarea{
                       <div class="form-group">
                         <h5 class="form-control-label">Foundation Vent</h5>
                         <select name="screen_foundation" class="form-control" id="grass">
-                          <option value="missing">Missing </option>
-                          <option value="broken">Broken</option>
-                          <option value="placed">Placed</option>
+                          <option value="missing" {{ !is_null(old('screen_foundation')) && old('screen_foundation') == 'missing' ? 'selected' : ''}}>Missing </option>
+                          <option value="broken" {{ !is_null(old('screen_foundation')) && old('screen_foundation') == 'broken' ? 'selected' : ''}}>Broken</option>
+                          <option value="placed" {{ !is_null(old('screen_foundation')) && old('screen_foundation') == 'placed' ? 'selected' : ''}}>Placed</option>
                         </select>
                           @error('screen_foundation')
                               <div class="error">{{ $message }}</div>
@@ -364,7 +365,7 @@ textarea{
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                          <textarea name="screen_foundation_value" id="screen_foundation_value" cols="30" rows="3"></textarea>
+                          <textarea name="screen_foundation_value" id="screen_foundation_value" cols="30" rows="3">{{ old('screen_foundation_value') ?? ''}}</textarea>
                           @error('screen_foundation_value')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -374,9 +375,9 @@ textarea{
                       <div class="form-group">
                         <h5 class="form-control-label">Chimney</h5>
                         <select name="screen_chimney" class="form-control" id="grass">
-                          <option value="missing">Missing </option>
-                          <option value="broken">Broken</option>
-                          <option value="placed">Placed</option>
+                          <option value="missing" {{ !is_null(old('screen_chimney')) && old('screen_chimney') == 'missing' ? 'selected' : ''}}>Missing </option>
+                          <option value="broken" {{ !is_null(old('screen_chimney')) && old('screen_chimney') == 'broken' ? 'selected' : ''}}>Broken</option>
+                          <option value="placed" {{ !is_null(old('screen_chimney')) && old('screen_chimney') == 'placed' ? 'selected' : ''}}>Placed</option>
                         </select>
                           @error('screen_chimney')
                               <div class="error">{{ $message }}</div>
@@ -385,7 +386,7 @@ textarea{
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                          <textarea name="screen_chimney_value" id="screen_chimney_value" cols="30" rows="3"></textarea>
+                          <textarea name="screen_chimney_value" id="screen_chimney_value" cols="30" rows="3">{{ old('screen_chimney_value') ?? ''}}</textarea>
                           @error('screen_chimney_value')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -403,7 +404,7 @@ textarea{
                     <div class="col-md-3">
                       <div class="form-group">
                         <h6>Number of trees</h6>
-                         <input type="number" min="0" class="form-control" name="space_assess1_trees"/>
+                         <input type="number" min="0" class="form-control" name="space_assess1_trees" value="{{ old('space_assess1_trees') ?? ''}}"/>
                           @error('space_assess1_trees')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -412,7 +413,7 @@ textarea{
                     <div class="col-md-3">
                       <div class="form-group">
                         <h6>Distance of trees from the structure </h6>
-                         <input type="number" min="0" class="form-control" name="space_assess1_trees_distance"/>
+                         <input type="number" min="0" class="form-control" name="space_assess1_trees_distance" value="{{ old('space_assess1_trees_distance') ?? ''}}"/>
                           @error('space_assess1_trees_distance')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -422,9 +423,9 @@ textarea{
                       <div class="form-group">
                            <h6 class="form-control-label">Density</h6>
                            <select name="space_assess1_density" class="form-control" id="">
-                             <option value="low">Low</option>
-                             <option value="medium">Medium</option>
-                             <option value="high">High</option>
+                             <option value="low" {{ !is_null(old('space_assess1_density')) && old('space_assess1_density') == 'low' ? 'selected' : ''}}>Low</option>
+                             <option value="medium" {{ !is_null(old('space_assess1_density')) && old('space_assess1_density') == 'medium' ? 'selected' : ''}}>Medium</option>
+                             <option value="high" {{ !is_null(old('space_assess1_density')) && old('space_assess1_density') == 'high' ? 'selected' : ''}}>High</option>
                            </select>
                             @error('space_assess1_density')
                                 <div class="error">{{ $message }}</div>
@@ -436,10 +437,10 @@ textarea{
                         <h6>Arrangement</h6>
                         <div class="kt-radio-list">
                           <select name="space_assess1_space_arrangement" class="form-control" id="">
-                            <option value="continues">Continues</option>
-                            <option value="clumps">clumps</option>
-                            <option value="scattered">Scattered</option>
-                            <option value="no_tree">No tree </option>
+                            <option value="continues" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'continues' ? 'selected' : ''}}>Continues</option>
+                            <option value="clumps" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'clumps' ? 'selected' : ''}}>clumps</option>
+                            <option value="scattered" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'scattered' ? 'selected' : ''}}>Scattered</option>
+                            <option value="no_tree" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'no_tree' ? 'selected' : ''}}>No tree </option>
                           </select>
                           @error('space_assess1_space_arrangement')
                               <div class="error">{{ $message }}</div>
@@ -455,35 +456,35 @@ textarea{
                                 <div class="error">{{ $message }}</div>
                             @enderror
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="east"> East
+                              <input type="radio" name="location" value="east" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'east' ? 'selected' : ''}}> East
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="west"> West
+                              <input type="radio" name="location" value="west" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'west' ? 'selected' : ''}}> West
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="north"> North
+                              <input type="radio" name="location" value="north" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'north' ? 'selected' : ''}}> North
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="south"> South
+                              <input type="radio" name="location" value="south" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'south' ? 'selected' : ''}}> South
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="northwest"> Northwest
+                              <input type="radio" name="location" value="northwest" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'northwest' ? 'selected' : ''}}> Northwest
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="northeast"> Northeast
+                              <input type="radio" name="location" value="northeast" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'northeast' ? 'selected' : ''}}> Northeast
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="southeast"> Southeast
+                              <input type="radio" name="location" value="southeast" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'southeast' ? 'selected' : ''}}> Southeast
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="southwest"> Southwest
+                              <input type="radio" name="location" value="southwest" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'southwest' ? 'selected' : ''}}> Southwest
                               <span></span>
                             </label>
                           </div>
@@ -525,7 +526,7 @@ textarea{
                     <div class="col-md-6">
                       <div class="form-group">
                         <h5 class="form-control-label">Picture description:</h5>
-                        <textarea class="form-control" rows="2" name="space_assess1_img_description" required></textarea>
+                        <textarea class="form-control" rows="2" name="space_assess1_img_description" required>{{ old('space_assess1_img_description') ?? ''}}</textarea>
                         @error('space_assess1_img_description')
                             <div class="error">{{ $message }}</div>
                         @enderror
@@ -534,7 +535,7 @@ textarea{
                     <div class="col-md-12">
                       <div class="form-group">
                         <h5 class="form-control-label">SME Comments:</h5>
-                        <textarea class="form-control" rows="2" name="space_assess1_sme_comments" required></textarea>
+                        <textarea class="form-control" rows="2" name="space_assess1_sme_comments" required>{{ old('space_assess1_sme_comments') ?? ''}}</textarea>
                         @error('space_assess1_sme_comments')
                             <div class="error">{{ $message }}</div>
                         @enderror
@@ -552,7 +553,7 @@ textarea{
                     <div class="col-md-3">
                       <div class="form-group">
                         <h6>Number of trees</h6>
-                         <input type="number" min="0" class="form-control" name="space_assess2_trees"/>
+                         <input type="number" min="0" class="form-control" name="space_assess2_trees" value="{{ old('space_assess2_trees') ?? ''}}"/>
                           @error('space_assess2_trees')
                               <div class="error">{{ $message }}</div>
                           @enderror
@@ -562,9 +563,9 @@ textarea{
                       <div class="form-group">
                         <h6>Density of Trees</h6>
                          <select name="space_assess2_trees_density" class="form-control" id="">
-                          <option value="low">Low</option>
-                          <option value="medium">Medium</option>
-                          <option value="high">High</option>
+                          <option value="low" {{ !is_null(old('space_assess2_trees_density')) && old('space_assess2_trees_density') == 'low' ? 'selected' : ''}}>Low</option>
+                          <option value="medium" {{ !is_null(old('space_assess2_trees_density')) && old('space_assess2_trees_density') == 'medium' ? 'selected' : ''}}>Medium</option>
+                          <option value="high" {{ !is_null(old('space_assess2_trees_density')) && old('space_assess2_trees_density') == 'high' ? 'selected' : ''}}>High</option>
                         </select>
                         @error('space_assess2_trees_density')
                             <div class="error">{{ $message }}</div>
@@ -575,10 +576,10 @@ textarea{
                       <div class="form-group">
                         <h6 class="form-control-label">Arrangement</h6>
                         <select name="space_assess2_density" class="form-control" id="">
-                          <option value="continues">Continues</option>
-                          <option value="clumps">Clumps</option>
-                          <option value="scattered">Scattered</option>
-                          <option value="no_trees">No trees</option>
+                          <option value="continues" {{ !is_null(old('space_assess2_density')) && old('space_assess2_density') == 'continues' ? 'selected' : ''}}>Continues</option>
+                            <option value="clumps" {{ !is_null(old('space_assess2_density')) && old('space_assess2_density') == 'clumps' ? 'selected' : ''}}>clumps</option>
+                            <option value="scattered" {{ !is_null(old('space_assess2_density')) && old('space_assess2_density') == 'scattered' ? 'selected' : ''}}>Scattered</option>
+                            <option value="no_tree" {{ !is_null(old('space_assess2_density')) && old('space_assess2_density') == 'no_tree' ? 'selected' : ''}}>No tree </option>
                         </select>
                         @error('space_assess2_density')
                             <div class="error">{{ $message }}</div>
@@ -589,8 +590,8 @@ textarea{
                       <div class="form-group">
                         <h6>Space</h6>
                         <select name="space_assess2_space" class="form-control" id="">
-                          <option value="Trees are scattered by 20ft apart">Trees are scattered by 20ft apart</option>
-                          <option value="Trees are scattered by less than 20ft apart">Trees are scattered by less than 20ft apart</option>
+                          <option value="Trees are scattered by 20ft apart" {{ !is_null(old('space_assess2_space')) && old('space_assess2_space') == 'Trees are scattered by 20ft apart' ? 'selected' : ''}}>Trees are scattered by 20ft apart</option>
+                          <option value="Trees are scattered by less than 20ft apart" {{ !is_null(old('space_assess2_space')) && old('space_assess2_space') == 'Trees are scattered by less than 20ft apart' ? 'selected' : ''}}>Trees are scattered by less than 20ft apart</option>
                         </select>
                         @error('space_assess2_space')
                             <div class="error">{{ $message }}</div>
@@ -604,8 +605,8 @@ textarea{
                       <div class="form-group">
                         <h6>Size of clump</h6>
                         <select name="space_assess2_clumpsize" class="form-control" id="">
-                          <option value="More than 3 trees">More than 3 trees</option>
-                          <option value="Less than or equal to 3">Less than or equal to 3</option>
+                          <option value="More than 3 trees" {{ !is_null(old('space_assess2_clumpsize')) && old('space_assess2_clumpsize') == 'More than 3 trees' ? 'selected' : ''}}>More than 3 trees</option>
+                          <option value="Less than or equal to 3" {{ !is_null(old('space_assess2_clumpsize')) && old('space_assess2_clumpsize') == 'Less than or equal to 3' ? 'selected' : ''}}>Less than or equal to 3</option>
                         </select>
                         @error('space_assess2_clumpsize')
                             <div class="error">{{ $message }}</div>
@@ -616,8 +617,8 @@ textarea{
                        <div class="form-group">
                           <h5>Ladder fuel</h5>
                           <select name="space_assess2_ladder_fuel" class="form-control" id="" required>
-                            <option value="Branch of trees below 6ft from the surface ">Branch of trees below 6ft from the surface </option>
-                            <option value="Branch of trees above 6ft from the surface">Branch of trees above 6ft from the surface</option>
+                            <option value="Branch of trees below 6ft from the surface" {{ !is_null(old('space_assess2_ladder_fuel')) && old('space_assess2_ladder_fuel') == 'Branch of trees below 6ft from the surface' ? 'selected' : ''}}>Branch of trees below 6ft from the surface </option>
+                            <option value="Branch of trees above 6ft from the surface" {{ !is_null(old('space_assess2_ladder_fuel')) && old('space_assess2_ladder_fuel') == 'Branch of trees above 6ft from the surface' ? 'selected' : ''}}>Branch of trees above 6ft from the surface</option>
                           </select>
                           @error('space_assess2_ladder_fuel')
                               <div class="error">{{ $message }}</div>
@@ -627,7 +628,7 @@ textarea{
                     <div class="col-md-4">
                       <div class="form-group">
                         <h5 class="form-control-label">Neighborhood vegetation growth security threats:</h5>
-                        <textarea class="form-control" rows="2" name="space_assess2_neighbour_vege" required></textarea>
+                        <textarea class="form-control" rows="2" name="space_assess2_neighbour_vege" required>{{ old('space_assess2_neighbour_vege') ?? ''}}</textarea>
                         @error('space_assess2_neighbour_vege')
                             <div class="error">{{ $message }}</div>
                         @enderror
@@ -646,7 +647,7 @@ textarea{
                     <div class="col-md-12">
                       <div class="form-group">
                         <h5 class="form-control-label">Site findings by SME </h5>
-                        <textarea class="form-control" rows="2" name="space_assess2_site_findings" required></textarea>
+                        <textarea class="form-control" rows="2" name="space_assess2_site_findings" required>{{old('space_assess2_site_findings') ?? ''}}</textarea>
                         @error('space_assess2_site_findings')
                             <div class="error">{{ $message }}</div>
                         @enderror
@@ -663,9 +664,9 @@ textarea{
                        <div class="form-group">
                           <h5 class="form-control-label">Slope</h5>
                           <select name="space_assess2_slope" class="form-control" id="" required>
-                            <option value="Leveled">Leveled</option>
-                            <option value="Medium Steep slope">Medium Steep slope</option>
-                            <option value="Steep Slope">Steep Slope</option>
+                            <option value="Leveled" {{ !is_null(old('space_assess2_slope')) && old('space_assess2_slope') == 'Leveled' ? 'selected' : ''}}>Leveled</option>
+                            <option value="Medium Steep slope" {{ !is_null(old('space_assess2_slope')) && old('space_assess2_slope') == 'Medium Steep slope' ? 'selected' : ''}}>Medium Steep slope</option>
+                            <option value="Steep Slope" {{ !is_null(old('space_assess2_slope')) && old('space_assess2_slope') == 'Steep Slope' ? 'selected' : ''}}>Steep Slope</option>
                           </select>
                           @error('space_assess2_slope')
                               <div class="error">{{ $message }}</div>
@@ -676,14 +677,14 @@ textarea{
                       <div class="form-group">
                              <h5 class="form-control-label">Aspects</h5>
                              <select name="space_assess2_aspects" class="form-control" id="">
-                               <option value="east">East</option>
-                               <option value="west">West</option>
-                               <option value="north">North</option>
-                               <option value="south">South</option>
+                               <option value="east" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'east' ? 'selected' : ''}}>East</option>
+                               <option value="west" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'west' ? 'selected' : ''}}>West</option>
+                               <option value="north" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'north' ? 'selected' : ''}}>North</option>
+                               <option value="south" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'south' ? 'selected' : ''}}>South</option>
                               
-                               <option value="south_east">South East</option>
-                               <option value="south_west">South West</option>
-                               <option value="north_west">North East</option>
+                               <option value="south_east" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'south_east' ? 'selected' : ''}}>South East</option>
+                               <option value="south_west" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'south_west' ? 'selected' : ''}}>South West</option>
+                               <option value="north_west" {{ !is_null(old('space_assess2_aspects')) && old('space_assess2_aspects') == 'north_west' ? 'selected' : ''}}>North East</option>
                              </select>
                               @error('space_assess2_aspects')
                                 <div class="error">{{ $message }}</div>
@@ -704,27 +705,27 @@ textarea{
                           <div class="row barier">
                             <div class="col-md-6"><h6>Rock</h6></div>
                             <div class="col-md-6 barier_field">
-                              <input class="form-control" name="space_assess2_rock" />
+                              <input class="form-control" name="space_assess2_rock"  value="{{old('space_assess2_rock') ?? ''}}"/>
                             </div>
                           
                             <div class="col-md-6"><h6>Pond</h6></div>
                             <div class="col-md-6 barier_field">
-                              <input class="form-control" name="space_assess2_Pond" />
+                              <input class="form-control" name="space_assess2_Pond" value="{{old('space_assess2_Pond') ?? ''}}" />
                             </div>
                           
                             <div class="col-md-6"><h6>Stream</h6></div>
                             <div class="col-md-6 barier_field">
-                              <input class="form-control" name="space_assess2_stream" />
+                              <input class="form-control" name="space_assess2_stream" value="{{old('space_assess2_stream') ?? ''}}" />
                             </div>
                           
                             <div class="col-md-6"><h6>Road</h6></div>
                             <div class="col-md-6 barier_field">
-                              <input class="form-control" name="space_assess2_road" />
+                              <input class="form-control" name="space_assess2_road" value="{{old('space_assess2_road') ?? ''}}" />
                             </div>
                           
                             <div class="col-md-6"><h6>Open Meadow</h6></div>
                             <div class="col-md-6 barier_field">
-                              <input class="form-control" name="space_assess2_meadow" />
+                              <input class="form-control" name="space_assess2_meadow" value="{{old('space_assess2_meadow') ?? ''}}" />
                             </div>
                           </div>
                       </div>
@@ -732,7 +733,7 @@ textarea{
                     <div class="col-md-12">
                       <div class="form-group">
                         <h5 class="form-control-label">SME observations Zone-2 </h5>
-                        <textarea class="form-control" rows="2" name="space_assess2_sme_comments" required></textarea>
+                        <textarea class="form-control" rows="2" name="space_assess2_sme_comments" required>{{old('space_assess2_sme_comments') ?? ''}}</textarea>
                         @error('space_assess2_sme_comments')
                             <div class="error">{{ $message }}</div>
                         @enderror
