@@ -160,7 +160,7 @@ class GroundProofController extends Controller
         ]);
         
         if ($validator->fails()) {
-            return $validator->errors();
+            /* return $validator->errors(); */
             return redirect()->back()
                         ->withErrors($validator)
                         ->withInput();
