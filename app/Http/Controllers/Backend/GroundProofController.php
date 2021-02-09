@@ -207,7 +207,7 @@ class GroundProofController extends Controller
         ];
         
         Mail::to($gp->user->email)->send(new GroundProofComplete($data));
-        dd('submitted');
+        
         if ($finding && $gp) {
             return redirect()->back()->with("status", "GroundProof Report Submitted.");
         }
