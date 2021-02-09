@@ -131,7 +131,7 @@ class GroundProofController extends Controller
             'space_assess1_img_description'  => 'required|string',
             'space_assess1_sme_comments'  => 'required|string',
 
-            'space_assess2_trees'  => 'nullable|integer',
+            'space_assess2_trees'  => 'required|integer',
             'space_assess2_trees_density'  => 'required|string',
             'space_assess2_density'  => 'required|string',
             'space_assess2_space'  => 'required|string',

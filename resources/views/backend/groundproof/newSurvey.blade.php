@@ -456,35 +456,35 @@ textarea{
                                 <div class="error">{{ $message }}</div>
                             @enderror
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="east" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'east' ? 'selected' : ''}}> East
+                              <input type="radio" name="location" value="east" {{ !is_null(old('location')) && old('location') == 'east' ? 'selected' : ''}}> East
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="west" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'west' ? 'selected' : ''}}> West
+                              <input type="radio" name="location" value="west" {{ !is_null(old('location')) && old('location') == 'west' ? 'selected' : ''}}> West
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="north" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'north' ? 'selected' : ''}}> North
+                              <input type="radio" name="location" value="north" {{ !is_null(old('location')) && old('location') == 'north' ? 'selected' : ''}}> North
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="south" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'south' ? 'selected' : ''}}> South
+                              <input type="radio" name="location" value="south" {{ !is_null(old('location')) && old('location') == 'south' ? 'selected' : ''}}> South
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="northwest" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'northwest' ? 'selected' : ''}}> Northwest
+                              <input type="radio" name="location" value="northwest" {{ !is_null(old('location')) && old('location') == 'northwest' ? 'selected' : ''}}> Northwest
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="northeast" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'northeast' ? 'selected' : ''}}> Northeast
+                              <input type="radio" name="location" value="northeast" {{ !is_null(old('location')) && old('location') == 'northeast' ? 'selected' : ''}}> Northeast
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="southeast" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'southeast' ? 'selected' : ''}}> Southeast
+                              <input type="radio" name="location" value="southeast" {{ !is_null(old('location')) && old('location') == 'southeast' ? 'selected' : ''}}> Southeast
                               <span></span>
                             </label>
                             <label class="kt-radio m-3">
-                              <input type="radio" name="location" value="southwest" {{ !is_null(old('space_assess1_space_arrangement')) && old('space_assess1_space_arrangement') == 'southwest' ? 'selected' : ''}}> Southwest
+                              <input type="radio" name="location" value="southwest" {{ !is_null(old('location')) && old('location') == 'southwest' ? 'selected' : ''}}> Southwest
                               <span></span>
                             </label>
                           </div>
