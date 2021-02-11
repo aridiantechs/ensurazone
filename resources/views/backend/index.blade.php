@@ -161,7 +161,7 @@
 					<div class="col-md-12">
 						<div class="kt-widget24" style="min-height: 500px;">
 							<div class="kt-widget24__details">
-								<div id="map"></div>
+								<div id="map" style="z-index: 0;"></div>
 							</div>
 						</div>
 					</div>

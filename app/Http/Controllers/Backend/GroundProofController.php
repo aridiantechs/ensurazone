@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 use Illuminate\Http\Request;
 use App\Mail\InquiryComplete;
-use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Response;
 use App\Models\RemoteAssessment;
 use App\Mail\GroundProofComplete;
 use App\Models\GroundProofSurvery;

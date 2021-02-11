@@ -242,7 +242,10 @@ class DashboardController extends Controller
                 return redirect()->route('survey_report',$gp_report->serial);
             }
         }
-        abort(404);
+        return redirect()->back()->with(array(
+            'message' => 'You request is in process, We will get back to you shortly.', 
+            'alert-type' => 'warning'
+        ));
     }
     
 

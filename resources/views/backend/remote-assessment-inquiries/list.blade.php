@@ -98,9 +98,9 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             <i class="la la-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                @if (auth()->user()->hasRole('superadmin'))
+                                                {{-- @if (auth()->user()->hasRole('superadmin'))
                                                     <a class="dropdown-item" href="#" name="remote_assess_assign" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                                @endif
+                                                @endif --}}
                                                 <a class="dropdown-item" href="#" name="remote_assess_update" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
                                                 <a class="dropdown-item" href="#" name="remote_assess_status" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
                                                 <a class="dropdown-item" name="gen_report_btn" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
@@ -109,9 +109,9 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                         <a href="{{ route('backend.inquiry-details',$user->remote_assessment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
                                         <i class="la la-eye"></i>
                                         </a>
-                                        <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
+                                        {{-- <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
                                         <i class="la la-mail-forward"> </i>
-                                        </a>
+                                        </a> --}}
                                     </td>
                                 
                                 </tr>
