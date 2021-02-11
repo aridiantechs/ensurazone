@@ -124,21 +124,24 @@ header.header-section {
                                 <h5 class="mb-3">GroundProof Plan Report</h5>
                                 @if (auth()->user()->ground_proof()->exists())
                                     <a href="{{route('view_report',['q'=>'ground_proof'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
-                                @else
+                                @elseif(auth()->user()->remote_assessment()->exists())
                                     <button class="site-btn sb-dark" name="upgradeBtn" data-upgradetype="ground_proof" data-toggle="modal" data-target="#upgradeModal"><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
                                 @endif
                                 
                             </div>
 
-                            <div class="col-4 border-left">
-                                <h5 class="mb-3">Mitigation Plan Report</h5>
-                                @if (auth()->user()->mitigation()->exists())
-                                    <a href="{{route('view_report',['q'=>'mitigation'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
-                                @else
-                                    <button class="site-btn sb-dark" name="upgradeBtn" data-upgradetype="mitigation" data data-toggle="modal" data-target="#upgradeModal"><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
-                                @endif
-                                
-                            </div>
+                            @if (auth()->user()->mitigation()->exists() || auth()->user()->ground_proof()->exists())
+                                <div class="col-4 border-left">
+                                    <h5 class="mb-3">Mitigation Plan Report</h5>
+                                    @if (auth()->user()->mitigation()->exists())
+                                        <a href="{{route('view_report',['q'=>'mitigation'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
+                                    @elseif(auth()->user()->ground_proof()->exists())
+                                        <button class="site-btn sb-dark" name="upgradeBtn" data-upgradetype="mitigation" data data-toggle="modal" data-target="#upgradeModal"><i class="fa fa-arrow-up mr-2"></i> Upgrade</button>
+                                    @endif
+                                    
+                                </div>
+                            @endif
+                            
 
                         </div>
                     </div>

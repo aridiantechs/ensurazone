@@ -72,9 +72,9 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                         <i class="la la-ellipsis-h"></i>
                                         </a>
                                         <div class="dropdown-menu dropdown-menu-right">
-                                            @if (auth()->user()->hasRole('superadmin'))
+                                           {{--  @if (auth()->user()->hasRole('superadmin'))
                                                 <a class="dropdown-item" name="ground_proof_assign" data-gpid="{{$user->ground_proof->id}}" href="#" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                            @endif
+                                            @endif --}}
                                             
                                             {{-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a> --}}
                                             <a href="#" class="dropdown-item"  name="ground_proof_status" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
@@ -85,8 +85,8 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                     <a href="{{ route('backend.inquiry-details',$user->remote_assessment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
                                     <i class="la la-eye"></i>
                                     </a>
-                                    <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
-                                    <i class="la la-mail-forward"> </i> 
+                                    {{-- <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
+                                    <i class="la la-mail-forward"> </i> </a> --}}
                                 </td>
                                 
                             </tr>
