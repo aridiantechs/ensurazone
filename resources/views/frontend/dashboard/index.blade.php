@@ -20,6 +20,9 @@ header.header-section {
 .p-0-20{
     padding: 0px 20px;
 }
+.error{
+    color: red;
+}
 </style>
 @endsection
 
@@ -81,28 +84,28 @@ header.header-section {
                             <div class="row mb-5">
                                 <div class="col-6">
                                     <label for="username" class="form-label mt-3">Name</label>
-                                    <input class="form-control" type="text" name="username" id="username" value="{{ !is_null($data['user']) ? $data['user']->username : ''}}" />
+                                    <input class="form-control" type="text" name="username" id="username" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->username : '')}}" />
                                     @error('username')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-6">
                                     <label for="email" class="form-label mt-3">Email</label>
-                                    <input class="form-control" type="email" name="email" id="email" value="{{ !is_null($data['user']) ? $data['user']->email : ''}}" />
+                                    <input class="form-control" type="email" name="email" id="email" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->email : '')}}" />
                                     @error('email')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-6">
                                     <label for="phone" class="form-label mt-3">Phone</label>
-                                    <input class="form-control" type="text" name="phone" id="phone" value="{{ !is_null($data['user']) ? $data['user']->phone : ''}}" />
+                                    <input class="form-control" type="text" name="phone" id="phone" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->phone : '')}}" />
                                     @error('phone')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-6">
                                     <label for="dob" class="form-label mt-3">DOB</label>
-                                    <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{ !is_null($data['user']) ? $data['user']->dob : ''}}" />
+                                    <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->dob : '')}}" />
                                     @error('dob')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
