@@ -7246,6 +7246,8 @@ button.close {
     display: none !important;
   }
 }
+
+  @page { margin: 0; }
 /*# sourceMappingURL=bootstrap.css.map */
     </style>
 </head>
