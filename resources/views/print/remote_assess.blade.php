@@ -7421,7 +7421,7 @@ button.close {
             importCSS: true,            // import parent page css
             importStyle: true,         // import style tags
             printDelay: 3000,            // variable print delay
-            header: "<h4 style='float:right'>"+today+"</h4>",               // prefix to html
+            /* header: "<h4 style='float:right'>"+today+"</h4>",        */        // prefix to html
             /* footer: "<h4 style='position: absolute; bottom: 5px;width: 100%;text-align:center'>The Talent Depot</h4>",   */             // postfix to html
         });
     </script>
