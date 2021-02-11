@@ -292,24 +292,30 @@ class RemoteAssessmentController extends Controller
 
         $ra=RemoteAssessment::findOrFail($request->ra_id);
         /* $image = custom_file_upload($request->file('image'),'public','uploads/uploadData',null,null,null,null); */
-        $folderPath = public_path('storage/uploads/uploadData/');
+        if ($request->cropped_img) {
+            $folderPath = public_path('storage/uploads/uploadData/');
  
-        $image_parts = explode(";base64,", $request->cropped_img);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
- 
-        $imageName = uniqid() . '.png';
- 
-        $imageFullPath = $folderPath.$imageName;
- 
-        file_put_contents($imageFullPath, $image_base64);
+            $image_parts = explode(";base64,", $request->cropped_img);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+    
+            $imageName = uniqid() . '.png';
+    
+            $imageFullPath = $folderPath.$imageName;
+    
+            file_put_contents($imageFullPath, $image_base64);
+        }
+        
 
         $finding=new Finding;
         $finding->type= 'remote_assessment';
         $finding->serial=unique_string('findings','serial',8);
         $finding->ra_id=$ra->id;
-        $finding->file= $imageName;
+        if ($request->cropped_img) {
+            $finding->file= $imageName;
+        }
+        
         $finding->message= $request->message;
         $finding->save();
 
