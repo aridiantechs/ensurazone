@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Finding;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
 
 class ReportController extends Controller
 {
@@ -40,5 +41,33 @@ class ReportController extends Controller
             
         }
         abort(404);
+    }
+
+    public function sample_report(Request $request)
+    {
+        /* dd($request->all()); */
+        if ($request->query('q')) {
+            if ($request->query('q')=='ground_proof' || $request->query('q')=='mitigation') {
+                $file_path = public_path().'/report/sample_'.$request->query('q').'.pdf';
+        
+                if (file_exists($file_path))
+                {
+                    return Response::download($file_path, $request->query('q').'.pdf', [
+                        'Content-Length: '. filesize($file_path)
+                    ]);
+                }
+                else
+                {
+                    exit('Requested file does not exist on our server!');
+                } 
+            }
+            
+            
+        } else {
+            return "permission denied...";
+        }
+        
+        
+        
     }
 }

@@ -20,6 +20,7 @@ Route::get('login/{provider}', 'SocialController@redirect');
 Route::get('login/{provider}/callback','SocialController@Callback');
 Route::post('/authenticate/{user}', 'SocialController@authenticate')->name('authenticate');
 
+Route::get('sample_report', [App\Http\Controllers\ReportController::class,'sample_report'])->name('sample_report');
 
 Route::get('/user_type', function () {
     return view('frontend.pages.user_type');

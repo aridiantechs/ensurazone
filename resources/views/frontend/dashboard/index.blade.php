@@ -16,6 +16,10 @@ header.header-section {
     background: #929292 !important;
     cursor: default !important;
 }
+
+.p-0-20{
+    padding: 0px 20px;
+}
 </style>
 @endsection
 
@@ -227,7 +231,12 @@ header.header-section {
         <div class="modal-body">
             <div class="container">
                 <div class="row justify-content-center">
-                    <div class="col-md-12 mt-5 mb-3">
+                    <div class="col-md-12 mt-2 mb-3">
+                        <div class="p-0-20">
+                            <a id="sample_report" href="{{route('sample_report')}}" target="_blank" class="btn btn-primary">Sample Report</a>
+                        </div>
+                        
+                        <p class="p-0-20"><em>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</em></p>
                         <form action="{{route('upgrade_plan')}}" id="groundProofForm" method="POST">
                             @csrf
                             <input type="hidden" name="upgrade_type" id="upgrade_type">
@@ -343,6 +352,8 @@ header.header-section {
         $('[name="upgradeBtn"]').click(function(){
             var upgrade_type=$(this).data('upgradetype');
             $('#upgrade_type').val(upgrade_type);
+
+            $('#sample_report').attr('href','{{url('/')}}'+'/sample_report?q='+upgrade_type)
         })
     })
 </script>
