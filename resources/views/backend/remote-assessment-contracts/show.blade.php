@@ -531,7 +531,7 @@
                                     <h4>Images of house: </h4>
                                     <p class="ml-0">
                                         <section class="img-gallery-magnific">
-                                            @foreach ($data['info']->attachments as $img)
+                                            @foreach ($data['info']->attachments->sortByDesc('created_at')->take(4) as $img)
                                                 @if ($img->type=='image' && file_exists( public_path().'/storage/uploads/uploadData/'.$img->file ))
                                                     <div class="magnific-img">
                                                         <a class="image-popup-vertical-fit" href="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" title="9.jpg">
