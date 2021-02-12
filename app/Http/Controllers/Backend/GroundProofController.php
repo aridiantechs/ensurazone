@@ -220,11 +220,22 @@ class GroundProofController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        $ra=RemoteAssessment::findOrFail($id);
+        /* dd($request->all()); */
+        if ($request->query('type') && $request->query('type')=="ground_proof") {
+            $ga=GroundProof::findOrFail($id);
+            $ra=$ga->remote_assessment;
+            $data=[
+                "ra"=>$ra,
+                "findings"=>$ga->findings()->exist() ? $ga->findings->last() : null,
+                "type"=>$request->type,
+            ];
+            return view('backend.remote-assessment-contracts.show',compact('data'));
+        }
+        abort(404);
         
-        return view('backend.remote-assessment-contracts.show',compact('ra'));
+        
     }
 
     public function groundProofStatus(Request $request)

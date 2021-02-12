@@ -465,15 +465,15 @@
                          <div class="col-sm-6">
                             <div class="locaion-d">
                                 <h4>Location: </h4>
-                                <p class="ml-4 location-details">{{$ra->address1 ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->address1 ?? ''}}</p>
                                 <h4>Latitude: </h4>
-                                <p class="ml-4 location-details">{{$ra->latitude ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->latitude ?? ''}}</p>
                                 <h4>Longitude: </h4>
-                                <p class="ml-4 location-details">{{$ra->longitude ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->longitude ?? ''}}</p>
                                 <h4>City: </h4>
-                                <p class="ml-4 location-details">{{$ra->city ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->city ?? ''}}</p>
                                 <h4>Zip: </h4>
-                                <p class="ml-4 location-details">{{$ra->zipcode ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->zipcode ?? ''}}</p>
                                 
                             </div>
                         </div>
@@ -503,31 +503,35 @@
                         <div class="col-sm-8">
                             <div class="locaion-d">
                                 <h4>Name: </h4>
-                                <p class="ml-4 location-details">{{$ra->username ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->username ?? ''}}</p>
                                 <h4>Email: </h4>
-                                <p class="ml-4 location-details">{{$ra->email ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->email ?? ''}}</p>
                                 <h4>Phone: </h4>
-                                <p class="ml-4 location-details">{{$ra->phone ?? ''}}</p>
+                                <p class="ml-4 location-details">{{$data['info']->phone ?? ''}}</p>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="locaion-d">
-                                <h4>Previous Report File: </h4>
-                                <p class="ml-0">
-                                    @php
-                                        $file=$ra->attachments->where('type','<>','image')->first();
-                                    @endphp
-                                    <a href="{{ !is_null($file)? route('backend.remote_assessment_report',$file->file) :'#'}}" class="btn btn-primary">Download</a>
-                                </p>
-                            </div>
-                        </div>
+                        
+                        @php
+                            $file=$data['info']->attachments->where('type','<>','image')->first();
+                        @endphp
+                        @if (!is_null($file) && $file->file)
+                            <div class="col-sm-4">
+                                <div class="locaion-d">
+                                    <h4>Previous Report File: </h4>
+                                    <p class="ml-0">
+                                        <a href="{{ !is_null($file)? route('backend.remote_assessment_report',$file->file) :'#'}}" class="btn btn-primary">Download</a>
+                                    </p>
+                                </div>
+                            </div>  
+                        @endif
+                        
 
                         <div class="col-sm-12">
                             <div class="locaion-d">
                                 <h4>Images of house: </h4>
                                 <p class="ml-0">
                                     <section class="img-gallery-magnific">
-                                        @foreach ($ra->attachments as $img)
+                                        @foreach ($data['info']->attachments as $img)
                                             @if ($img->type=='image' && file_exists( public_path().'/storage/uploads/uploadData/'.$img->file ))
                                                 <div class="magnific-img">
                                                     <a class="image-popup-vertical-fit" href="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" title="9.jpg">
@@ -550,6 +554,20 @@
             </div>
             <!--end:: Widgets/Order Statistics-->    
         </div>
+        <div class="col-md-12">
+            <div class="kt-portlet kt-portlet--height-fluid">
+                <div class="kt-portlet__head">
+                    <div class="kt-portlet__head-label">
+                        <h3 class="kt-portlet__head-title">
+                            Report
+                        </h3>
+                    </div>
+                </div>
+                <div class="kt-portlet__body">
+                    @include('backend.components.report.'.$data['type'],['finding'=>$data['findings']])
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 @endsection
@@ -566,13 +584,13 @@
 <!--end::Page Scripts -->
 <script>
     function initMap() {
-        const myLatLng = { lat: {{$ra->latitude}}, lng: {{$ra->longitude}} };
+        const myLatLng = { lat: {{$data['info']->latitude}}, lng: {{$data['info']->longitude}} };
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 8,
             center: myLatLng,
         });
 
-        @if($ra->latitude && $ra->longitude)
+        @if($data['info']->latitude && $data['info']->longitude)
             new google.maps.Marker({
                 position: myLatLng,
                 map,
