@@ -105,7 +105,7 @@ header.header-section {
                                 </div>
                                 <div class="col-6">
                                     <label for="dob" class="form-label mt-3">DOB</label>
-                                    <input class="form-control" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->dob : '')}}" />
+                                    <input class="form-control" type="date" name="dob" max="{{ now() }}" id="dob" placeholder="DATE OF BIRTH" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->dob : '')}}" />
                                     @error('dob')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
