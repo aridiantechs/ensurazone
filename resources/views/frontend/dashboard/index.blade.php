@@ -235,11 +235,16 @@ header.header-section {
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-md-12 mt-2 mb-3">
-                        <div class="p-0-20">
-                            <a id="sample_report" href="{{route('sample_report')}}" target="_blank" class="btn btn-primary">Sample Report</a>
+                        <div class="row">
+                            <div class="col-sm-8">
+                                <p class="p-0-20"><em>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</em></p>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="p-0-20">
+                                    <a id="sample_report" href="{{route('sample_report')}}" target="_blank" class="site-btn sb-dark">Sample Report</a>
+                                </div>
+                            </div>
                         </div>
-                        
-                        <p class="p-0-20"><em>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</em></p>
                         <form action="{{route('upgrade_plan')}}" id="groundProofForm" method="POST">
                             @csrf
                             <input type="hidden" name="upgrade_type" id="upgrade_type">
