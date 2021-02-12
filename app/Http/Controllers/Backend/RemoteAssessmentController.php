@@ -355,7 +355,7 @@ class RemoteAssessmentController extends Controller
     public function downloadReport($id)
     {
         $remote=RemoteAssessment::findOrFail($id);
-        if ($remote->findings()->exists()) {
+        if ($remote->findings()->exists() && $remote->findings->last()->serial) {
             return redirect()->route('survey_report',$remote->findings->last()->serial);
         }
         return "report not found...";
