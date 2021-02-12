@@ -226,9 +226,11 @@ class GroundProofController extends Controller
         if ($request->query('type') && $request->query('type')=="ground_proof") {
             $ga=GroundProof::findOrFail($id);
             $ra=$ga->remote_assessment;
+            /* dd($ra); */
             $data=[
-                "ra"=>$ra,
-                "findings"=>$ga->findings()->exist() ? $ga->findings->last() : null,
+                "info"=>$ra,
+                "findings"=>$ga->findings()->exists() ? $ga->findings->last() : null,
+                "survey"=>$ga->findings()->exists() ? $ga->findings->last()->ground_proof->ground_proof_survey : null,
                 "type"=>$request->type,
             ];
             return view('backend.remote-assessment-contracts.show',compact('data'));

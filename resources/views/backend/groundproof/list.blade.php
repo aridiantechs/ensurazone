@@ -82,7 +82,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             {{-- <a class="dropdown-item" name="gen_report_btn" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a> --}}
                                         </div>
                                     </span>
-                                    <a href="{{ route('backend.ground-proof-inquiry-details',$user->ground_proof->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                    <a href="{{ route('backend.ground-proof-inquiry-details',["id"=>$user->ground_proof->id,"type"=>"ground_proof"]) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
                                     <i class="la la-eye"></i>
                                     </a>
 
