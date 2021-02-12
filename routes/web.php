@@ -79,7 +79,9 @@ Route::group([
     Route::get('/mitigation_status', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationStatus'])->name('mitigation_status');
 });
 
-Route::get('/survey_report/{id}', [App\Http\Controllers\ReportController::class, 'show'])->name('survey_report');
+Route::middleware(['auth'])->group(function () {
+    Route::get('/survey_report/{id}', [App\Http\Controllers\ReportController::class, 'show'])->name('survey_report');
+});
 
 // Old routes
 

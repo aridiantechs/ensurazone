@@ -292,7 +292,7 @@ class RemoteAssessmentController extends Controller
                 'ra_id'      =>'required|integer',
             ]
         );
-        dd($validator->errors());
+        /* dd($validator->errors()); */
         if ($validator->fails()) {
             /* return $validator->errors(); */
             return redirect()->back()
