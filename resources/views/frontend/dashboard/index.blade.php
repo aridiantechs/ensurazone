@@ -91,21 +91,22 @@ header.header-section {
                                 </div>
                                 <div class="col-6">
                                     <label for="email" class="form-label mt-3">Email</label>
-                                    <input class="form-control" type="email" name="email" id="email" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->email : '')}}" />
+                                    <input class="form-control" type="email" name="email" id="email" value="{{ old('email') ?? (!is_null($data['user']) ? $data['user']->email : '')}}" />
                                     @error('email')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-6">
                                     <label for="phone" class="form-label mt-3">Phone</label>
-                                    <input class="form-control" type="text" name="phone" id="phone" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->phone : '')}}" />
+                                    <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone') ?? (!is_null($data['user']) ? $data['user']->phone : '')}}" />
                                     @error('phone')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
                                 <div class="col-6">
                                     <label for="dob" class="form-label mt-3">DOB</label>
-                                    <input class="form-control" type="date" name="dob" max="{{ now() }}" id="dob" placeholder="DATE OF BIRTH" value="{{ old('username') ?? (!is_null($data['user']) ? $data['user']->dob : '')}}" />
+                                    <input class="form-control" max="{{ now() }}" type="date" name="dob" id="dob" placeholder="DATE OF BIRTH" value="{{ old('dob') ?? (!is_null($data['user']) ? $data['user']->dob : '')}}" />
+
                                     @error('dob')
                                         <div class="error">{{ $message }}</div>
                                     @enderror

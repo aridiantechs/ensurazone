@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'phone' => ['required', 'string'],
+            'phone' => ['required', 'numeric'],
             'dob' => ['required', 'string'],
         ]);
         

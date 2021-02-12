@@ -110,7 +110,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             <i class="la la-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('backend.remote_assessment.download',$user->remote_assessment->id) }}" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                        <a href="{{ route('backend.remote_assessment.download',$user->remote_assessment->id) }}" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Download Report">
                                             <i class="la la-download"></i>
                                         </a>
                                         {{-- <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
@@ -314,7 +314,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
 <div class="modal fade" id="kt_scrollable_modal_1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
-            <form method="POST" action="{{route('backend.remote-assessment-findings')}}" enctype="multipart/form-data">
+            <form method="POST" action="{{route('backend.remote-assessment-findings')}}" id="ra_gen_report_form" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="ra_id">
                 <div class="modal-header">
@@ -335,7 +335,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                             </div> --}}
                             <div class="form-group">
                                 <label for="file" class="form-label">Image</label>
-                                <input style="height: 45px;" class="form-control" type="file" onchange="changeImageView(this, 'cat_image',250000)" name="image" id="image" required/>
+                                <input style="height: 45px;" class="form-control" type="file" {{-- onchange="changeImageView(this, 'cat_image',250000)" --}} name="image" id="image" required/>
                                 <input class="btn btn-primary mt-3" type="button" id="btnCrop" value="Crop" />
                                 @error('file')
                                     <div class="error">{{ $message }}</div>
@@ -361,7 +361,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="button" id="ra_gen_report" class="btn btn-primary">Submit</button>
                 </div>
                 
             </form>
@@ -404,11 +404,20 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
             @if($errors->has('contractor') || $errors->has('note_to_contractor') )
                 $('#enz_AssignContract').modal('toggle');
             @endif
+
+            $('#ra_gen_report').click(function(e){
+                e.preventDefault();
+                if ($('#result').is(':empty')) {
+                    toastr.error('please crop the image!')
+                } else {
+                    $('#ra_gen_report_form').submit();
+                }
+            })
         })
 
         $('.summernote').summernote();
 
-        function changeImageView(input, id,max_size) {
+        /* function changeImageView(input, id,max_size) {
    
             var FileUploadPath = input.value;
             
@@ -419,7 +428,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
             else 
             {
                 var Extension = FileUploadPath.substring(FileUploadPath.lastIndexOf('.') + 1).toLowerCase();
-                if (Extension == "jpg" || Extension == "png")
+                if (Extension == "jpg" || Extension == "jpeg" || Extension == "png")
                 {
                     if (input.files && input.files[0]) {
                         var size = input.files[0].size;
@@ -429,7 +438,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                             return;
                         }else{
                             var reader = new FileReader();
-                            /* alert(input.files[0].size); */
+                            
                             reader.onload = function (e) {
                                 $('#'+id).attr('src', e.target.result).fadeIn('slow');
                             }
@@ -439,11 +448,12 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                 }
                 else{
                     alert("Photo only allows file types of GIF, PNG");
+                    $('#image').removeAttr('src');
                 }
                 
             }   
             // alert('');
-        }
+        } */
         
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqqhqN5q545cx57GD5ht6JVidUQuuGd34&sensor=false&v=3&libraries=geometry,places&callback=initAutocomplete" async defer></script>

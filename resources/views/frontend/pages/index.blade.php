@@ -328,7 +328,7 @@ actions by your fire services provider or insurance company.</p>
                         <h5 class="mb-5 mt-5" style="    line-height: 1.5;">Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</h5>
 
                         <a href="{{ route('services') }}" class="site-btn sb-dark mb-5">Read More</a>
-                        <a href="{{ route('services') }}" class="site-btn sb-dark mb-5">Download Sample Report</a>
+                        <a href="{{route('sample_report',['q'=>'remote_assessment'])}}" class="site-btn sb-dark mb-5">Download Sample Report</a>
 
                     </div>
                 </div>

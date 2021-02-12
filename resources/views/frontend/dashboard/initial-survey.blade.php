@@ -524,8 +524,28 @@
 <script src="{{asset('js/mydropzone.js')}}"></script>
 
 <script>
-    
+    function setInputFilter(textbox, inputFilter) {
+        ["input", "keydown", "keyup", "mousedown", "mouseup", "select", "contextmenu", "drop"].forEach(function(event) {
+            textbox.addEventListener(event, function() {
+            if (inputFilter(this.value)) {
+                this.oldValue = this.value;
+                this.oldSelectionStart = this.selectionStart;
+                this.oldSelectionEnd = this.selectionEnd;
+            } else if (this.hasOwnProperty("oldValue")) {
+                this.value = this.oldValue;
+                this.setSelectionRange(this.oldSelectionStart, this.oldSelectionEnd);
+            } else {
+                this.value = "";
+            }
+            });
+        });
+    }
+
     $(document).ready(function(){
+
+        setInputFilter(document.getElementById("phone"), function(value) {
+            return /^\d*\.?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
+        });
 
         $('a[href="#finish"]').attr('id','card-button');
         $('a[href="#finish"]').attr('data-secret',"{{ $intent->client_secret }}");

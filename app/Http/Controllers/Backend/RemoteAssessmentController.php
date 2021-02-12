@@ -8,12 +8,12 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 use App\Mail\InquiryComplete;
-use Illuminate\Http\Response;
 use App\Models\RemoteAssessment;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
 class RemoteAssessmentController extends Controller
@@ -285,7 +285,7 @@ class RemoteAssessmentController extends Controller
                 'ra_id'      => $request->ra_id,
             ]
             ,[
-                /* 'file'      => 'required|is_png', */
+                'file'      => 'required'/*|is_png  */,
                 /* 'extension'      =>'required|in:pdf,docx', */
 
                 'message'      => 'required|string',
@@ -355,7 +355,7 @@ class RemoteAssessmentController extends Controller
     public function downloadReport($id)
     {
         $remote=RemoteAssessment::findOrFail($id);
-        if ($remote->findings()->exists()) {
+        if ($remote->findings()->exists() && $remote->findings->last()->serial) {
             return redirect()->route('survey_report',$remote->findings->last()->serial);
         }
         return "report not found...";
