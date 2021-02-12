@@ -458,7 +458,7 @@
                 
             
                 <div class="kt-portlet__body">
-                    <div class="row">
+                    <div class="row" style="height:100%">
                         <div class="col-sm-6">
                             <div id="map" style="height: 100%;"></div>
                         </div>
