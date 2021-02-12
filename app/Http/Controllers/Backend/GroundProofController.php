@@ -433,6 +433,17 @@ class GroundProofController extends Controller
         
     }
 
+
+    
+    public function downloadReport($id)
+    {
+        $remote=GroundProof::findOrFail($id);
+        if ($remote->findings()->exists()) {
+            return redirect()->route('survey_report',$remote->findings->last()->serial);
+        }
+        return "report not found...";
+    }
+
     /**
      * Remove the specified resource from storage.
      *

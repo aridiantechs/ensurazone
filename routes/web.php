@@ -69,6 +69,8 @@ Route::group([
     Route::post('/ground-proof-findings', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofFindings'])->name('ground-proof-findings');
     Route::post('/ground-proof-assign', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofAssign'])->name('ground-proof.assign');
     Route::get('/ground_proof_status', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofStatus'])->name('ground_proof_status');
+    Route::get('/ground-proof-inquiry-details/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'show'])->name('ground-proof-inquiry-details');
+    Route::get('/ground_proof/download_report/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'downloadReport'])->name('ground_proof.download');
 
     Route::resource('mitigation-inquiries', Backend\MitigationController::class);
     Route::get('/mitigation-survey/{id}', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationSurvey'])->name('mitigation-survey');

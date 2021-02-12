@@ -82,8 +82,12 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             {{-- <a class="dropdown-item" name="gen_report_btn" data-gpid="{{$user->ground_proof->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a> --}}
                                         </div>
                                     </span>
-                                    <a href="{{ route('backend.inquiry-details',$user->remote_assessment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                    <a href="{{ route('backend.ground-proof-inquiry-details',$user->ground_proof->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
                                     <i class="la la-eye"></i>
+                                    </a>
+
+                                    <a href="{{ route('backend.ground_proof.download',$user->ground_proof->id) }}" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                        <i class="la la-download"></i>
                                     </a>
                                     {{-- <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
                                     <i class="la la-mail-forward"> </i> </a> --}}

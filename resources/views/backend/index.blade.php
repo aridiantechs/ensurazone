@@ -1110,7 +1110,7 @@
 
 <script type="text/javascript">
 
-	 const tilesUrl = 'https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png';
+	 const tilesUrl = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png?';
 	 const map = L.map('map').setView([33.597, 73.0759], 5);
 
 	 L.tileLayer(tilesUrl, {
