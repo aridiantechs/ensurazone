@@ -117,13 +117,13 @@ Route::get('/contact', function () {
     return view('frontend.pages.contact');
 })->name('contact');
 
-Route::get('/dashboard', function () {
-    return view('backend.index');
-})->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('backend.index');
+// })->name('dashboard');
 
-Route::get('/initial-survey', function () {
-    return view('frontend.dashboard.initial-survey');
-})->name('initial-survey');
+// Route::get('/initial-survey', function () {
+//     return view('frontend.dashboard.initial-survey');
+// })->name('initial-survey');
 
 Route::get('/thanks', function () {
     return view('frontend.dashboard.thanks');
