@@ -124,11 +124,22 @@ class RemoteAssessmentController extends Controller
      * @param  \App\Content  $content
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request,$id)
     {
-        $ra=RemoteAssessment::findOrFail($id);
+        /* dd($request->all()); */
+        if ($request->query('type') && $request->query('type')=="remote_assessment") {
+            $ra=RemoteAssessment::findOrFail($id);
+            $data=[
+                "info"=>$ra,
+                "findings"=>$ra->findings()->exists() ? $ra->findings->last() : null,
+                "type"=>$request->type,
+            ];
+            /* dd($data); */
+            return view('backend.remote-assessment-contracts.show',compact('data'));
+        }
+        abort(404);
         
-        return view('backend.remote-assessment-contracts.show',compact('ra'));
+        
     }
 
     public function assignRole(Request $request)
@@ -341,6 +352,14 @@ class RemoteAssessmentController extends Controller
 
     }
 
+    public function downloadReport($id)
+    {
+        $remote=RemoteAssessment::findOrFail($id);
+        if ($remote->findings()->exists()) {
+            return redirect()->route('survey_report',$remote->findings->last()->serial);
+        }
+        return "report not found...";
+    }
 
     public function remoteAssessmentAssign(Request $request)
     {

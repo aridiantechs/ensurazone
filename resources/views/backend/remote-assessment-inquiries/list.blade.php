@@ -106,8 +106,12 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                                 <a class="dropdown-item" name="gen_report_btn" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
                                             </div>
                                         </span>
-                                        <a href="{{ route('backend.inquiry-details',$user->remote_assessment->id) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
-                                        <i class="la la-eye"></i>
+                                        <a href="{{ route('backend.inquiry-details',["id"=>$user->remote_assessment->id,"type"=>"remote_assessment"]) }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                            <i class="la la-eye"></i>
+                                        </a>
+
+                                        <a href="{{ route('backend.remote_assessment.download',$user->remote_assessment->id) }}" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                            <i class="la la-download"></i>
                                         </a>
                                         {{-- <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
                                         <i class="la la-mail-forward"> </i>

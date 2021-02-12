@@ -62,12 +62,15 @@ Route::group([
     Route::get('/remote_assessment_report/{file}', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remote_assessment_report'])->name('remote_assessment_report');
     Route::get('/remote_assessment_status', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'remoteAssessmentStatus'])->name('remote_assessment_status');
     Route::get('/inquiry-details/{id}', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'show'])->name('inquiry-details');
+    Route::get('/remote-assessment/download_report/{id}', [App\Http\Controllers\Backend\RemoteAssessmentController::class, 'downloadReport'])->name('remote_assessment.download');
 
     Route::resource('groundproof-inquiries', Backend\GroundProofController::class);
     Route::get('/ground-proof-survey/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofSurvey'])->name('ground-proof-survey');
     Route::post('/ground-proof-findings', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofFindings'])->name('ground-proof-findings');
     Route::post('/ground-proof-assign', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofAssign'])->name('ground-proof.assign');
     Route::get('/ground_proof_status', [App\Http\Controllers\Backend\GroundProofController::class, 'groundProofStatus'])->name('ground_proof_status');
+    Route::get('/ground-proof-inquiry-details/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'show'])->name('ground-proof-inquiry-details');
+    Route::get('/ground_proof/download_report/{id}', [App\Http\Controllers\Backend\GroundProofController::class, 'downloadReport'])->name('ground_proof.download');
 
     Route::resource('mitigation-inquiries', Backend\MitigationController::class);
     Route::get('/mitigation-survey/{id}', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationSurvey'])->name('mitigation-survey');
