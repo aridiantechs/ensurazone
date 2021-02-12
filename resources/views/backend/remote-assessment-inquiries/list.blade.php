@@ -110,7 +110,7 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             <i class="la la-eye"></i>
                                         </a>
 
-                                        <a href="{{ route('backend.remote_assessment.download',$user->remote_assessment->id) }}" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="View">
+                                        <a href="{{ route('backend.remote_assessment.download',$user->remote_assessment->id) }}" target="_blank" class="btn btn-sm btn-clean btn-icon btn-icon-md" title="Download Report">
                                             <i class="la la-download"></i>
                                         </a>
                                         {{-- <a href="{{ route('inquiry-details') }}" class="btn btn-sm btn-clean btn-icon btn-icon-md" data-toggle="modal" data-target="#enz_SendRequestToContractorsModal" title="Send email to contractors">
