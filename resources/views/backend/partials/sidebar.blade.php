@@ -2,7 +2,7 @@
     <!-- begin:: Aside -->
     <div class="kt-aside__brand kt-grid__item " id="kt_aside_brand">
         <div class="kt-aside__brand-logo">
-            <a href="{{ route('dashboard') }}">
+            <a href="{{ route('backend.dashboard') }}">
              <h4>{{ app_name() }}</h4>
             </a>
         </div>
@@ -44,7 +44,7 @@
              
                
                 <li class="kt-menu__item  kt-menu__item--submenu" aria-haspopup="true"  data-ktmenu-submenu-toggle="hover">
-                    <a  href="{{ route('dashboard') }}" class="kt-menu__link kt-menu__toggle">
+                    <a  href="{{ route('backend.dashboard') }}" class="kt-menu__link kt-menu__toggle">
                         <span class="kt-menu__link-icon">
                         
                             <div class="kt-demo-icon__preview">
