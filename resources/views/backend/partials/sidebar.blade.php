@@ -39,7 +39,6 @@
             class="kt-aside-menu kt-scroll ps ps--active-y"
             data-ktmenu-vertical="1"
             data-ktmenu-scroll="1" data-ktmenu-dropdown-timeout="500"
-            style="height: 500px"
             >
             <ul class="kt-menu__nav ">
              
