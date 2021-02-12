@@ -512,7 +512,7 @@
                         </div>
                         
                         @php
-                            $file=$data['info']->attachments->where('type','<>','image')->first();
+                            $file=!is_null($data['info']) && $data['info']->attachments ? $data['info']->attachments->where('type','<>','image')->first() : null;
                         @endphp
                         @if (!is_null($file) && $file->file)
                             <div class="col-sm-4">
@@ -525,30 +525,32 @@
                             </div>  
                         @endif
                         
-
-                        <div class="col-sm-12">
-                            <div class="locaion-d">
-                                <h4>Images of house: </h4>
-                                <p class="ml-0">
-                                    <section class="img-gallery-magnific">
-                                        @foreach ($data['info']->attachments as $img)
-                                            @if ($img->type=='image' && file_exists( public_path().'/storage/uploads/uploadData/'.$img->file ))
-                                                <div class="magnific-img">
-                                                    <a class="image-popup-vertical-fit" href="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" title="9.jpg">
-                                                        <img src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" alt="9.jpg" />
-                                                        <i class="fa fa-search-plus" aria-hidden="true" style="display: none"></i>
-                                                    </a>
-                                                </div>
-                                            @endif
-                                        @endforeach
-                                    </section>
-                                    <div class="clear"></div>
-                                            {{-- <a href="#" class="kt-media kt-media--xl">
-                                                <img src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" alt="image">
-                                            </a>  --}}    
-                                </p>
+                        @if (!is_null($data['info']) && $data['info']->attachments)
+                            <div class="col-sm-12">
+                                <div class="locaion-d">
+                                    <h4>Images of house: </h4>
+                                    <p class="ml-0">
+                                        <section class="img-gallery-magnific">
+                                            @foreach ($data['info']->attachments as $img)
+                                                @if ($img->type=='image' && file_exists( public_path().'/storage/uploads/uploadData/'.$img->file ))
+                                                    <div class="magnific-img">
+                                                        <a class="image-popup-vertical-fit" href="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" title="9.jpg">
+                                                            <img src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" alt="9.jpg" />
+                                                            <i class="fa fa-search-plus" aria-hidden="true" style="display: none"></i>
+                                                        </a>
+                                                    </div>
+                                                @endif
+                                            @endforeach
+                                        </section>
+                                        <div class="clear"></div>
+                                                {{-- <a href="#" class="kt-media kt-media--xl">
+                                                    <img src="{{ asset('storage/uploads/uploadData/' . $img->file ?? '') }}" alt="image">
+                                                </a>  --}}    
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -584,13 +586,13 @@
 <!--end::Page Scripts -->
 <script>
     function initMap() {
-        const myLatLng = { lat: {{$data['info']->latitude}}, lng: {{$data['info']->longitude}} };
+        const myLatLng = { lat: {{$data['info']->latitude ?? 0}}, lng: {{$data['info']->longitude ?? 0}} };
         const map = new google.maps.Map(document.getElementById("map"), {
             zoom: 8,
             center: myLatLng,
         });
 
-        @if($data['info']->latitude && $data['info']->longitude)
+        @if(!is_null($data['info']) && ($data['info']->latitude && $data['info']->longitude))
             new google.maps.Marker({
                 position: myLatLng,
                 map,
