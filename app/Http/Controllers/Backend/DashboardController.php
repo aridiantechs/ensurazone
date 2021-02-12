@@ -2,20 +2,55 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 
-use Illuminate\Http\Request;
+use App\Models\Skill;
 
 use App\Models\SavedSearch;
-use App\Models\Skill;
 use App\Search\TalentSearch;
+use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 
 class DashboardController extends Controller
 {
-	public function dashboard(){
-		return view('backend.index');
+	public function dashboard()
+	{
+		$ra_users=\App\Models\User::whereHas('remote_assessment', function($q){
+                $q->where('paid',1);
+            })->get()->sum('remote_assessment.amount');
+		
+		$gp_users=\App\Models\User::whereHas('ground_proof', function($q){
+			$q->where('paid',1);
+		})->get()->sum('ground_proof.amount');
+
+		$profit=($ra_users+$gp_users)/100;
+
+		$ra_inquiries=\App\Models\User::whereHas('remote_assessment', function($q){
+					$q->where('paid',1)->where("status","pending");
+				})->get()->count('remote_assessment');
+	
+		$gp_inquiries=\App\Models\User::whereHas('ground_proof', function($q){
+					$q->where('paid',1)->where("status","pending");
+				})->get()->count('ground_proof');
+		
+		$total_inquiries=$ra_inquiries+$gp_inquiries;
+
+		$users=\App\Models\User::latest()->whereMonth('created_at',
+				Carbon::now()->format('m')
+			)->get()->count();
+
+        /* dd($users); */
+
+		$data=[
+			"profit"=>$profit,
+			"users"=>$users,
+			"total_inquiries"=>$total_inquiries
+		];
+
+		return view('backend.index',compact('data'));
 
 	}
 

@@ -63,6 +63,8 @@ class RemoteAssessmentController extends Controller
             
             $profile=new RemoteAssessment;
             $profile->user_id=auth()->user()->id;
+            $profile->paid=1;
+            $profile->amount=5000;
             $profile->fill($request->all());
             $profile->save();
 

@@ -28,7 +28,7 @@
 		<div class="kt-portlet">
 			<div class="kt-portlet__body  kt-portlet__body--fit">
 				<div class="row row-no-padding row-col-separator-xl">
-					<div class="col-md-12 col-lg-3">
+					<div class="col-md-12 col-lg-4">
 						<!--begin::Total Profit-->
 						<div class="kt-widget24">
 							<div class="kt-widget24__details">
@@ -41,7 +41,7 @@
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-brand">
-								$18M 
+								$ {{$data['profit'] ?? 0}} 
 								</span>	 
 							</div>
 							<div class="progress progress--sm">
@@ -58,7 +58,7 @@
 						</div>
 						<!--end::Total Profit-->
 					</div>
-					<div class="col-md-12 col-lg-3">
+					<div class="col-md-12 col-lg-4">
 						<!--begin::New Feedbacks-->
 						<div class="kt-widget24">
 							<div class="kt-widget24__details">
@@ -71,7 +71,7 @@
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-warning">
-								1349
+									{{$data['inquiries'] ?? 0}} 
 								</span>	 
 							</div>
 							<div class="progress progress--sm">
@@ -88,7 +88,7 @@
 						</div>
 						<!--end::New Feedbacks--> 
 					</div>
-					<div class="col-md-12 col-lg-3">
+					{{-- <div class="col-md-12 col-lg-4">
 						<!--begin::New Orders-->
 						<div class="kt-widget24">
 							<div class="kt-widget24__details">
@@ -117,21 +117,21 @@
 							</div>
 						</div>
 						<!--end::New Orders--> 
-					</div>
-					<div class="col-md-12 col-lg-3">
+					</div> --}}
+					<div class="col-md-12 col-lg-4">
 						<!--begin::New Users-->
 						<div class="kt-widget24">
 							<div class="kt-widget24__details">
 								<div class="kt-widget24__info">
 									<h4 class="kt-widget24__title">
-										New Users
+										Users this Month
 									</h4>
 									<span class="kt-widget24__desc">
 									Joined New User
 									</span>
 								</div>
 								<span class="kt-widget24__stats kt-font-success">
-								276 
+									{{$data['users'] ?? 0}}  
 								</span>	 
 							</div>
 							<div class="progress progress--sm">
