@@ -8,12 +8,12 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 
 use App\Mail\InquiryComplete;
-use Illuminate\Http\Response;
 use App\Models\RemoteAssessment;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Validator;
 
 class RemoteAssessmentController extends Controller
@@ -285,14 +285,14 @@ class RemoteAssessmentController extends Controller
                 'ra_id'      => $request->ra_id,
             ]
             ,[
-                /* 'file'      => 'required|is_png', */
+                'file'      => 'required'/*|is_png  */,
                 /* 'extension'      =>'required|in:pdf,docx', */
 
                 'message'      => 'required|string',
                 'ra_id'      =>'required|integer',
             ]
         );
-        /* dd($validator->errors()); */
+        dd($validator->errors());
         if ($validator->fails()) {
             /* return $validator->errors(); */
             return redirect()->back()
