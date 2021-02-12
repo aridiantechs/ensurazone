@@ -358,6 +358,10 @@ header.header-section {
 
 <script>
     $(document).ready(function(){
+
+        dob.max = new Date().toISOString().split("T")[0];
+
+        
         $('[name="upgradeBtn"]').click(function(){
             var upgrade_type=$(this).data('upgradetype');
             $('#upgrade_type').val(upgrade_type);
