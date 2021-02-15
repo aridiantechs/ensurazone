@@ -4,7 +4,7 @@
 @hasSection('meta')
 	@yield('meta')
 @else
-	<title>Adbotics | Home</title>
+	<title>Ensurazone | Home</title>
 @endif
 
 <meta name="description" content="Updates and statistics">

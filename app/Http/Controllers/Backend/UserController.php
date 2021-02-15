@@ -51,7 +51,8 @@ class UserController extends Controller
     {
         /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
-            'role_id'  => 'required|integer',
+            "role_id"    => "required|array",
+            "role_id.*"  => "required|integer",
             'name'  => 'required|string',
             'email' => 'required|string',
             'password'  => 'required|string',
@@ -72,8 +73,11 @@ class UserController extends Controller
 		}
         $user->save();
 
-        $role=Role::where('id',$request->role_id)->first();
-        $user->assignRole($role->name);
+        foreach ($request->role_id as $key => $value) 
+        {
+            $role=Role::where('id',$value)->first();
+            $user->assignRole($role->name);
+        }
         
         return redirect()->back()->with("status", "User has been Created.");
     }
@@ -136,6 +140,8 @@ class UserController extends Controller
     {
         /* dd($request->all()); */
         $validator = Validator::make($request->all(),[
+            "role_id"    => "required|array",
+            "role_id.*"  => "required|integer",
             'name'  => 'required|string',
             'email' => 'required|string',
             'password'  => 'string|nullable',
@@ -158,9 +164,12 @@ class UserController extends Controller
         $user->save();
 
         if ($request->has('role_id')) {
-            $user->removeRole($user->roles[0]->name);
-            $role=Role::where('id',$request->role_id)->first();
-            $user->assignRole($role->name);
+            $user->roles()->detach();
+            foreach ($request->role_id as $key => $value) 
+            {
+                $role=Role::where('id',$value)->first();
+                $user->assignRole($role->name);
+            }
         }
         
         return redirect()->back()->with("status", "User has been Updated.");

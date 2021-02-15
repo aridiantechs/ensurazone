@@ -5,6 +5,7 @@
 <link href="{{asset('backend/assets/plugins/summernote/summernote.css')}}" rel="stylesheet">
 <link href="{{asset('backend/assets/plugins/summernote/summernote-bs4.css')}}" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('backend/assets/css/tagsinput.css') }}">
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 <style>
    .form-group label {
    font-size: 1.2rem;
@@ -27,6 +28,20 @@
 		background-color: #5969ff;
 		border-radius: 4px;
 	}
+
+   .select2-selection--multiple{
+      border: 1px solid #e2e5ec !important;
+   }
+
+   .select2-container--default .select2-selection--multiple .select2-selection__rendered .select2-selection__choice .select2-selection__choice__remove {
+      color: #ffffff;
+   }
+
+   .select2-container--default .select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
+      color: #ffffff;
+      background: #4a8de7;
+      border: 1px solid #ebedf2;
+   }
 </style>
 @endsection
 @section('content')
@@ -62,7 +77,7 @@
                         <div class="form-group">
                            <label class="col-md-12">Add Role</label>
                            <div class="col-md-12">
-                           <select class="form-control" name="role_id">
+                           <select class="form-control multi-role" name="role_id[]" multiple="multiple">
                               <option value="">Select Role</option>
                               @foreach ($roles as $role)
                                     <option value="{{$role->id}}" {{isset($user)&& $user->roles()->exists() && $user->roles->first()->id==$role->id?'selected' : ''}}>{{$role->name}}</option>
@@ -126,10 +141,21 @@
 <!--Page Active Scripts(used by this page)-->
 <script src="{{asset('backend/assets/plugins/summernote/summernote.active.js')}}"></script>
 <script src="{{ asset('backend/assets/js/tagsinput.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 <script type="text/javascript">
 
    $(document).ready(function(){
+
+      $('.multi-role').select2();
+
+      @if($user && $user->roles())
+         var role_id={!!$user->roles->pluck('id')!!};
+         
+         $('[name="role_id[]"]').val(role_id);
+         $('[name="role_id[]"]').trigger('change');
+      @endif
+
 		window.sidebar_search=function() {
 			var input, filter, div, childdiv, label, i, txtValue;
 			input = document.getElementById("admin_sidebar_search");

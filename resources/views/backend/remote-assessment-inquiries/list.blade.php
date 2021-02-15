@@ -98,9 +98,10 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                                             <i class="la la-ellipsis-h"></i>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-right">
-                                                {{-- @if (auth()->user()->hasRole('superadmin'))
-                                                    <a class="dropdown-item" href="#" name="remote_assess_assign" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a>
-                                                @endif --}}
+                                                @if (auth()->user()->hasRole('superadmin') && $user->remote_assessment->status != "completed")
+                                                    <a class="dropdown-item" href="#" name="remote_assess_assign" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-list"></i> Assign Inquiry</a>
+                                                @endif
+                                                {{-- <a class="dropdown-item" href="#" name="remote_assess_assign" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#enz_AssignContract"><i class="la la-edit"></i> Assign Contract</a> --}}
                                                 <a class="dropdown-item" href="#" name="remote_assess_update" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#enz_updateInquiry"><i class="la la-edit"></i> Edit Details</a>
                                                 <a class="dropdown-item" href="#" name="remote_assess_status" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#kt_modal_status"><i class="la la-leaf"></i> Update Status</a>
                                                 <a class="dropdown-item" name="gen_report_btn" data-raid="{{$user->remote_assessment->id}}" data-toggle="modal" data-target="#kt_scrollable_modal_1" href="#"><i class="la la-print"></i> Generate Report</a>
@@ -273,16 +274,16 @@ a.btn.btn-sm.btn-clean.btn-icon.btn-icon-md i{
                 @csrf
                 <input type="hidden" name="ra_id" value="{{old('ra_id') ?? ''}}">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Assign Contract</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Assign Inquiry</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="kt-scroll" data-scroll="true" data-height="400">
                         <div class="form-group">
-                            <label class="form-control-label">Contractors</label>
+                            <label class="form-control-label">Assign to</label>
                             <select class="form-control" name="contractor" id="">
-                                <option value="">Select Contractor</option>
+                                <option value="">Select...</option>
                                 @foreach ($contractors as $contractor)
                                     <option value="{{$contractor->id}}">{{$contractor->name}}</option>
                                 @endforeach
