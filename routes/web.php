@@ -40,6 +40,7 @@ Route::middleware(['hasPaid'])->group(function () {
     Route::post('/upgrade_plan', [App\Http\Controllers\Account\DashboardController::class, 'upgrade_plan'])->name('upgrade_plan');
 });
 
+Route::resource('contact', ContactController::class);
 
 Route::group([
 	'prefix' => 'backend',
@@ -77,6 +78,9 @@ Route::group([
     Route::post('/mitigation-findings', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationFindings'])->name('mitigation-findings');
     Route::post('/mitigation-assign', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationAssign'])->name('mitigation.assign');
     Route::get('/mitigation_status', [App\Http\Controllers\Backend\MitigationController::class, 'mitigationStatus'])->name('mitigation_status');
+
+    Route::resource('contact', Backend\ContactController::class);
+    Route::get('delete_contact/{id}', [App\Http\Controllers\Backend\ContactController::class,'delete_contact'])->name('contact.delete');
 });
 
 Route::middleware(['auth'])->group(function () {
