@@ -10,6 +10,7 @@ use App\Models\SavedSearch;
 use App\Search\TalentSearch;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -42,14 +43,23 @@ class DashboardController extends Controller
 				Carbon::now()->format('m')
 			)->get()->count();
 
-        /* dd($users); */
+		$ra_locations=\App\Models\User::whereHas('remote_assessment', function($q){
+				$q->where('paid',1);
+			})->with('remote_assessment:user_id,city,latitude,longitude')->get()->pluck('remote_assessment')->toArray();
+		
+		$map_data=new Collection;
+		foreach ($ra_locations as $key => $locate) {
+			$map_data->push((object)['name'=> $locate['city'],'coords'=> [$locate['latitude'],$locate['longitude']] ]);
+		}
+        /* dd($map_data[0]->name); */
 
 		$data=[
 			"profit"=>$profit,
 			"users"=>$users,
-			"total_inquiries"=>$total_inquiries
+			"total_inquiries"=>$total_inquiries,
+			"map_data"=>$map_data->toArray()
 		];
-
+		/* dd($data['map_data']); */
 		return view('backend.index',compact('data'));
 
 	}

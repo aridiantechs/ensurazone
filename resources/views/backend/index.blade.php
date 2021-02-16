@@ -1118,14 +1118,9 @@
 	 	attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',	 	
 	 }).addTo(map);
 
-	 const cities = [
-	   { name: 'Rome', coords: [41.89, 12.51] },
-	   { name: 'Chicago', coords: [41.74, -87.55] },
-	   { name: 'San Francisco', coords: [37.77, -122.42] },
-	   { name: 'Athens', coords: [37.98, 23.73] },
-	   { name: 'Toronto', coords: [43.67, -79.42] },
-	   { name: 'Toulouse', coords: [43.60, 1.44] },
-	 ];
+	 const cities = {!!json_encode($data['map_data'])!!};
+
+	 console.log(cities[0].name);
 	 const markers = cities.map(c => 
 	   L.marker(c.coords)
 	     .addTo(map)
