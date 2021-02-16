@@ -249,7 +249,7 @@
 		                    <div class="row mt-5">
 		                    	<div class="col-12">
 		                    		<h5 class="mb-3">Download Our Sample Report</h5>
-                                	<a href="{{route('sample_report',['q'=>'remote_assessment'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
+                                	<a href="{{route('sample_report',['q'=>'complete_report'])}}" target="_blank" class="site-btn sb-dark"><i class="fa fa-download mr-2"></i> Download</a>
 		                    	</div>
 		                    </div>
                         </div>

@@ -1,6 +1,7 @@
 @extends('frontend.layout.app')
 
 @section('styles')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
 <style type="text/css">
 .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
     background-color: #17172d;
@@ -22,6 +23,22 @@ header.header-section {
 }
 .error{
     color: red;
+}
+
+.d-grid{
+    display: grid;
+}
+
+.valid-feedback{
+    display: block;
+}
+
+.invalid-feedback{
+    display: block;
+}
+
+.hide{
+    display: none;
 }
 </style>
 @endsection
@@ -77,7 +94,7 @@ header.header-section {
                 <!-- Tabs content -->
                 <div class="tab-content" id="v-pills-tabContent">
                     <div class="tab-pane fade shadow rounded bg-white show active p-5" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        <form action="{{route('my_account.store')}}" method="POST">
+                        <form action="{{route('my_account.store')}}" id="personal-info-form" method="POST">
                             @csrf
                             
                             <h4 class="font-italic mb-4">Personal information</h4>
@@ -96,9 +113,12 @@ header.header-section {
                                         <div class="error">{{ $message }}</div>
                                     @enderror
                                 </div>
-                                <div class="col-6">
+                                <div class="col-6 d-grid">
                                     <label for="phone" class="form-label mt-3">Phone</label>
-                                    <input class="form-control" type="text" name="phone" id="phone" value="{{ old('phone') ?? (!is_null($data['user']) ? $data['user']->phone : '')}}" />
+                                    <input class="form-control" type="tel" name="phone" id="phone" value="{{$data['user']->phone ?? ''}}" />
+                                    <input type="tel" class="hide" name="new_phone" id="hiden" value="{{$data['user']->phone_c_data ?? ''}}">
+                                    <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
+                                    <span id="error-msg" class="invalid-feedback hide"></span>
                                     @error('phone')
                                         <div class="error">{{ $message }}</div>
                                     @enderror
@@ -114,7 +134,7 @@ header.header-section {
                             </div>
                             <div class="row ">
                                 <div class="col-12">
-                                    <button class="site-btn sb-dark">Update</button>
+                                    <button type="button" id="personalInfoFormBtn" class="site-btn sb-dark">Update</button>
                                 </div>
                             </div>
                         </form>
@@ -281,6 +301,9 @@ header.header-section {
 
 @section('scripts')
 <script src="https://js.stripe.com/v3/"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" integrity="sha512-DNeDhsl+FWnx5B1EQzsayHMyP6Xl/Mg+vcnFPXGNjUZrW28hQaa1+A4qL9M+AiOMmkAhKAWYHh1a+t6qxthzUw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
 <script>
     // Create a Stripe client.
     var stripe = Stripe('{{config('app.STRIPE_KEY')}}');
@@ -370,5 +393,108 @@ header.header-section {
         })
     })
 </script>
+
+{{-------------------------}}
+    {{-- input phone setting --}}
+    <script>
+        /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
+
+        var phone = document.querySelector("#phone"),
+            errorMsg = document.querySelector("#error-msg"),
+            validMsg = document.querySelector("#valid-msg");
+        
+        // here, the index maps to the error code returned from getValidationError - see readme
+        var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+        var iti=window.intlTelInput(phone,{
+            allowDropdown: false,
+            initialCountry: "us",
+            separateDialCode: true,
+            preferredCountries: ["fr", "us", "gb"],
+            geoIpLookup: function (callback) {
+                $.get('https://ipinfo.io', function () {
+                }, "jsonp").always(function (resp) {
+                    var countryCode = (resp && resp.country) ? resp.country : "";
+                    callback(countryCode);
+                });
+            },
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var hiden_phone = document.querySelector("#hiden");
+        window.intlTelInput(hiden_phone,{
+            initialCountry: "us",
+            dropdownContainer: 'body',
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+        });
+
+        var reset = function() {
+            phone.classList.remove("error");
+            errorMsg.innerHTML = "";
+            errorMsg.classList.add("hide");
+            validMsg.classList.add("hide");
+        };
+
+        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+
+        $(document).ready(function () {
+            $('#phone').mask(mask1)
+        });
+
+        $("#phone").on("countrychange", function (e, countryData) {
+            $("#phone").val('');
+            var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+            $('#phone').mask(mask1);
+
+            var country_data=iti.getSelectedCountryData();
+            console.log(country_data);
+            document.getElementById("hiden").value = JSON.stringify(country_data);/* $("#phone").val().replace(/\s+/g, '') */;
+        });
+
+        // on blur: validate
+        phone.addEventListener('blur', function() {
+        reset();
+        if (phone.value.trim()) {
+            if (iti.isValidNumber()) {
+            validMsg.classList.remove("hide");
+            } else {
+            phone.classList.add("error");
+            var errorCode = iti.getValidationError();
+            errorMsg.innerHTML = errorMap[errorCode];
+            errorMsg.classList.remove("hide");
+            }
+        }
+        });
+
+        $('input.hide').parent().hide();
+
+        // on keyup / change flag: reset
+        phone.addEventListener('change', reset);
+        phone.addEventListener('keyup', reset);
+
+    </script>
+    {{-- end input phone setting --}}
+    {{-----------------------------}}
+
+    <script>
+        $('#personalInfoFormBtn').on('click',function(e){
+            e.preventDefault();
+            if (iti.isValidNumber()) {
+                var country_data=iti.getSelectedCountryData();
+                console.log(country_data);
+                document.getElementById("hiden").value = JSON.stringify(country_data);
+                $('#personal-info-form').submit();
+            } else {
+                phone.classList.add("error");
+                var errorCode = iti.getValidationError();
+                errorMsg.innerHTML = errorMap[errorCode];
+                errorMsg.classList.remove("hide");
+                $('html, body').animate({
+                    scrollTop: $("#phone-div").position().top
+                }, 800);
+                return false;
+            }
+        })
+    </script>
 
 @endsection

@@ -344,10 +344,10 @@ actions by your fire services provider or insurance company.</p>
 
 @section('scripts')
 <script type="text/javascript">
-$( window ).on( "load", function() {
+/* $( window ).on( "load", function() {
     setTimeout(function(){ 
         $('#myModal').modal('show');
     }, 6000);
-});
+}); */
 </script>
 @endsection

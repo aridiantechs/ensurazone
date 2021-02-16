@@ -43,7 +43,7 @@ class DashboardController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => ['required', 'string'],
             'email' => ['required', 'email'],
-            'phone' => ['required', 'numeric'],
+            'phone' => ['required', 'string'],
             'dob' => ['required', 'string'],
         ]);
         
@@ -55,9 +55,13 @@ class DashboardController extends Controller
         }
 
         try {
-           
+            $country_data=json_decode($request->new_phone,true);
             $user=RemoteAssessment::where('user_id',auth()->user()->id)->first();
             $user->fill($request->all());
+
+            $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
+            $user->phone_c_data=$request->new_phone;
+
             $user->save();
             
             return redirect()->back()->with(array(

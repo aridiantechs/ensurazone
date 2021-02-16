@@ -47,7 +47,7 @@ class ReportController extends Controller
     {
         /* dd($request->all()); */
         if ($request->query('q')) {
-            if ($request->query('q')=='ground_proof' || $request->query('q')=='mitigation' || $request->query('q')=='remote_assessment') {
+            if ($request->query('q')=='ground_proof' || $request->query('q')=='mitigation' || $request->query('q')=='remote_assessment' || $request->query('q')=='complete_report') {
                 $file_path = public_path().'/report/sample_'.$request->query('q').'.pdf';
         
                 if (file_exists($file_path))
