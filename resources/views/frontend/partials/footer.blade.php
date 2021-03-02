@@ -52,7 +52,7 @@
                             <li><a href="">Oil Extractions</a></li>
                             <li><a href="">Manufactoring</a></li>
                         </ul> --}}
-                        <a href="{{route('sample_report',['q'=>'remote_assessment'])}}" target="_blank" class="site-btn sb-white mr-4 mb-3">Download our Sample Report</a>
+                        <a href="{{route('sample_report',['q'=>'complete_report'])}}" target="_blank" class="site-btn sb-white mr-4 mb-3">Download our Sample Report</a>
                     </div>
                 </div>
             </div>
