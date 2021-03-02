@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true] );
 
 //Social Login
 Route::get('login/{provider}', 'SocialController@redirect');
@@ -26,13 +26,13 @@ Route::get('/user_type', function () {
     return view('frontend.pages.user_type');
 })->name('user_type');
 
-Route::middleware(['auth','hasNotPaid'])->group(function () {
+Route::middleware(['auth','hasNotPaid','verified'])->group(function () {
     Route::resource('remote-assessment', RemoteAssessmentController::class);
     Route::post('/storeMedia', [App\Http\Controllers\RemoteAssessmentController::class, 'storeMedia'])->name('storeMedia');
     Route::get('/fileDestroy', [App\Http\Controllers\RemoteAssessmentController::class, 'fileDestroy'])->name('fileDestroy');
 });
 
-Route::middleware(['hasPaid'])->group(function () {
+Route::middleware(['hasPaid','verified'])->group(function () {
     Route::resource('my_account', Account\DashboardController::class);
     Route::post('/my_password', [App\Http\Controllers\Account\DashboardController::class, 'myPassword'])->name('my_account.password');
     Route::get('/view_report', [App\Http\Controllers\Account\DashboardController::class, 'view_report'])->name('view_report');

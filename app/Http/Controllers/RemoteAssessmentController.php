@@ -57,8 +57,12 @@ class RemoteAssessmentController extends Controller
         $stripeCharge = $request->user()->charge(5000, $request->paymentMethod); //STRIPE ACCEPTS PAYMENT IN CENT
         if ($stripeCharge && $stripeCharge->status=='succeeded') 
         {
+            $country_data=json_decode($request->new_phone,true);
+            
             $user=auth()->user();
             $user->paid=1;
+            $user->phone=Str::of($request->phone)->prepend('+'.$country_data['dialCode']);
+            $user->phone_c_data=$request->new_phone;
             $user->save();
             
             $profile=new RemoteAssessment;

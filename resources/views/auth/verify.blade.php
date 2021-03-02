@@ -1,11 +1,20 @@
-@extends('layouts.app')
+@extends('frontend.layout.app')
 
+@section('styles')
+<style>
+    .bgcolor-ensura{
+        background: #f57e37;
+    }
+
+    
+</style>
+@endsection
 @section('content')
-<div class="container">
+<div class="container mt-5 mb-5">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
+                <div class="card-header bgcolor-ensura text-white">{{ __('Verify Your Email Address') }}</div>
 
                 <div class="card-body">
                     @if (session('resent'))
@@ -25,4 +34,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('scripts')
+<script type="text/javascript">
+</script>
 @endsection

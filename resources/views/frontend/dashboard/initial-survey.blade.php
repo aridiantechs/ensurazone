@@ -5,6 +5,8 @@
 <link rel="stylesheet" href="{{ asset('theme/survey/vendor/nouislider/nouislider.min.css') }}">
 <link rel="stylesheet" href="{{ asset('theme/survey/css/style.css') }}">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.2/min/dropzone.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" integrity="sha512-gxWow8Mo6q6pLa1XH/CcH8JyiSDEtiwJV78E+D+QP0EVasFs8wKXq16G8CLD4CJ2SnonHr4Lm/yY2fSI2+cbmw==" crossorigin="anonymous" />
+<style type="text/css">
 <style type="text/css">
     header.header-section {
         box-shadow: 0px 1px 25px #2e2e2e1a;
@@ -102,6 +104,34 @@
           float: left;
           width: 17%;
       }
+
+      .error{
+        color: red;
+    }
+
+    .d-grid{
+        display: grid;
+    }
+
+    .valid-feedback{
+        display: block;
+    }
+
+    .invalid-feedback{
+        display: block;
+    }
+
+    .hide{
+        display: none;
+    }
+
+    .iti--separate-dial-code{
+        width: 100%;
+    }
+
+    .color-ensura{
+        color: #e25822;
+    }
 </style>
 @endsection
 
@@ -144,9 +174,12 @@
                                 <span class="text-input">Example :<span>  Jeff@gmail.com</span></span>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group" id="phone-div">
                                 <label for="phone" class="form-label">Phone</label>
-                                <input class="form-control" type="text" name="phone" value="" required="" id="phone" />
+                                <input class="form-control" type="tel" name="phone" id="phone" />
+                                <input type="tel" class="hide" name="new_phone" id="hiden" value="{{$data['user']->phone_c_data ?? ''}}">
+                                <span id="valid-msg" class="valid-feedback hide">✓ Valid</span>
+                                <span id="error-msg" class="invalid-feedback hide"></span>
                             </div>
                             
                             <div class="form-group">
@@ -188,11 +221,17 @@
                     <h3>Payment Setup</h3>
                     <fieldset>
                         <h2>Payment Setup</h2>
-                        <p class="desc">Set up your money limit to reach the future plan</p>
+                        <p class="desc mb-0">Set up your money limit to reach the future plan</p>
                         <div class="row justify-content-center">
-                            <div class="col-md-12 mt-5 mb-3">
+                            <div class="col-md-12 mt-3 mb-3">
                                 <div id="payment-section">
-                                                         
+                                    <div class="form-group">
+                                        <p class="ml-4"><b>Use test card: </b><br>
+                                            card number: <span class="color-ensura">4242 4242 4242 4242</span>  <br>
+                                            date:  <span class="color-ensura">Any future date</span> <br>
+                                            cvc: <span class="color-ensura"> Any 3 digits</span>
+                                        </p>
+                                    </div>
                                     <div class="form-group">
                                         <div class="card-body">
                                           <div class="form-group">
@@ -202,6 +241,7 @@
                                             <div id="card-element" class="form-control">
                                             <!-- A Stripe Element will be inserted here. -->
                                             </div>
+                                            
                                             <!-- Used to display form errors. -->
                                             <div id="card-errors" role="alert"></div>
                                             
@@ -276,6 +316,8 @@
 
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBqqhqN5q545cx57GD5ht6JVidUQuuGd34&sensor=false&v=3&libraries=geometry,places&callback=initAutocomplete" async defer></script>
+
+
 <script type="text/javascript">
 	(function($) {
 
@@ -319,6 +361,25 @@
             }
             if (currentIndex === 3) {
                 form.parent().parent().parent().find('.footer').removeClass('footer-2').addClass('footer-' + currentIndex + '');
+            }
+            
+            if ($('#steps-uid-0-p-'+currentIndex).has( "#phone" ).length) {
+                console.log('phone found');
+                if (iti.isValidNumber()) {
+                    var country_data=iti.getSelectedCountryData();
+                   /*  console.log(country_data); */
+                    document.getElementById("hiden").value = JSON.stringify(country_data);
+                }else{
+                    phone.classList.add("error");
+                    var errorCode = iti.getValidationError();
+                    errorMsg.innerHTML = errorMap[errorCode];
+                    errorMsg.classList.remove("hide");
+                    $('html, body').animate({
+                        scrollTop: $("#phone-div").position().top
+                    }, 800);
+                    return false;
+                }
+                
             }
             // if(currentIndex === 4) {
             //     form.parent().parent().parent().append('<div class="footer" style="height:752px;"></div>');
@@ -399,6 +460,92 @@
     }
 })(jQuery);
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js" integrity="sha512-DNeDhsl+FWnx5B1EQzsayHMyP6Xl/Mg+vcnFPXGNjUZrW28hQaa1+A4qL9M+AiOMmkAhKAWYHh1a+t6qxthzUw==" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.js"></script>
+{{-------------------------}}
+{{-- input phone setting --}}
+<script>
+    /* INITIALIZE BOTH INPUTS WITH THE intlTelInput FEATURE*/
+
+    var phone = document.querySelector("#phone"),
+        errorMsg = document.querySelector("#error-msg"),
+        validMsg = document.querySelector("#valid-msg");
+    
+    // here, the index maps to the error code returned from getValidationError - see readme
+    var errorMap = ["Invalid number", "Invalid country code", "Too short", "Too long", "Invalid number"];
+
+    var iti=window.intlTelInput(phone,{
+        allowDropdown: false,
+        initialCountry: "us",
+        separateDialCode: true,
+        preferredCountries: ["fr", "us", "gb"],
+        geoIpLookup: function (callback) {
+            $.get('https://ipinfo.io', function () {
+            }, "jsonp").always(function (resp) {
+                var countryCode = (resp && resp.country) ? resp.country : "";
+                callback(countryCode);
+            });
+        },
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+    });
+
+    var hiden_phone = document.querySelector("#hiden");
+    window.intlTelInput(hiden_phone,{
+        initialCountry: "us",
+        dropdownContainer: 'body',
+        utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/11.0.14/js/utils.js"
+    });
+
+    var reset = function() {
+        phone.classList.remove("error");
+        errorMsg.innerHTML = "";
+        errorMsg.classList.add("hide");
+        validMsg.classList.add("hide");
+    };
+
+    var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+
+    $(document).ready(function () {
+        $('#phone').mask(mask1)
+    });
+
+    $("#phone").on("countrychange", function (e, countryData) {
+        $("#phone").val('');
+        var mask1 = $("#phone").attr('placeholder').replace(/[0-9]/g, 0);
+        $('#phone').mask(mask1);
+
+        var country_data=iti.getSelectedCountryData();
+        console.log(country_data);
+        document.getElementById("hiden").value = JSON.stringify(country_data);/* $("#phone").val().replace(/\s+/g, '') */;
+    });
+
+    // on blur: validate
+    phone.addEventListener('blur', function() {
+    reset();
+    if (phone.value.trim()) {
+        if (iti.isValidNumber()) {
+        validMsg.classList.remove("hide");
+        } else {
+        phone.classList.add("error");
+        var errorCode = iti.getValidationError();
+        errorMsg.innerHTML = errorMap[errorCode];
+        errorMsg.classList.remove("hide");
+        }
+    }
+    });
+
+    $('input.hide').parent().hide();
+
+    // on keyup / change flag: reset
+    phone.addEventListener('change', reset);
+    phone.addEventListener('keyup', reset);
+
+</script>
+{{-- end input phone setting --}}
+{{-----------------------------}}
+
 <script type="text/javascript">
     var country,city,state,zipcode,address,lati,lngi;
 
@@ -543,10 +690,10 @@
 
     $(document).ready(function(){
 
-        setInputFilter(document.getElementById("phone"), function(value) {
+        /* setInputFilter(document.getElementById("phone"), function(value) {
             return /^\d*\.?\d*$/.test(value); // Allow digits and '.' only, using a RegExp
         });
-
+ */
         $('a[href="#finish"]').attr('id','card-button');
         $('a[href="#finish"]').attr('data-secret',"{{ $intent->client_secret }}");
 
@@ -570,4 +717,5 @@
     var stripe = Stripe('{{config('app.STRIPE_KEY')}}');
 </script>
 <script src="{{asset('js/mystripe.js')}}"></script>
+
 @endsection

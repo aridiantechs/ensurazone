@@ -26,7 +26,7 @@
                 <div class="col-lg-6 offset-3">
                     <div class="contact-text">
                         <h2>Get in to your account</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque orci purus, sodales in est quis, estst quis, blandit sollicitudi</p>
+                        <p>Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</p>
                         
                     </div>
                     

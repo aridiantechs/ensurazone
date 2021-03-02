@@ -105,7 +105,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="contact-text">
-                        <h2>Register to your account now</h2>
+                        <h2>Register your account now</h2>
                         <p>Ensurazone can help you organize your hazard mitigation plan and find fire protection contractors who can complete the recommended repairs and/or improvements quickly and efficiently.</p>
                         <div class="header-info-box">
                             <div class="hib-icon">
